@@ -1,0 +1,27 @@
+{% extends "site_base.html" %}
+
+{% block title %}404 error{% endblock %}
+
+{% block body %}
+{% include "topbar.html" %}
+
+<div class="container">
+
+    <div class="content">
+        {% include "page_header.html" %}
+        <div class="row notfound">
+            <div class="span8">
+                <h3>error</h3>
+                <span>404</span>
+            </div>
+            <div class="span3">
+                <h2>Page not found</h2>
+                <p>The page you were looking for could not be found at this address. Sorry for the incovenience. Thanks.</p>
+            </div>
+        </div>
+    </div>
+
+    {% include "footer.html" %}
+
+</div> <!-- /container -->
+{% endblock %}

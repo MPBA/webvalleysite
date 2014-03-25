@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/158/progetti/webvalleysite/webvalley/timetable
+END
+views.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/160/progetti/webvalleysite/webvalley/timetable/views.py
+END
+gspreadsheet.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/160/progetti/webvalleysite/webvalley/timetable/gspreadsheet.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/158/progetti/webvalleysite/webvalley/timetable/__init__.py
+END
+tests.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/158/progetti/webvalleysite/webvalley/timetable/tests.py
+END
+urls.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/158/progetti/webvalleysite/webvalley/timetable/urls.py
+END

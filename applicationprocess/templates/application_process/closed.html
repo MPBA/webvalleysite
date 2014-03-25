@@ -1,0 +1,17 @@
+{% extends "sidebar_layout.html" %}
+{% load url from future %}
+{% load switch %}
+{% block title %}Application closed{% endblock %}
+
+{% block page %}
+
+<h2>Application to WebValley summer school</h2>
+
+<p>The required action is not available, as you are not allowed to edit your application for one of these reasons:</p>
+<ul>
+  <li>The deadline has expired</li>
+  <li>You've already submitted your application forms</li>
+  <li>You've decided to apply in the old-fashoned way, with paper forms only</li>
+</ul>
+
+{% endblock %}

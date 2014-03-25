@@ -1,0 +1,113 @@
+{% extends "sidebar_layout.html" %}
+
+{% block page %} {# sorry for the bad block name, but 'content' was already in use #}
+
+    {# ERROR AREA #}
+    {% if errors %}
+        <div class="alert alert-error fade in" data-alert="alert">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+
+            {% for error in errors %}
+                <p><strong>Error: </strong> {{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {# NOTIFICATION AREA #}
+    {% if notifications %}
+        <div class="alert alert-info fade in" data-alert="alert">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            {% for notification in notifications %}
+                <p><strong>Heads up!</strong> {{ notification }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+<div class="row">
+    <div class="span10">
+        <div class="span4" ><img src="{{STATIC_URL}}img/logowvfbk-300.png"/></div>
+        <div class="span4"><div><a href="#" class="thumbnail"><img src="{{STATIC_URL}}img/gruppo.jpg"><img/></a>
+			</br>
+			<p><a href="/media/pdf/WebValley2012_brochure.pdf"><strong> Download WebValley2012 Brochure</strong></a> </p>
+			<p><strong>The list of the selected students is available <a href="/sp/webvalley2012/" style="color:red;">here</a>!</p>
+			<p><strong>Webvalley 2012 Welcome Dinner <a href="/news/welcomedinner/1/" style="color:red;">more info...</a></p>
+			<p><strong>Departure to Transacqua <a href="/news/departure-transacqua-planned-sunday-17th-2012-1400/1/" style="color:red;">more info...</a></p>
+	   </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span8" style="margin-top:30px;">
+       <blockquote>
+            <p style="font-size:170%; line-height:130%;">
+                <a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2012 - International in Primiero, Trentino (June 17 - July 7, 2012).</strong><br/>
+		 Follow us on the  <a href="http://dashnanowebgis.blog.com/">project blog</a> or browse the school <a href="{% url timetable.views.display %}">timetable</a>.
+            </p>
+			 </blockquote>
+        <p><strong>WebValley is the FBK summer school</strong> for dissemination of interdisciplinary research: <strong> almost 250 students</strong> (17-18y old) have attended the WebValley camps since its first edition in 2001. WebValley started as a regional initiative for high school students from Trentino Alto-Adige SudTirol, and it is now an opportunity for national and international students to experiment scientific research.
+    </p>
+        </br>
+        <p>
+            <strong>Fellowships</strong> will include full tuition, accommodation  and travel costs. Thanks to co-funding by collaborating institutions, for the 2012 edition, 18 fellowships are available for students from: <strong>7 Trentino and Alto Adige-South Tyrol</strong>
+            <strong>4 National</strong> (co-funding PLS - National Program for Mathematics and Science Education) <strong> 7 International </strong> (co-funding: FBK Trustees Board)
+            </br>
+            Find <a href="/sp/intel_info/">here</a> more info for our Intel ISEF finalists FBK Grant Awards.
+        </p>
+        </br>
+        <p>
+            <strong>The requirements</strong> to participate are: High School student (for Italy: <strong>4th year completed</strong>; for others student: who <strong>completed the 12th grade and were born in 1994 or younger</strong>), good knowledge of English, enthusiasm in science and new technologies, above-average school records, student’s motivation and teacher’s recommendation letters.
+        </p>
+        </br>
+        <blockquote>
+            <p>
+                <strong>The 2012 project:</strong> <strong>Multi-scale science: the nanoWebGIS interface for molecular medicine data</strong>. The project will aim at sketching a new type of interface to big data in molecular biology. Labs are generating more and more massive amounts of imaging data at scales from tissue to cell aggregates and single cell environment scales that can be characterized by their spatial description and possibly dynamic evolution in time. The software shall offer on-line spatial exploration of data, from lab instruments or simulated environments of 2D/3D cellular dynamics. The challenge is to use for the first time the latest techs applied in the GIS over internet domain, capable to harmonize complex data and different scales. <strong>The project shall enable the sharing between scientists of multi-scale studies, the overlay of models and real data, with an interaction based on Kinect and Android interfaces</strong>. We aim to extend the tools we built in 2011 for the amazing Kinect controller adding an interaction with Smart WebTV displays to the newest GIS and WebGIS methods. </p>
+        </blockquote>
+        </br>
+        <p>
+            <strong>The WebValley formula</strong>: <strong>Create a team of enthusiast and motivated high school students (18 y) tutored by researchers.</strong>
+        <ul>
+            <li>
+                <strong>The team accepts a challenge</strong> by a collaborating scientist from Ecology, Biology or Social Sciences and develops <strong>in three weeks</strong> a new web-based prototype for data analysis and management. In 2011, the project was commissioned by MUSE.
+            </li>
+            <li>
+                Students are introduced to <strong>Open Source</strong> software solutions (scientific programming, web interfaces, database, GIS and data analysis); they discuss, design and develop the new sys-tem interacting with scientists. They learn to select tools, organize their own workplan, and respond with a new solution to a problem of ethical interest. A working prototype web solu-tion and technical results are presented at the end of the three week period.
+            </li>
+            <li>
+                <strong>The project activities are developed mostly in teamwork</strong> as in a true research environment, that is informal and of high quality in resources, competence and organization. Each student can differently contribute to project with ideas, software code or data preparation, design of new web interfaces, project presentation.
+            </li>
+            <li>
+                <strong>The location:</strong> the school is held in <strong>a high-tech lab located in a small Alpine village</strong>, to demonstrate that web access may support new types of innovative actions also in remote areas, combining new technologies and high-quality of life in a natural environment.(<strong>Lab is open all day</strong>, but group activities and leisure time are also part of the three weeks).
+            </li>
+        </ul>
+
+        </p>
+        </br>
+    </div>
+</div>
+
+    {# LATEST NEWS #}
+    <div id="links">
+        <a href="feeds/rss/" title="rss">RSS</a>
+        <a href="feeds/atom/" title="atom">ATOM</a>
+    </div>
+
+    <h2> Latest News </h2>
+    {% if news.paginator.count %}
+        {% for news_obj in news.object_list %}
+            <h4><a class="news-title" href="{% url news-details news_obj.slug news.number %}">{{ news_obj.title }}</a></h4>
+            <span class="news-date">{{ news_obj.created_at|date:"d.m.Y" }}, {% if news_obj.user.get_full_name %}{{ news_obj.user.get_full_name }} {% else %} {{ news_obj.user.username }}{% endif %}</span>
+            <p>
+                {{ news_obj.body|striptags|linebreaksbr|urlizetrunc:20|safe|truncatewords:words }} - <a href="{% url news-details news_obj.slug news.number %}">more</a>
+            </p>
+        {% endfor %}
+        <a class="btn small" href="/news">View all the news</a>
+
+    {% else %}
+        <p class="info">No news so far</p>
+    {% endif %}
+
+{% endblock %}
+
+<script type="text/javascript">
+    $('.carousel').carousel();
+</script>

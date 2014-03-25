@@ -1,0 +1,299 @@
+// ========================================
+// # topbar stuff
+// # (NOT for the dropdown user menu: see below)
+// ========================================
+
+.navbar-inner {
+  background-color: @blueFbk;
+  background-image: none;
+  // translucent blue gradient
+  #gradient > .vertical(rgba(0, 65, 117, 0.6), darken(rgba(0, 65, 117, 0.6), 10%));
+  @shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
+  .box-shadow(@shadow);
+
+  // topbar :hover
+  &:hover {
+    #gradient > .vertical(@blueFbk, darken(@blueFbk, 10%));
+  }
+
+  // webvalley logo on the top-left
+  .container {
+    a.brand {
+      padding-bottom: 0;
+      padding-top: 5px;
+
+      img {
+        height: 30px;
+      }
+    }
+
+    // search form near to the webvalley logo
+    .navbar-search {
+      margin-bottom: 0;
+      margin-top: 5px;
+
+      // search form - input box
+      input {
+        border-radius: 3px;
+        margin-bottom: 0;
+        padding-left: 25px;
+        background-repeat: no-repeat;
+        background-position: 4px 4px;
+      }
+
+    }
+  }
+}
+
+// ========================================
+// # user menu (top-right dropdown menu)
+// ========================================
+
+.navbar-inner {
+  li.dropdown {
+    a.dropdown-toggle {
+      color: #bbb;
+
+      &:hover {
+        color: @white;
+      }
+    }
+
+    div.menu-dropdown.signin-menu {
+      padding: 10px;
+      padding-bottom: 0px;
+
+      fieldset.signin {
+        label {
+          padding-left: 5px;
+        }
+
+        input {
+          width: 180px;
+        }
+
+        p.signin-button {
+          padding-left: 5px;
+        }
+
+        p.forgot {
+          text-align: left;
+
+          a{
+            padding: 0px;
+            color: @blueFbk;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// # page-header tweaks
+// ========================================
+
+.page-header {
+  font-family: cantarell;
+  background-color: @black;
+  margin: -20px -20px 30px;
+  padding: 0;
+  #gradient > .horizontal(lighten(@blueFbk,0%), lighten(@black,20%));
+
+  img {
+    float: left;
+    height: 64px;
+    margin: 15px 30px 15px 20px;
+  }
+
+  & h2 {
+    color: @grayLight;
+
+    .page-title, .user a {
+      color: @white;
+      font-size: 30px;
+    }
+
+    .fbk-header-link a {
+      color: @grayLight;
+    }
+  }
+
+  .grid-effect {
+    padding: 30px 30px 20px;
+    background: url("/static/img/grid-18px.png") repeat scroll center top transparent;
+  }
+}
+
+// ========================================
+// # content-related stuff
+// ========================================
+
+// The white background content wrapper
+.content {
+  background-color:#FFFFFF;
+  padding:20px;
+  margin-bottom: 30px;
+  .border-radius(0px 0px 6px 6px);
+  .box-shadow(0 0 15px 1px lighten(@blueFbk,40%));
+
+  .span12 {
+    // Give a quick and non-cross-browser friendly divider
+    margin-left:0;
+    padding-left:19px;
+    border-left:1px solid #eee;
+
+    .sidebar-layout {
+      border-left: 1px solid #EEEEEE;
+    }
+
+    .span3 {
+      min-height:500px;}
+  }
+}
+
+// ========================================
+// # my-profile page
+// ========================================
+
+div.my-profile {
+  padding-top: 30px;
+}
+
+// ========================================
+// # Photogallery
+// ========================================
+.album-list {
+  margin-top: 20px;
+}
+
+// ========================================
+// # misc stuff
+// ========================================
+
+body {
+  padding-top: 38px;
+  #gradient > .vertical(lighten(@blueFbk, 40%), @blueFbk);
+  height: auto;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+html {
+  height: 100%;
+}
+
+.container {
+  > footer p {
+    text-align:center; // center align it with the container
+  }
+}
+
+.footer {
+  color: white;
+  border-top: 0;
+
+  & img {
+    height: 40px;
+  }
+}
+
+div.sidebar {
+  padding: 8px 0;
+
+  .divider {
+    background-color: #E5E5E5;
+    border-bottom: 1px solid #FFFFFF;
+    height: 1px;
+    margin: 8px 1px;
+    overflow: hidden;
+  }
+}
+
+/* 404 error */
+div.notfound {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  //the big "404"
+  span {
+    font-size: 300px;
+    line-height: 100%;
+    margin-left: 40px;
+  }
+
+  h3 {
+    color: @blueFbk;
+    margin-left: 60px;
+    font-size: 40px;
+    text-transform: uppercase;
+  }
+  
+  h2 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    line-height: 200%;
+  }
+}
+
+// ========================================
+// # Media queries
+// ========================================
+
+// Landscape phone to portrait tablet
+@media (max-width: 980px) {
+  body {
+    padding: 0;
+  }
+
+  .navbar-inner {
+    // the top-right button with 3 lines inside
+    a.btn.btn-navbar {
+      #gradient > .vertical(lighten(@blueFbk, 10%), @blueFbk);
+    }
+    
+    a, li.dropdown a.dropdown-toggle, a#resend-password-link {
+      &:hover {
+        #translucent > .background(@blue, 0.0) !important;
+      }
+    }
+
+    form {
+      text-align: center;
+    }
+    
+    li.dropdown {
+      text-align: center;
+
+      p, label {
+        color: @grayLighter;
+      }
+
+      p.forgot {
+        text-align: center !important;
+      }
+
+      a#resend-password-link {
+        color: lighten(@linkColor, 40%);
+      }
+    }
+  }
+}
+
+// ========================================
+// # Django forms
+// ========================================
+
+ul.errorlist {
+  list-style: none;
+
+  li {
+    color: #F00;
+    margin-left: -25px;
+  }
+}
