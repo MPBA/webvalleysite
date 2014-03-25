@@ -1,0 +1,56 @@
+{% extends "sidebar_layout.html" %}
+{% load url from future %}
+{% load switch %}
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block page %}
+
+<h2>Application to WebValley summer school</h2>
+{% comment %}
+Stato: {{ application_status }}
+<br/>
+Forms: {{ user_forms }}
+<br/>
+primo form: {{ user_forms.0 }}
+<br/>
+stato primo form: {{ user_forms.0.status }}
+{% endcomment %}
+
+{% switch application_status %}
+{% case application_status_choices.WEBVALLEY_STAFF %}
+  <p>
+    I know you'd like to be young enough to apply for WebValley...
+    You are not.
+  </p>
+{% case application_status_choices.NOT_SET %}
+  {% include "application_process/home_choose_applicationprocess.html" %}
+{% case application_status_choices.ONGOING %}{# thus, user_forms not None #}
+  {% switch user.get_profile.applicationstatus.status %}
+  {% case "S_IPR" %}
+    {% if can_edit_application %}
+      {% include "application_process/home_form_list.html" %}
+    {% else %}
+      <p>
+	You can't edit your application any more: deadline was at
+	<b class="label label-important">{{ user.get_profile.applicationstatus.application_process.deadline }}</b>.
+      </p>
+      <p>
+	Refer to the <em>call for students</em> for offical deadlines.
+      </p>
+    {% endif %}
+  {% case "S_SUB" %}
+    <p>
+      <span>Thank you for applying to WebValley Summer School!
+    </p>
+    <p>
+      Your application has been carried by the information system. After the application deadline (scheluled on {{ user.get_profile.applicationstatus.application_process.deadline }}), your submission will be evaluated and you will be informed of the result.
+      Good luck !
+    </p>
+  {% case "S_ERR" %}
+    <p>
+      You have chosen to apply to the school with the paper-only option, thus you won't be able to do much from here.
+    </p>
+  {% endswitch %}
+{% endswitch %}
+
+{% endblock %}

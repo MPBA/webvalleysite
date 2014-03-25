@@ -1,0 +1,41 @@
+{% load url from future %}
+<p>
+  Welcome to the WebValley summer school application process!<br/>
+  Before you start, you must select the application process you will
+  follow: different students will follow slightly different
+  application processes (this is due to the different countries involved).
+  Refer to the School <em>call for students</em> if in doubt.
+  <p style="font-weight:bold;">Note that we will consider only students that are 17/18 years old
+  and thus at the end of the 12th year of school.</p>
+</p>
+<form class="form-inline"
+      method="post" enctype="multipart/form-data" action=
+      "{% url 'applicationprocess.views.set_application_process' %}">
+  {% csrf_token %}
+  <p>
+    {% for field in choose_process_form %}
+    {{ field.errors }}
+    {{ field }}
+    {% endfor %}
+    <button class="btn btn-primary" type="submit">
+      Submit
+    </button>
+  </p>
+</form>
+
+</br>
+</br>
+<p>
+<h4>Please note that sending your application you acknowledge and accept the following terms:</h4>
+</p>
+<ol>
+    <li>
+    The authorization to process personal details as per Italian law, legislative decree of 30th June 2003, n. 196 (Code for the protection of personal data) and subsequent amendments.
+    </li>
+    <li>
+    Those candidates who will pass the preliminary curricula screening will be contacted shortly for an interview.
+    </li>
+    <li>
+    For transparency purposes, the name of the selected candidate, if he or she has accepted the position, will be published on the http://webvalley.fbk.eu  website at the bottom of the selection notice.
+    </li>
+</ol>

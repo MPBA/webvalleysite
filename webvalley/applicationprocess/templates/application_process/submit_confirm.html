@@ -1,0 +1,24 @@
+{% extends "sidebar_layout.html" %}
+{% load url from future %}
+
+{% block title %}Submit application{% endblock %}
+
+{% block page %}
+
+<h2>Application to WebValley summer school</h2>
+
+<p>
+  You are now ready to submit your application,
+  but be careful, <b>this action is permanent</b>.
+</p>
+<p>
+  <b> Any application submitted after the deadline will NOT be considered. </b>
+</p>
+<form action="." method="post">
+  {% csrf_token %}
+  <p class="well">
+    <input type="submit" value="Submit application"
+	   class="btn btn-primary btn-large" />
+  </p>
+</form>
+{% endblock %}

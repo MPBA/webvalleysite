@@ -1,0 +1,89 @@
+import re, urllib, urllib2
+import csv
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import render
+
+class Spreadsheet(object):
+	def __init__(self, key):
+		super(Spreadsheet, self).__init__()
+		self.key = key
+
+class Client(object):
+	def __init__(self, email, password):
+		super(Client, self).__init__()
+		self.email = email
+		self.password = password
+
+	def _get_auth_token(self, email, password, source, service):
+		url = "https://www.google.com/accounts/ClientLogin"
+		params = {
+			"Email": email, "Passwd": password,
+			"service": service,
+			"accountType": "HOSTED_OR_GOOGLE",
+			"source": source
+		}
+		req = urllib2.Request(url, urllib.urlencode(params))
+		return re.findall(r"Auth=(.*)", urllib2.urlopen(req).read())[0]
+
+	def get_auth_token(self):
+		source = type(self).__name__
+		return self._get_auth_token(self.email, self.password, source, service="wise")
+
+	def download(self, spreadsheet, gid=0, format="csv"):
+		url_format = "https://spreadsheets.google.com/feeds/download/spreadsheets/Export?key=%s&exportFormat=%s&gid=%i"
+		headers = {
+			"Authorization": "GoogleLogin auth=" + self.get_auth_token(),
+			"GData-Version": "3.0"
+		}
+		req = urllib2.Request(url_format % (spreadsheet.key, format, gid), headers=headers)
+		return urllib2.urlopen(req)
+
+if __name__ == "__main__":
+	import getpass
+	import csv
+
+	email = "" # (your email here)
+	password = getpass.getpass()
+	spreadsheet_id = "" # (spreadsheet id here)
+
+	# Create client and spreadsheet objects
+	gs = Client(email, password)
+	ss = Spreadsheet(spreadsheet_id)
+
+	# Request a file-like object containing the spreadsheet's contents
+	csv_file = gs.download(ss)
+
+	# Parse as CSV and print the rows
+	for row in csv.reader(csv_file):
+		print ", ".join(row)
+
+def display(request):
+    gs = Client(settings.TIMETABLE_GOOGLE_USER,
+                settings.TIMETABLE_GOOGLE_PASSWORD)
+    ss = Spreadsheet(settings.TIMETABLE_SPREADSHEET)
+    csv_file = gs.download(ss, gid=settings.TIMETABLE_SPREADSHEET_GID)
+    raw_data = csv.reader(csv_file)
+
+    data = []
+    for row in raw_data:
+        if row[1]:
+            data.append({ 'date': row[0]+u', '+row[1],
+                          'activities': [] })
+        act = { 'time': row[2],
+                'name': row[3],
+                'teachers': row[4],
+                'links': [] }
+        for cell in row[5:]:
+            if cell:
+                if 'dropbox' in cell:
+                    ext = cell.split('.')[-1]
+                else:
+                    ext = "WWW"
+                act['links'].append({ 'href': cell,
+                                      'extension': ext })
+        data[-1]['activities'].append(act)
+
+    return render(request, "timetable/display.html", {'data': data})
+

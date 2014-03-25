@@ -1,0 +1,76 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <a href="/" class="brand"><img src="{{ STATIC_URL }}/img/webvalley-logo-topbar.png" /> </a>
+
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li>
+                        <form action="/search/" method="get" class="navbar-search">
+                            <input type="text" class="span3 search-query" name="q" placeholder="Search news" style='background-image: url("{{ STATIC_URL }}img/search_magnifier.png");'>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+
+                        {% if user.is_authenticated %}
+
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Logged in as <strong>{{ user.get_full_name }}</strong> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href="/profile/my/">View / edit profile</a></li>
+                            <li><a href="/account/logout/?next={{ request.path }}">Logout</a></li>
+                            <li class="divider"></li>
+                            {# TODO: button enabled only when users are allowed to join webvalley #}
+                            <li><a href="/school-application/">Join WebValley!</a></li>
+                        </ul>
+
+                        {% else %}
+
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><em>Have an account?  </em><strong>Sign in</strong> <b class="caret"></b></a>
+                        <div class="dropdown-menu">
+
+                            <div class="menu-dropdown signin-menu">
+                                <fieldset class="signin">
+                                    <form method="post" action="/account/login/?next={% firstof login_redirect_to request.path %}">
+                                        {% csrf_token %}
+                                        <p>
+                                            <label for="username">Email</label>
+                                            <input id="username" name="username" value="" tabindex="1" type="text">
+                                        </p>
+                                        <p>
+                                            <label for="password">Password</label>
+                                            <input id="password" name="password" value="" title="password" tabindex="2" type="password">
+                                        </p>
+                                        <div class="divider"></div>
+                                        <p class="signin-button"><input value="Sign in" tabindex="4" type="submit" class="btn btn-primary btn-large"></p>
+                                        <p class="remember-checkbox">Remember me <input type="checkbox" id="remember_me" value="remember_me" name="remember_me" tabindex="3"></p>
+                                        <p class="forgot"> <a href="mailto:webvalley@fbk.eu" id="resend-password-link" tabindex="5">Forgot your password?</a> </p>
+                                        <p class="forgot"><a href="/account/signup/">Sign up!</a></p>
+                                    </form>
+                                </fieldset>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // prevent dropdown menu closing when clicking on the dropdown menu itself
+    $('div.signin-menu').click( function(event) {
+        event.stopPropagation();
+    });
+</script>

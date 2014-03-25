@@ -1,0 +1,11 @@
+<div class="page-header" style="display: none;">
+    <img src="{{ STATIC_URL }}/img/fbk-logo-penguin.png" alt="FBK logo">
+    <div class="grid-effect">
+        <h2>
+            <!-- firstof templatetag returns first non False value -->
+            <span class="user"><a href="/profile/my/">{% firstof user.first_name "guest" %}</a></span>
+            <span class="fbk-header-link">@<a href="/">webvalley</a>.<a href="http://www.fbk.eu">fbk.eu </a></span>
+            <span class="page-title">/{{ page_title|lower }}</span> %
+        </h2>
+    </div>
+</div>

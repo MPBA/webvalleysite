@@ -1,0 +1,56 @@
+{% extends "sidebar_layout.html" %}
+{% load url from future %}
+{% load switch %}
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block page %}
+
+
+<h2>
+    Edit form
+    <a style="font-size: small;"
+       href="{% url 'applicationprocess.views.home' %}">
+        [back to application overview]
+    </a>
+</h2>
+<script type="text/javascript"
+        src="{{ STATIC_URL }}js/marks_widget.js"></script>
+<br/>
+<br/>
+
+<form action="." method="post" enctype="multipart/form-data" class="form-stacked">
+    {% if form.non_field_errors %}
+    <div class="alert alert-error">
+        {{ form.non_field_errors }}
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <fieldset>
+        <legend> {{ form_name }}</legend>
+        {% if form.user_form.description %}
+        <p>
+            {{ form.user_form.description|safe }}
+        </p>
+        {% endif %}
+        {% for field in form %}
+        <div class="control-group">
+            <h4> {{ field.label|capfirst }} </h4>
+            {{ field.errors }}
+            <div class="controls">
+                {{ field }}
+            </div>
+        </div>
+        {% endfor %}
+    </fieldset>
+
+    <div class="form-actions">
+        <button class="btn btn-primary btn-large" type="submit">
+            Save form
+        </button>
+        <button class="btn btn-large" type="reset">
+            Reset
+        </button>
+    </div>
+</form>
+
+{% endblock %}
