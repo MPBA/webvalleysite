@@ -102,7 +102,7 @@ def home(request):
 
 
 @require_POST
-@transaction.commit_on_success
+@transaction.atomic
 @login_required()
 def set_application_process(request):
     form = ApplicationProcessSelectForm(request.POST)
@@ -118,7 +118,7 @@ def set_application_process(request):
                        'choose_process_form': form})
 
 
-@transaction.commit_on_success
+@transaction.atomic
 @login_required
 @application_edit_perm_required()
 def form_edit(request, form_id):
@@ -146,7 +146,7 @@ def form_edit(request, form_id):
                     'form':form
                   })
 
-@transaction.commit_on_success
+@transaction.atomic
 @login_required
 @application_edit_perm_required()
 def submit_signed(request, form_id):
@@ -169,7 +169,7 @@ def submit_signed(request, form_id):
                     'form':form
                   })
 
-@transaction.commit_on_success
+@transaction.atomic
 @login_required
 @application_edit_perm_required()
 def submit(request):

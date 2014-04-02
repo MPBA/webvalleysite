@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 _global_cache = {}
 
 class CustomForm( forms.Form ):
-    @transaction.commit_on_success
+    @transaction.atomic
     def save(self):
         if self.user_form.signed_copy:
             self.user_form.signed_copy.delete()

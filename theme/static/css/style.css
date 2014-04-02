@@ -75,3 +75,29 @@ td h4 {
 .navbar-brand img {
 	height: 34px;
 }
+
+.dropdown-menu form {
+	padding: 10px;
+}
+
+ul.nav {
+	margin-top: 3px;
+}
+
+.nav-collapse ul.nav > li > a{
+	color: #fff;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #fff;
+	border-radius: 15px;
+}
+
+.nav-collapse ul.nav > li > a:hover {
+	color: #000;
+	border-color: transparent;
+}
+
+.nav-collapse ul.nav > li.open > a {
+	color: #000;
+	border-color: transparent;
+}

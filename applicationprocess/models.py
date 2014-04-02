@@ -148,7 +148,7 @@ class ApplicationProcessForm( models.Model ):
         unique_together = (( 'application_process', 'form' ), )
 
     def save(self):
-        with transaction.commit_on_success():  # Hopefully, this is a serializable transaction
+        with transaction.atomic():  # Hopefully, this is a serializable transaction
             # read from database the current status of this object (if self.pk is not null)
             # compare what was read with self
             # Take proper action, basing on the diff (new item/index chanded/s.t. important changed)
@@ -246,7 +246,7 @@ def assign_new_form_to_users( sender, **kwargs ):
         new_form = kwargs.get( 'instance' ).form
         affected_application_statuses = application_process.applicationstatus_set.all()
 
-        with transaction.commit_on_success():
+        with transaction.atomic():
             for current_application_status in affected_application_statuses:
                 new_user_form = UserForm( form=new_form,
                     application_status=current_application_status )
@@ -269,7 +269,7 @@ def assign_userforms_to_new_user( sender, **kwargs ):
         application_process = application_status.application_process
         form_list = application_process.forms.all()
 
-        with transaction.commit_on_success():
+        with transaction.atomic():
             for current_form in form_list:
                 new_user_form = UserForm( application_status=application_status,
                     form=current_form)

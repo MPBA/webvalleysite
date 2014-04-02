@@ -8,7 +8,7 @@ def home(request, errors=None, notifications=None):
 
     return render(request, 'home.html', {
         'page_title': 'home',
-        'sidebar_item': 'home',
+        # 'sidebar_item': 'home',
         'errors': errors,
         'notifications':notifications,
         'login_redirect_to' : '/',

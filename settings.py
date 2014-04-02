@@ -243,6 +243,7 @@ INSTALLED_APPS = (
     "theme",
     "timetable",
     "team",
+    "partecipants",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

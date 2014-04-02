@@ -1,9 +1,9 @@
-{% extends "site_base.html" %}
-{% load tags %}
+{% extends "base.html" %}
+{# load tags #}
 
 {% block body %}
 
-    {% include "topbar.html" with login_redirect_to=login_redirect_to %}
+    {# include "topbar.html" with login_redirect_to=login_redirect_to #}
 
     <div class="container">
 
@@ -13,11 +13,11 @@
 
             <div class="row">
                 <div class="span3">
-                    {% if sidebar_item %}
-                        {% sidebar sidebar_item%}
-                    {% else %}
-                        {% sidebar "none" %}
-                    {% endif %}
+                    {# if sidebar_item #}
+                        {# sidebar sidebar_item #}
+                    {# else #}
+                        {# sidebar "none" #}
+                    {# endif #}
                 </div>
                 <div id="page-content" class="sidebar-layout span8">
 

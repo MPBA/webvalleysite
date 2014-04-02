@@ -30,7 +30,7 @@ def signup(request):
 
         if form.is_valid():
 
-            with transaction.commit_on_success():
+            with transaction.atomic():
                 new_user = create_new_inactive_user(first_name=form.cleaned_data['first_name'],
                                                     last_name=form.cleaned_data['last_name'],
                                                     email=form.cleaned_data['mail'],
@@ -49,6 +49,7 @@ def signup(request):
     else:
         form = RegistrationForm()
 
+    form = str(form).replace('<tr><th>', '<div class="form-group">').replace('</th><td>', '').replace('</td></tr>', '</div>')
     return render(request, 'signup.html', {'form': form, 'sidebar_item': 'signup', 'page_title': 'signup'})
 
 

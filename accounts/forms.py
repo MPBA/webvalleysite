@@ -10,6 +10,10 @@ class RegistrationForm(forms.Form):
     password1 = forms.CharField(max_length=30, required=True,widget=forms.PasswordInput(render_value=False), label=_('Password'))
     password2 = forms.CharField(max_length=30, required=True,widget=forms.PasswordInput(render_value=False), label=_('Confirm password'))
 
+    # def __init__(self, *args, **kwargs):
+    #     super(RegistrationForm, self).__init__(*args, **kwargs)
+    #     self.fields['first_name'].widget.attrs.update({'class' : 'form_group'})
+
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -27,4 +31,5 @@ class RegistrationForm(forms.Form):
         except User.DoesNotExist:
             return form_email
         raise validators.ValidationError('Email "{email}" is already taken.'.format(email=form_email))
+
 
