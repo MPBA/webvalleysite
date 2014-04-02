@@ -68,6 +68,7 @@ td h4 {
 }
 
 .navbar-brand {
+	height: auto;
 	padding: 0;
 }
 
