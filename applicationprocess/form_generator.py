@@ -43,7 +43,7 @@ class FormFactory( object ):
         validators = [FormFactory._validator_object_from_db(validator) for validator in db_field.validators.all()]
         options = db_field.extra_options
         options['validators'] = validators
-        options['required'] = db_field.required
+        options['required'] = not db_field.required
         options['label'] = db_field.label
         field_object = field_class( **options )
 

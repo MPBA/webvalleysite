@@ -22,20 +22,6 @@ from applicationprocess_settings import APPLICATIONPROCESS_EMAIL_SUBJECT,\
     APPLICATIONPROCESS_HANDLER_EMAILS,USER_DATA_ROOT
 from accounts.accounts_settings import WEBVALLEY_EMAIL_ADDRESS
 
-def make_pdf_file(output_filename, text):
-    point = 1
-    inch = 72
-    title = output_filename
-    c = canvas.Canvas(output_filename, pagesize=(8.5 * inch, 11 * inch))
-    c.setStrokeColorRGB(0,0,0)
-    c.setFillColorRGB(0,0,0)
-    c.setFont("Helvetica", 12 * point)
-    v = 10 * inch
-    for subtline in (data).split( '\n' ):
-        c.drawString( 1 * inch, v, subtline )
-        v -= 12 * point
-    c.showPage()
-    c.save()
 
 def do_submission( user_profile ):
     """
@@ -70,7 +56,7 @@ def do_submission( user_profile ):
     with open( os.path.join( data_path, 'data.json'), 'w' ) as data_file:
         data_file.write( _get_json( _get_data( user_profile ) ) )
 
-    with codecs.open( os.path.join( data_path, 'data.csv'), 'w', encoding='utf-8' ) as data_file:
+    with codecs.open( os.path.join(data_path, 'data.csv'), 'w', encoding='utf-8' ) as data_file:
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
     _send_submission_email_to_user( user_profile )
@@ -80,7 +66,7 @@ def do_final_submission( user_profile ):
     """
     Places a copy of the user's data into a folder containing only submitted applications
     """
-
+    user_number = user_profile.applicationstatus.pk
     user_name = " ".join( [str(user_profile.user.last_name), str(user_profile.user.first_name)] )
     application_process_name = user_profile.applicationstatus.application_process.name
     data_path = os.path.join(USER_DATA_ROOT,"submitted_applications",application_process_name,user_name)
@@ -104,21 +90,45 @@ def do_final_submission( user_profile ):
             user_profile.user.username),
         data_path
     )
-
+    """
+	generate json
+    """
     with open( os.path.join( data_path, 'data.json'), 'w' ) as data_file:
         data_file.write( _get_json( _get_data( user_profile ) ) )
+
+    """
+	generate csv
+    """
 
     with codecs.open( os.path.join( data_path, 'data.csv'), 'w', encoding='utf-8' ) as data_file:
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
-    with open (os.path.join(rdata_path, 'data.json'), 'r') as json_file:
+
+    """
+	generate pdf
+    """
+    with open (os.path.join(data_path, 'data.json'), 'r') as json_file:
 		data=json_file.read()
     data = data.replace("{", "")
     data = data.replace("}", "")
     data = data.replace("\"", "")
     data = data.replace(",", "")
-    filename = "".join(str(user_name),".pdf")
-    make_pdf_file(filename, data)
+    filename = "".join([str(user_name),".pdf"])
+    point = 1
+    inch = 72
+    title = filename
+    c = canvas.Canvas(os.path.join( data_path, output_filename))pagesize=(8.5 * inch, 11 * inch))
+    c.setStrokeColorRGB(0,0,0)
+    c.setFillColorRGB(0,0,0)
+    c.setFont("Helvetica", 12 * point)
+    v = 10 * inch
+    for subtline in (data).split( '\n' ):
+        c.drawString( 1 * inch, v, subtline )
+        v -= 12 * point
+    c.showPage()
+    c.save()
+
+
 
 def _get_json( data ):
     return json.dumps( data, indent=4 ) #.decode('utf-8') # non funziona...
