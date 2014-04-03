@@ -5,6 +5,6 @@ GioPede:
 fixare i field
 
 covix:
-copiare db
 copiare dati da webvalley
 aggiungere pagine
+skip sidebar_layout
