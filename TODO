@@ -1,3 +1,5 @@
+### TODO ###
+
 gestire news
 template login
 
@@ -5,6 +7,11 @@ GioPede:
 fixare i field
 
 covix:
-copiare dati da webvalley
 aggiungere pagine
 skip sidebar_layout
+
+### UPDATE ###
+
+covix: 
+2014-04-03: copiate le immagini da webvalley
+2014-04-03: update Pillow (vedi requirements) per errore codec jpeg
