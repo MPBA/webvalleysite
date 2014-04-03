@@ -13,3 +13,7 @@ skip sidebar_layout
 covix: 
 2014-04-03: copiate le immagini da webvalley
 2014-04-03: update Pillow (vedi requirements) per errore codec jpeg
+
+GioPede:
+2014-04-03: fix delle submission
+2014-04-03: fix delle transazioni con il database
