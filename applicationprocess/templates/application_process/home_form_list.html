@@ -111,17 +111,17 @@
 
 <p class="well">
     {% if ready_for_submission %}
-    <a class="btn btn-primary btn-large"
+    <a class="btn btn-primary btn-lg"
        href="{% url 'applicationprocess.views.submit' %}">
         Submit application
     </a>
     {% else %}
-    <span class="btn btn-primary btn-large disabled"
+    <span class="btn btn-primary btn-lg disabled"
           title="Complete all the forms, then submit your application">
       Submit application
     </span>
     {% endif %}
-	<a class="btn btn-info btn-large"
+	<a class="btn btn-info btn-lg"
        href="/sp/registration_howto/">
         Application HOW TO
     </a>

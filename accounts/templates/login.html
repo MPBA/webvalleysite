@@ -2,7 +2,7 @@
 
 {% block page %}
 
-<form class="form-stacked span6 login-form" method="post" action="/account/login/?next={{ next_page }}">
+<form class="form-stacked col-md-6 login-form" method="post" action="/account/login/?next={{ next_page }}">
     {% csrf_token %}
 
     <fieldset>
@@ -21,13 +21,13 @@
         <div>
             <label for="username">Email</label>
             <div class="input">
-                <input type="text" name="username" id="username" class="xlarge span5">
+                <input type="text" name="username" id="username" class="xlarge col-md-5">
             </div>
         </div>
         <div>
             <label for="password">Password</label>
             <div class="input">
-                <input type="password" size="30" name="password" id="password" class="xlarge span5">
+                <input type="password" size="30" name="password" id="password" class="xlarge col-md-5">
             </div>
         </div>
         <div>

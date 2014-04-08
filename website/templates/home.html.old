@@ -24,9 +24,9 @@
     {% endif %}
 
 <div class="row">
-    <div class="span10">
-        <div class="span4" ><img src="{{STATIC_URL}}img/logowvfbk-300.png"/></div>
-        <div class="span4"><div><a href="#" class="thumbnail"><img src="{{STATIC_URL}}img/gruppo.jpg"><img/></a>
+    <div class="col-md-10">
+        <div class="col-md-4" ><img src="{{STATIC_URL}}img/logowvfbk-300.png"/></div>
+        <div class="col-md-4"><div><a href="#" class="thumbnail"><img src="{{STATIC_URL}}img/gruppo.jpg"><img/></a>
 			</br>
 			<p><a href="/media/pdf/WebValley2012_brochure.pdf"><strong> Download WebValley2012 Brochure</strong></a> </p>
 			<p><strong>The list of the selected students is available <a href="/sp/webvalley2012/" style="color:red;">here</a>!</p>
@@ -37,7 +37,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span8" style="margin-top:30px;">
+    <div class="col-md-8" style="margin-top:30px;">
        <blockquote>
             <p style="font-size:170%; line-height:130%;">
                 <a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2012 - International in Primiero, Trentino (June 17 - July 7, 2012).</strong><br/>

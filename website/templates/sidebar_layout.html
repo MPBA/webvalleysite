@@ -12,14 +12,14 @@
             {% include "page_header.html" %}
 
             <div class="row">
-                <div class="span3">
+                <div class="col-md-3">
                     {# if sidebar_item #}
                         {# sidebar sidebar_item #}
                     {# else #}
                         {# sidebar "none" #}
                     {# endif #}
                 </div>
-                <div id="page-content" class="sidebar-layout span8">
+                <div id="page-content" class="sidebar-layout col-md-8">
 
                     {% block page %} {# sorry for the bad block name, but 'content' was already in use #}
                     {% endblock %}

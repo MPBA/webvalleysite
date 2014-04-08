@@ -33,7 +33,7 @@
         </p>
         {% endif %}
         {% for field in form %}
-        <div class="control-group">
+        <div class="form-group">
             <h4> {{ field.label|capfirst }} </h4>
             {{ field.errors }}
             <div class="controls">
@@ -44,10 +44,10 @@
     </fieldset>
 
     <div class="form-actions">
-        <button class="btn btn-primary btn-large" type="submit">
+        <button class="btn btn-primary btn-lg" type="submit">
             Save form
         </button>
-        <button class="btn btn-large" type="reset">
+        <button class="btn btn-lg" type="reset">
             Reset
         </button>
     </div>

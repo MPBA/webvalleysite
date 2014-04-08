@@ -24,7 +24,7 @@
     <fieldset>
         <legend> Upload here your signed copy of {{ form_name }} </legend>
         {% for field in form %}
-        <div class="control-group">
+        <div class="form-group">
 	    {% if field.errors %}
 	      <div class="alert alert-error">{{ field.errors }}</div>
 	    {% endif %}
@@ -36,10 +36,10 @@
     </fieldset>
 
     <div class="form-actions">
-        <button class="btn btn-primary btn-large" type="submit">
+        <button class="btn btn-primary btn-lg" type="submit">
             Upload
         </button>
-        <button class="btn btn-large" type="reset">
+        <button class="btn btn-lg" type="reset">
             Reset
         </button>
     </div>
