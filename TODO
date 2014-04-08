@@ -1,8 +1,6 @@
 ### TODO ###
 
 gestire news (blog)
-template login
-
 
 covix:
 aggiungere pagine
@@ -11,6 +9,7 @@ skip sidebar_layout
 ### UPDATE ###
 
 covix: 
+2014-04-08: migrate le classi da bootstrap 2 a 3 (forse)
 2014-04-03: copiate le immagini da webvalley
 2014-04-03: update Pillow (vedi requirements) per errore codec jpeg
 
