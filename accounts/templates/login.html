@@ -1,6 +1,9 @@
-{% extends "sidebar_layout.html" %}
+{# extends "sidebar_layout.html" #}
 
-{% block page %}
+{% extends "pages/page.html" %}
+
+{# block page #}
+{% block body %}
 
 <form class="form-stacked col-md-6 login-form" method="post" action="/account/login/?next={{ next_page }}">
     {% csrf_token %}

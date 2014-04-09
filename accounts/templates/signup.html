@@ -1,8 +1,11 @@
-{% extends "sidebar_layout.html" %}
+{# extends "sidebar_layout.html" #}
 
-{% block page %}
+{% extends "pages/page.html" %}
+
+{# block page #}
+{% block body %}
     {% if form %}
-        <form class="form-stacked span6 edit-profile-form" method="post" action="">
+        <form class="form-stacked col-md-6 edit-profile-form" method="post" action="">
             {% csrf_token %}
 
             <legend>Sign up for a new account</legend>

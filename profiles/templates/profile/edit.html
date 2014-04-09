@@ -1,11 +1,15 @@
-{% extends "sidebar_layout.html" %}
+{# extends "sidebar_layout.html" #}
+
+{% extends "pages/page.html" %}
+
 
 {% block extrahead %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/datepicker.css">
     <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
 {% endblock %}
 
-{% block page %}
+{# block page #}
+{% block body %}
 
 
 
