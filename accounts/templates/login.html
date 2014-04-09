@@ -3,7 +3,7 @@
 {% extends "pages/page.html" %}
 
 {# block page #}
-{% block body %}
+{% block main %}
 
 <form class="form-stacked col-md-6 login-form" method="post" action="/account/login/?next={{ next_page }}">
     {% csrf_token %}

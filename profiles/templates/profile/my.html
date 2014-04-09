@@ -7,7 +7,7 @@
 {% block title %}WebValley - {{ request.user.get_full_name }}{% endblock %}
 
 {# block page #}
-{% block body %}
+{% block main %}
     <h2> {{ request.user.first_name }}'s profile
         <small><a href="/profile/edit/"> [edit]</a></small>
     </h2>

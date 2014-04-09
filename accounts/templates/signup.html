@@ -3,7 +3,7 @@
 {% extends "pages/page.html" %}
 
 {# block page #}
-{% block body %}
+{% block main %}
     {% if form %}
         <form class="form-stacked col-md-6 edit-profile-form" method="post" action="">
             {% csrf_token %}
