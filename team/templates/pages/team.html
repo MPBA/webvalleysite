@@ -9,7 +9,7 @@
 {{ block.super }}
 
 <div class="container-fluid">
-	{% for tc in page.team.teamcomponent_set.all %}
+	{% for tc in page.team.teamcomponent_set.all|dictsort:'id' %}
 	<div style="margin-bottom:30px" class="row">
 		<div class="col-md-2">
 			<a href="#" class="thumbnail">
