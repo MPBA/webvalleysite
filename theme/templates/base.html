@@ -121,8 +121,8 @@
 </div>
 {% endif %}
 {% endnevercache %}
-<!-- 
-<h1>{% block title %}{% endblock %}</h1> -->
+
+
 <br>
 <ul class="breadcrumb">
 {% spaceless %}
@@ -140,7 +140,7 @@
     <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
     {% endblock %}
 </div>
-
+<h1>{% block blog_title %}{% endblock %}</h1> 
 <div class="col-md-10 middle">
     {% block body %}{% endblock %}
 </div>
