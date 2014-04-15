@@ -38,6 +38,27 @@
 		</a>
 	</div>
 </div>
+
+<blockquote class="index-news"><!-- Recent Posts -->
+	{% load blog_tags keyword_tags i18n %}
+	{% blog_recent_posts 5 as recent_posts %}
+	
+	{% if recent_posts %}
+	<h3>Recent News</h3>
+	{% for recent_post in recent_posts %}
+	<h4><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h4>
+
+	 <h5>{{ recent_post.publish_date|timesince }} {% trans "ago" %}</h5>
+	<div class="recent-summary">
+	{{ recent_post.description_from_content|safe }}
+
+	    <a href="{{ recent_post.get_absolute_url }}" class="">{% trans "more" %}</a>
+	<hr>
+	</div><!-- /recent-summary -->
+	{% endfor %}
+	{% endif %}
+</blockquote><!-- /Recent Posts -->
+
 {% endblock %}
 
 

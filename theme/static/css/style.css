@@ -116,5 +116,26 @@ ul.nav {
 .footer img {
 	padding: 15px;
 	height: 75px;
-	background-color: #0559a2;
+	background-color: #1C588D;
+}
+
+.index-news {
+	font-size: 13px;
+}
+
+.index-news h1, 
+.index-news h2, 
+.index-news h3, 
+.index-news a {
+	font-weight: bold;
+}
+
+.index-news h4,
+.index-news h5,
+.index-news p {
+	margin-bottom: 0px;
+}
+
+.img-width {
+	max-width: 100%;
 }
