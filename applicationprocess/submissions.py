@@ -116,8 +116,7 @@ def do_final_submission( user_profile ):
     filename = "".join([str(user_name),".pdf"])
     point = 1
     inch = 72
-    title = filename
-    c = canvas.Canvas(os.path.join( data_path, output_filename), pagesize=(8.5 * inch, 11 * inch))
+    c = canvas.Canvas(os.path.join( data_path, filename), pagesize=(8.5 * inch, 11 * inch))
     c.setStrokeColorRGB(0,0,0)
     c.setFillColorRGB(0,0,0)
     c.setFont("Helvetica", 12 * point)

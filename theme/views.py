@@ -6,7 +6,7 @@ def home(request, errors=None, notifications=None):
     errors = errors or []
     notifications = notifications or []
 
-    return render(request, 'home.html', {
+    return render(request, 'index.html', {
         'page_title': 'home',
         # 'sidebar_item': 'home',
         'errors': errors,

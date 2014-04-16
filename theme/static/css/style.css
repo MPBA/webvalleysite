@@ -139,3 +139,11 @@ td h4 {
 img {
 	max-width: 100%;
 }
+
+blockquote {
+	font-size: 15px;
+}
+
+ul.errorlist li {
+	color: red;
+}

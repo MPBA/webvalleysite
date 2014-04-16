@@ -13,7 +13,7 @@
 {% endmetablock %}{% endblock %}
 
 {% block blog_title %}
-{% editable blog_post.title %}{{ blog_post.title }}{% endeditable %}
+<h1>{% editable blog_post.title %}{{ blog_post.title }}{% endeditable %}</h1>
 {% endblock %}
 
 {% block breadcrumb_menu %}
@@ -21,7 +21,7 @@
 <li class="active">{{ blog_post.title }}</li>
 {% endblock %}
 
-{% block body %}
+{% block main %}
 
 {% block blog_post_detail_postedby %}
 {% editable blog_post.publish_date %}
@@ -35,19 +35,6 @@
 {% endeditable %}
 {% endblock %}
 {% block blog_post_detail_commentlink %}
-<p>
-    {% if blog_post.allow_comments %}
-        {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-            (<a href="{{ blog_post.get_absolute_url }}#disqus_thread"
-                data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
-                {% trans "Comments" %}
-            {% endspaceless %}</a>)
-        {% else %}(<a href="#comments">{% spaceless %}
-            {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
-            {% endspaceless %}</a>)
-        {% endif %}
-    {% endif %}
-</p>
 {% endblock %}
 
 {% block blog_post_detail_featured_image %}
@@ -78,14 +65,6 @@
 </ul>
 {% endspaceless %}
 {% endif %}
-{% endblock %}
-
-{% block blog_post_detail_rating %}
-<div class="panel panel-default rating">
-    <div class="panel-body">
-    {% rating_for blog_post %}
-    </div>
-</div>
 {% endblock %}
 
 {% block blog_post_detail_sharebuttons %}
@@ -124,10 +103,6 @@
 </ul>
 </div>
 {% endif %}
-{% endblock %}
-
-{% block blog_post_detail_comments %}
-{% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
 {% endblock %}
 
 {% endblock %}
