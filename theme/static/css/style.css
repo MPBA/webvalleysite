@@ -93,14 +93,11 @@ td h4 {
 	border-radius: 15px;
 }
 
-.nav-collapse ul.nav > li > a:hover {
-	color: #000;
-	border-color: transparent;
-}
-
+.nav-collapse ul.nav > li > a:hover,
 .nav-collapse ul.nav > li.open > a {
 	color: #000;
-	border-color: transparent;
+	border-width: 0px;
+	background-color: #f5f5f5;
 }
 
 .footer {
