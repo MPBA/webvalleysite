@@ -69,7 +69,7 @@
                         <ul class="dropdown-menu">
 
                             <li><a href="/profile/my/">View / edit profile</a></li>
-                            <li><a href="/account/logout/?next={{ request.path }}">Logout</a></li>
+                            <li><a href="/account/logout/?next=/">Logout</a></li>
                             <li class="divider"></li>
                             {# TODO: button enabled only when users are allowed to join webvalley #}
                             <li><a href="/school-application/">Join WebValley!</a></li>
@@ -145,9 +145,9 @@
 
 <!-- Footer -->
 <footer class="footer">
-    <div class="container ">
+    <div class="container">
         <p><img src="{{ STATIC_URL }}/img/fbk-complete-logo.png" alt='' align="middle"/></p>
-        <p>&copy; Fondazione Bruno Kessler 2012</p>
+        <p>&copy; Fondazione Bruno Kessler 2014</p>
     </div>
 </footer>
 {% include "includes/footer_scripts.html" %}
