@@ -13,12 +13,15 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import views as auth_views
 from django.core.mail import send_mail
 from django.contrib.sites.models import Site
+from django.utils.timezone import utc
 
 from theme.views import home
 from website.models import UserProfile
+from applicationprocess.models import ApplicationStatus
 
 from .forms import RegistrationForm
 from .accounts_settings import CONFIRMATION_EMAIL_SUBJECT, CONFIRMATION_EMAIL_TEMPLATE, WEBVALLEY_EMAIL_ADDRESS
+from local_settings import DEBUG
 
 def signup(request):
     if request.user.is_authenticated():
@@ -42,8 +45,8 @@ def signup(request):
 
 
 
-
-                #send_confirmation_email( new_user )      Per ora no
+                if not DEBUG
+                    send_confirmation_email( new_user )
 
             return home(request, notifications=[_('Your account has been created. Check your email and follow the instructions to activate it.')])
     else:
@@ -56,8 +59,8 @@ def signup(request):
 def confirm(request, activation_key):
     if request.user.is_authenticated():
         return home(request, errors = [_('You already have an account')])
-
-    #user_profile = get_object_or_404(UserProfile, activation_key=activation_key)
+    if not DEBUG
+        user_profile = get_object_or_404(UserProfile, activation_key=activation_key)
     
     try:
         user_profile = UserProfile.objects.get(activation_key=activation_key)
@@ -67,7 +70,7 @@ def confirm(request, activation_key):
     user_account = user_profile.user
     if user_profile.user.is_active:
         return HttpResponseRedirect('/')
-    elif user_profile.key_expires < datetime.datetime.today():
+    elif user_profile.key_expires < datetime.datetime.utcnow().replace(tzinfo=utc):
         user_account.delete()
         return home(request, errors = [_('Your activation key has expired.')])
     else: # everythig is right
@@ -96,7 +99,8 @@ def login(request):
     else:
         return render(request, 'login.html', {'next_page': next_page,
                                                       'sidebar_item':'login',
-                                                      'page_title': 'account/login'})
+                                                      'page_title': 'account/login',
+												'application_status': ApplicationStatus.status})
 
 def logout(request):
     next_page = "/"
