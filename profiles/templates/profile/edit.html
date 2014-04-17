@@ -18,7 +18,7 @@
         <small><a href="/profile/my/">[view]</a></small>
     </h2>
 
-    <form class="form-stacked span6 edit-profile-form" enctype="multipart/form-data" method="post" action="">
+    <form class="form-stacked col-md-6 edit-profile-form" enctype="multipart/form-data" method="post" action="">
         {% csrf_token %}
 
         {% if form.errors %}

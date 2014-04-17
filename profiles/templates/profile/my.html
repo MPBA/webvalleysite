@@ -8,22 +8,13 @@
 
 {# block page #}
 {% block main %}
-    <h2> {{ request.user.first_name }}'s profile
-        <small><a href="/profile/edit/"> [edit]</a></small>
-    </h2>
-    <div class="row my-profile">
-        <div class="span3">
-            <a href="#" class="thumbnail">
-                {% if request.user.get_profile.photo %}
-                    <img alt="profile_image" src="{{ request.user.get_profile.photo.url }}"/>
-                {% else %}
-                    <img alt="unknown_image" src="{{ STATIC_URL }}img/unknown-user-image.png"/>
-                {% endif %}
-            </a>
-        </div>
-        <div class="span5">
-            <table class="table">
-                <tbody>
+<h2> {{ request.user.first_name }}'s profile
+    <small><a href="/profile/edit/"> [edit]</a></small>
+</h2>
+<div class="row my-profile">
+    <div class="col-md-5">
+        <table class="table">
+            <tbody>
                 <tr>
                     <th>First name</th>
                     <td>{{ request.user.first_name }}</td>
@@ -65,9 +56,18 @@
                     <td>{{ request.user.get_profile.mobile_phone }}</td>
                 </tr>
             </table>
-	    <p>
-	      <a class="btn btn-primary btn-small" href="{% url 'applicationprocess.views.home' %}">Continue your WebValley application</a>
-	    </p>
-        </div>
+            <p>
+               <a class="btn btn-primary btn-small" href="{% url 'applicationprocess.views.home' %}">Continue your WebValley application</a>
+           </p>
+       </div>
+       <div class="col-md-4">
+        <a href="#" class="thumbnail">
+            {% if request.user.get_profile.photo %}
+            <img alt="profile_image" src="{{ request.user.get_profile.photo.url }}"/>
+            {% else %}
+            <img alt="unknown_image" src="{{ STATIC_URL }}img/unknown-user-image.png"/>
+            {% endif %}
+        </a>
     </div>
+</div>
 {% endblock %}

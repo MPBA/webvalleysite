@@ -90,6 +90,14 @@ def home(request):
         ready_for_submission = profile.applicationstatus.ready_for_submission()
         can_edit_appl = can_edit_application(request.user)
 
+    # print "wei"
+    # print user_forms[0].form_data
+    # if user_forms[0].form_data:
+    #     print True 
+    # else: 
+    #     print False
+    # print user_forms[0].status
+    # print 
     return render(request, 'application_process/home.html',
                   {'page_title': 'School Application',
                    'application_status': status,
@@ -132,15 +140,17 @@ def form_edit(request, form_id):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('applicationprocess.views.home'))
-    elif (user_form.form_data <> '{}'):
+    elif (user_form.form_data and user_form.form_data <> '{}'):
         form = FormClass( initial=user_form.form_data )
     else:
-        form = FormClass({})
+        form = FormClass(initial = {})
+    # else:
+    #     form = FormClass( initial=user_form.form_data if user_form.form_data else {} )
 
     template = user_form.form.template
     if not template:
         template = 'application_process/form_edit.html'
-    
+
     return render(request,
                   'application_process/form_edit.html',
                   {

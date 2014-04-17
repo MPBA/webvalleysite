@@ -201,7 +201,9 @@ class UserForm( models.Model ):
         #form_class_object = FormFactory.form_from_user_form( self )
         #bound_form = form_class_object( self.form_data )
         #return bound_form.is_valid_from_cleaned_data()
-        return bool( self.form_data )
+
+        return bool( self.form_data <> '{}' )
+        # return bool(self.form_data)
 
     @property
     def is_completed(self):
