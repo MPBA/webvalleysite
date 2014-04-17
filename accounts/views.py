@@ -45,7 +45,7 @@ def signup(request):
 
 
 
-                if not DEBUG
+                if not DEBUG:
                     send_confirmation_email( new_user )
 
             return home(request, notifications=[_('Your account has been created. Check your email and follow the instructions to activate it.')])
@@ -59,7 +59,7 @@ def signup(request):
 def confirm(request, activation_key):
     if request.user.is_authenticated():
         return home(request, errors = [_('You already have an account')])
-    if not DEBUG
+    if not DEBUG:
         user_profile = get_object_or_404(UserProfile, activation_key=activation_key)
     
     try:
