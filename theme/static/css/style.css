@@ -1,9 +1,9 @@
 body {
-	font-size: 13px;
+	font-size: 14px;
 }
 
-h1, h2, h3 {
-	margin-top: 0;
+.tree {
+	font-size: 13px;
 }
 
 td h4 {
@@ -106,7 +106,7 @@ td h4 {
 	bottom: 0;
 	width: 100%;
 	/* Set the fixed height of the footer here */
-	height: 60px;
+	/*height: 60px;*/
 	background-color: #f5f5f5;
 }
 
@@ -114,6 +114,10 @@ td h4 {
 	padding: 15px;
 	height: 75px;
 	background-color: #1C588D;
+}
+
+h1, h2, h3 {
+	margin-top: 0;
 }
 
 .index-news {
