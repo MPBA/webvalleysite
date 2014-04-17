@@ -1,6 +1,7 @@
 {% extends "pages/page.html" %}
 
 {% load mezzanine_tags staticfiles %}
+{% load tags %}
 {% block main %}
 
 {{ block.super }}
@@ -12,8 +13,13 @@
            <a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2013 - International in Castello - Molina di Fiemme , Trentino (June 30 - July 20, 2013). </strong>
 	</p></br>
 	 <p style="font-size:170%; line-height:130%" align="center">
+		{% if user.is_authenticated %}
+		<strong> <a href="/school-application/"><i class="icon-star"></i>On-line applications</a>: Apr 17 - May 31.<i class="icon-star"></i></strong>
+         </p>
+		{% else %}
 	   <strong> <a href="/account/signup/"><i class="icon-star"></i>On-line applications</a>: Apr 17 - May 31.<i class="icon-star"></i></strong>
          </p>
+		{% endif %}
        </blockquote>
        <p><strong>WebValley is the FBK summer school</strong> for dissemination of interdisciplinary research: <strong> almost 250 students</strong> (17-18y old) have attended the WebValley camps since its first edition in 2001. WebValley started as a regional initiative for high school students from Trentino Alto-Adige S&uuml;dTirol, and it is now an opportunity for national and international students to experiment scientific research.
        </p>
