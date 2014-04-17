@@ -10,7 +10,7 @@
 </p>
 <table style="width:auto;">
     <tr>
-        <td><span class="label label-important">Empty</span></td>
+        <td><span class="label label-danger">Empty</span></td>
         <td>You still haven't filled the form.</td>
     </tr>
     <tr>
@@ -49,7 +49,7 @@
             {% if user.get_profile.filled_for_application %}
             <span class="label label-success">Completed</span>
             {% else %}
-            <span class="label label-important">Empty</span>
+            <span class="label label-danger">Empty</span>
             {% endif %}
         </td>
         <td>
@@ -65,7 +65,7 @@
         {% switch user_form.status %}
         {% case form_status_choices.INCOMPLETE %}
         <td>
-            <span class="label label-important">Empty</span>
+            <span class="label label-danger">Empty</span>
         </td>
         <td>
             <a class="btn btn-primary"

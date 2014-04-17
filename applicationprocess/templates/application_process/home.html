@@ -34,7 +34,7 @@ stato primo form: {{ user_forms.0.status }}
     {% else %}
       <p>
 	You can't edit your application any more: deadline was at
-	<b class="label label-important">{{ user.get_profile.applicationstatus.application_process.deadline }}</b>.
+	<b class="label label-danger">{{ user.get_profile.applicationstatus.application_process.deadline }}</b>.
       </p>
       <p>
 	Refer to the <em>call for students</em> for offical deadlines.

@@ -20,4 +20,10 @@ TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 #     }
 # }
 
+EMAIL_HOST = "stmp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "gsgisng@gmail.com"
+EMAIL_HOST_PASSWORD = "ciaociaociao"
+
 SECRET_KEY = "asfakojngusadifjisodkpjq387894017rysadiouhy8uerqwkd"
