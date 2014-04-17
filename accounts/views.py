@@ -106,7 +106,7 @@ def logout(request):
     if request.GET and request.GET['next']:
         next_page = request.GET['next']
 
-    return auth_views.logout(request, next_page=next_page)
+    return auth_views.logout(request, next_page="/")
 
 
 def send_confirmation_email( new_user ):
