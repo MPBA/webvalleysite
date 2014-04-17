@@ -1,0 +1,33 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles %}
+
+{% block meta_title %}{{ page.title }}{% endblock %}
+
+{% block main %}
+
+{{ block.super }}
+
+<div class="container-fluid">
+	<div style="margin-bottom:10px" class="row">
+	<div class="col-md-2">
+			<b><p>Date</p>
+		</div>
+		<div class="col-md-2">
+			<a href="{{ pe.link }}">Title</a></b>
+		</div>
+	</div>
+	{% for pe in page.press.pressevent_set.all|dictsort:'id' %}
+	<div style="margin-bottom:10px" class="row">
+		<div class="col-md-2">
+			<p>{{ pe.date }}</p>
+		</div>
+		<div class="col-md-2">
+			<a href="{{ pe.link }}">{{ pe.title }}</a>
+		</div>
+		
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}

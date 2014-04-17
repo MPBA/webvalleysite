@@ -239,6 +239,7 @@ INSTALLED_APPS = (
     "accounts",
     "applicationprocess",
     "profiles",
+	"press",
     # covix
     "theme",
     "timetable",
