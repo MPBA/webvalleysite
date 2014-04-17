@@ -236,31 +236,31 @@ def _get_other_subjects_data( user_profile ):
     return data
 
 def _send_submission_email_to_user( user_profile ):
-    #_send_mail_to_user( 'submitted.html', user_profile )
+    _send_mail_to_user( 'submitted.html', user_profile )
 	return
 
 def _send_submission_email_to_handler( user_profile, data_path, application_number ):
-    #_send_mail_to_handler( 'submitted.html', user_profile,
-    #    context={'data_path':data_path, 'application_number':application_number} )
+    _send_mail_to_handler( 'submitted.html', user_profile,
+        context={'data_path':data_path, 'application_number':application_number} )
 	return
 
 def _send_mail_to_handler( template, user_profile, context=None):
-    #context = context or {}
-    #context.update({'user_profile': user_profile})
-    #_send_mail_from_template(os.path.join('email/application_process/handler', template),
-    #                         context, APPLICATIONPROCESS_HANDLER_EMAILS)
+    context = context or {}
+    context.update({'user_profile': user_profile})
+    _send_mail_from_template(os.path.join('email/application_process/handler', template),
+                             context, APPLICATIONPROCESS_HANDLER_EMAILS)
 	return
 	
 def _send_mail_to_user( template, user_profile, context=None):
-    #context = context or {}
-    #context.update({'user_profile': user_profile})
-    #_send_mail_from_template(os.path.join('email/application_process/user', template),
-    #                         context, [user_profile.email])
+    context = context or {}
+    context.update({'user_profile': user_profile})
+    _send_mail_from_template(os.path.join('email/application_process/user', template),
+                             context, [user_profile.email])
 	return
 
 def _send_mail_from_template( template, context, recipients ):
-    #mail_body = render_to_string( template, context )
-    #send_mail( APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
+    mail_body = render_to_string( template, context )
+    send_mail( APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
 	return    
 
 
