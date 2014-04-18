@@ -148,3 +148,9 @@ blockquote {
 ul.errorlist li {
 	color: red;
 }
+
+iframe {
+	border-width: 0px;
+	width: 577px;
+	height: 476px;
+}
