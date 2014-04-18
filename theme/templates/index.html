@@ -5,6 +5,27 @@
 
 {{ block.super }}
 
+{# ERROR AREA #}
+{% if errors %}
+<div class="alert alert-error fade in" data-alert="alert">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+
+	{% for error in errors %}
+	<p><strong>Error: </strong> {{ error }}</p>
+	{% endfor %}
+</div>
+{% endif %}
+
+{# NOTIFICATION AREA #}
+{% if notifications %}
+<div class="alert alert-success fade in" data-alert="alert">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	{% for notification in notifications %}
+	<p><strong>Heads up!</strong> {{ notification }}</p>
+	{% endfor %}
+</div>
+{% endif %}
+
 <div class="row">
 	<div class="col-md-10">
 		<div class="col-md-4" ><img src="{{STATIC_URL}}img/logowvfbk-300.png"/></div>
@@ -19,7 +40,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-12" style="margin-top:30px;">
+	<div class="col-md-12" >
 		<blockquote>
 			<p style="font-size:170%; line-height:130%;">
 				<a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2014 - International in San Lorenzo in Banale, Trentino (June 22 - July 12, 2014).</strong><br/>
@@ -31,7 +52,7 @@
 					{% else %}
 					<a href="/account/signup/">On-line applications:</a>
 					{% endif %}
-					Apr 18 - May 12 (Intel ISEF track).
+					Apr 18 - May 11 (Intel ISEF track).
 				</strong>
 			</p>
 		</blockquote>
@@ -78,10 +99,12 @@
 			</ul>
 		</p>
 		<br />
-		<div><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/group2.jpg"><img/></a></div>
-		<div><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/group3.jpg"><img/></a></div>
-		<div><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/group4.jpg"><img/></a></div>
-		<div><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/teaching.jpg"><img/></a></div>
+		<div>
+			<div class=""><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/group2.jpg"><img/></a></div>
+			<div class=""><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/group3.jpg"><img/></a></div>
+			<div class=""><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/group4.jpg"><img/></a></div>
+			<div class=""><a href="#" class="thumbnail col-md-4" style="margin:10px"><img src="/static/media/uploads/home/teaching.jpg"><img/></a></div>
+		</div>
 	</div>
 </div>
 
