@@ -6,6 +6,7 @@ from website.models import UserProfile
 
 from models import ApplicationStatus, UserForm
 
+
 class ApplicationProcessSelectForm(forms.ModelForm):
     class Meta:
         model = ApplicationStatus

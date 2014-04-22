@@ -1,5 +1,5 @@
 {% extends "pages/page.html" %}
-
+{% load static %}
 {% load mezzanine_tags staticfiles %}
 {% block main %}
 
@@ -57,54 +57,10 @@
 			</p>
 		</blockquote>
 		<br />
-		<div><a href="#" class="thumbnail"><img src="/static/media/uploads/home/lab.jpg"><img/></a></div>
-		<br />
-		<p><strong>WebValley is the FBK summer school</strong> for dissemination of interdisciplinary research: <strong> almost 250 students</strong> (17-18y old) have attended the WebValley camps since its first edition in 2001. WebValley started as a regional initiative for high school students from Trentino Alto-Adige S&uuml;dTirol, and it is now an opportunity for national and international students to experiment scientific research.
-		</p>
-		<br />
-		<p>
-			<strong>Fellowships</strong> will include full tuition, accommodation  and travel costs. Thanks to co-funding by collaborating institutions, for the 2014 edition, 20 fellowships are available for students from Trentino, national and international, with co-funding from FAST - Federation of the Scientific and Technical Associations (Italy), NYEX - Network of Youth Excellence (Germany), from FBK Board of Trustees, and from EDULIFE (Italy).
-			<br />
-			Find <a href="/isef-info/">here</a> more info for our Intel ISEF finalists FBK Grant Awards.
-		</p>
-		<br />
-		<p>
-			<strong>The requirements</strong> to participate are: High School student (for Italy: <strong>4th year completed</strong>), adequate knowledge of English, enthusiasm in science and new technologies, above-average school records, student’s motivation and teacher’s recommendation letters.
-		</p>
-		<br />
-		<blockquote>
-			<p>
-				<strong>The 2014 project:</strong> <strong>the aim of WebValley 2014 is designing a novel web platform for studying microbiota dysbiosis in childhood.</strong>The platform shall connect –omics data and clinical phenotypes, implementing a system medicine approach, with a special focus on the support of reproducible research within interdisciplinary projects. The team will partner with researchers from major Children's hospital and research institutes, international experts in bioinformatics for functional metagenomics, and specialist web developers. Teamwork will rely on a few preparatory short courses on the biology of microbiota and its importance for health and safe nutrition, basic data science tools, and a hands-on course in understanding and analyzing next-generation sequencing (NGS) data. We expect to develop an open source working prototype solution as well as to explore the biotechnology and predictive modeling aspects, such as profiling and network analysis. The prototype will be tested on original and open access datasets of clinical interest. 
-			</p>
-		</blockquote>
-		<br />
-		<p>
-			<strong>The WebValley formula</strong>: <strong>Create a team of enthusiast and motivated high school students (18 y) tutored by researchers.</strong>
-			<br>
-			<div><a href="#" class="thumbnail"><img src="/static/media/uploads/home/group1.jpg"><img/></a></div>
-			<br>
-			<ul>
-				<li>
-					<strong>The team accepts a challenge</strong> by a collaborating scientist from Ecology, Biology or Social Sciences and develops <strong>in three weeks</strong> a new web-based prototype for data analysis and management.
-				</li>
-				<li>
-					Students are introduced to <strong>Open Source</strong> software solutions (scientific programming, web interfaces, database, GIS and data analysis); they discuss, design and develop the new system interacting with scientists. They learn to select tools, organize their own workplan, and respond with a new solution to a problem of ethical interest. A working prototype web solution and technical results are presented at the end of the three week period.
-				</li>
-				<li>
-					<strong>The project activities are developed mostly in teamwork</strong> as in a true research environment, that is informal and of high quality in resources, competence and organization. Each student can differently contribute to project with ideas, software code or data preparation, design of new web interfaces, project presentation.
-				</li>
-				<li>
-					<strong>The location:</strong> the school is held in <strong>a high-tech lab located in a small Alpine village</strong>, to demonstrate that web access may support new types of innovative actions also in remote areas, combining new technologies and high-quality of life in a natural environment.(<strong>Lab is open all day</strong>, but group activities and leisure time are also part of the three weeks).
-				</li>
-			</ul>
-		</p>
-		<br />
-		<div class="col-md-offset-1">
-			<div class=""><a href="#" class="thumbnail col-md-5" style="margin:10px"><img src="/static/media/uploads/home/group2.jpg"><img/></a></div>
-			<div class=""><a href="#" class="thumbnail col-md-5" style="margin:10px"><img src="/static/media/uploads/home/group3.jpg"><img/></a></div>
-			<div class=""><a href="#" class="thumbnail col-md-5" style="margin:10px"><img src="/static/media/uploads/home/group4.jpg"><img/></a></div>
-			<div class=""><a href="#" class="thumbnail col-md-5" style="margin:10px"><img src="/static/media/uploads/home/teaching.jpg"><img/></a></div>
-		</div>
+		<img src="{% static 'img/lab.jpg' %}" class="thumbnail col-md-8 col-lg-offset-2">
+    </div>
+    <div class="row">
+
 	</div>
 </div>
 
