@@ -85,7 +85,8 @@ td h4 {
 	margin-top: 3px;
 }
 
-.nav-collapse ul.nav > li > a{
+.nav-collapse ul.nav > li > a,
+.nav-collapse ul.nav > li > a:active {
 	color: #fff;
 	border-style: solid;
 	border-width: 2px;
