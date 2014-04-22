@@ -3,3 +3,4 @@
 .idea
 local_settings.py
 *.py~
+static/media/
