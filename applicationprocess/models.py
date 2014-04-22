@@ -69,10 +69,11 @@ class Field( models.Model ):
     label = models.CharField( max_length=255 )
     description = models.TextField(null=True, blank=True)
     type = models.ForeignKey( FieldType )
-    validators = models.ManyToManyField( Validator, blank=True, null=True )
+    validators = models.ManyToManyField( Validator, blank=True, null=True)
     required = models.BooleanField(default=True)
     extra_options = jsonfield.JSONField( default='{}', blank=True,
                     help_text=_("Extra options that will be passed to the field __init__ method."))
+    order = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name

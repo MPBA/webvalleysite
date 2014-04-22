@@ -242,7 +242,6 @@ INSTALLED_APPS = (
 	"press",
     # covix
     "theme",
-    "timetable",
     "team",
     "partecipants",
     "django_su",
