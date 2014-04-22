@@ -7,7 +7,11 @@
 {% block title %}{{ page_title }}{% endblock %}
 
 {% block main %}
-
+<script>
+    $(function(){
+        $('input').addClass('form-control');
+    });
+</script>
 
 <h2>
     Edit form
@@ -39,9 +43,9 @@
         <div class="form-group">
             <h4> {{ field.label|capfirst }} </h4>
             {{ field.errors }}
-            <div class="controls">
+
                 {{ field }}
-            </div>
+
         </div>
         {% endfor %}
     </fieldset>
