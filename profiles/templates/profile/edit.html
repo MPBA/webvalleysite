@@ -6,13 +6,18 @@
 {% block extrahead %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/datepicker.css">
     <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+
 {% endblock %}
 
 {# block page #}
 {% block main %}
 
-
-
+<script>
+    $(function(){
+        $('select').addClass('form-control');
+        $( "#photo-clear_id" ).before( "<br>" );
+    });
+</script>
     <h2>
         {{ request.user.first_name }}'s profile
         <small><a href="/profile/my/">[view]</a></small>

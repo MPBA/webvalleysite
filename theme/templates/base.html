@@ -59,8 +59,8 @@
                 </button>
                 <a href="/" class="navbar-brand"><img src="{{ STATIC_URL }}/img/webvalley-logo-topbar.png" /> </a>
             </div>
-            <div class="nav-collapse">
-                <ul class="nav pull-right">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
                     <li class="dropdown">
 
                         {% if user.is_authenticated %}
@@ -71,7 +71,7 @@
                             <li><a href="/profile/my/">View / edit profile</a></li>
                             <li><a href="/account/logout/?next=/">Logout</a></li>
                             <li class="divider"></li>
-                            {# TODO: button enabled only when users are allowed to join webvalley #}
+
                             <li><a href="/school-application/">Join WebValley!</a></li>
                         </ul>
 
@@ -96,10 +96,24 @@
                                 <p class="forgot"> <a href="mailto:webvalley@fbk.eu" id="resend-password-link" tabindex="5">Forgot your password?</a> </p>
                                 <p class="forgot"><a href="/account/signup/">Sign up!</a></p>
                             </form>
-                        </div>  
+                        </div>
                         {% endif %}
                     </li>
                 </ul>
+{#                <ul class="nav navbar-nav"><li class="" id="dropdown-menu-home"><a href="/">Home</a></li><li class="dropdown" id="dropdown-menu-about"><a href="/about/" class="dropdown-toggle" data-toggle="dropdown">#}
+{#            About#}
+{#            <span class="caret"></span></a><ul class="dropdown-menu"><li#}
+{#        id="dropdown-menu-about-skilo"><a href="/about/skilo/">Skilo</a></li><li#}
+{#        id="dropdown-menu-about-team"><a href="/about/team/">Team</a></li></ul></li><li class="dropdown" id="dropdown-menu-contact-info"><a href="/contact-info/" class="dropdown-toggle" data-toggle="dropdown">#}
+{#            Contact#}
+{#            <span class="caret"></span></a><ul class="dropdown-menu"><li#}
+{#        id="dropdown-menu-contact-info-legals"><a href="/contact-info/legals/">Legals</a></li><li#}
+{#        id="dropdown-menu-contact-info-credits"><a href="/contact-info/credits/">Credits</a></li><li#}
+{#        id="dropdown-menu-contact"><a href="/contact/">Info</a></li></ul></li><li class="dropdown active" id="dropdown-menu--myskitrips"><a href="/myskitrips" class="dropdown-toggle" data-toggle="dropdown">#}
+{#            My Trips#}
+{#            <span class="caret"></span></a><ul class="dropdown-menu"><li class="active"#}
+{#        id="dropdown-menu-myskitrips"><a href="/myskitrips">Dashboard</a></li><li#}
+{#        id="dropdown-menu-myskitrips-myroomsarchive"><a href="/myskitrips/myroomsarchive">Rooms</a></li></ul></li><li class="divider-vertical"></li></ul>#}
             </div>
 <!-- <div class="navbar-collapse collapse">
     {% search_form "all" %}
@@ -127,11 +141,12 @@
 
 </div>
 
-<div class="container">
+<div class="container marketing">
     <div class="row">
 
         <div class="col-md-3 left">
             {% block left_panel %}
+
             <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
             {% endblock %}
         </div>

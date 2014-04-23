@@ -119,9 +119,9 @@ img.pull-left {
   margin: 3px 0;
 }
 
-/*========================================
-          MULTI-LEVEL DROP-DOWN NAV
-==========================================*/
+/*========================================*/
+          /*MULTI-LEVEL DROP-DOWN NAV*/
+/*==========================================*/
 .nav > li > a.dropdown-toggle:hover{
   background-color: #e7e7e7;
   color: #555;
@@ -453,24 +453,24 @@ float the buttons inside it. This prevents collapsing. */
   margin-bottom: 20px;
 }
 
-/*========================================
-          RESPONSIVE TWEAKS
-==========================================*/
+/*========================================*/
+          /*RESPONSIVE TWEAKS*/
+/*==========================================*/
 
 /* Display dropdowns on hover only in desktops (md and lg classes) */
-@media (min-width: 768px) {
-  .navbar-nav > li.dropdown:hover > ul.dropdown-menu {
-    display: block;
-  }
-}
-.tree {display:none;}
-@media (min-width: 992px) {
-  .tree {display:block;}
-}
-.navbar .container {width:100%;}
-@media (min-width: 992px) {
-  .navbar .container {width:970px;}
-}
-@media (min-width: 1200px) {
-  .navbar .container {width:1170px;}
-}
+/*@media (min-width: 768px) {*/
+  /*.navbar-nav > li.dropdown:hover > ul.dropdown-menu {*/
+    /*display: block;*/
+  /*}*/
+/*}*/
+/*.tree {display:none;}*/
+/*@media (min-width: 992px) {*/
+  /*.tree {display:block;}*/
+/*}*/
+/*.navbar .container {width:100%;}*/
+/*@media (min-width: 992px) {*/
+  /*.navbar .container {width:970px;}*/
+/*}*/
+/*@media (min-width: 1200px) {*/
+  /*.navbar .container {width:1170px;}*/
+/*}*/
