@@ -4,7 +4,7 @@ from website.models import UserProfile
 
 
 class EditProfileForm(forms.ModelForm): # God bless ModelForms!
-    birth_date = forms.DateField( required=False,
+    birth_date = forms.DateField(required=False,
                                   initial=datetime.date(1990, 01, 01), widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'True'}))
     birth_place = forms.CharField(required=True,  widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'True'}))
     home_phone = forms.CharField(required=True,  widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'True'}))
