@@ -6,7 +6,7 @@ USER_DATA_ROOT = getattr( settings, "USER_DATA_ROOT", APP_USER_DATA_ROOT )
 
 APPLICATION_CLOSED_URL = getattr( settings, "APPLICATION_CLOSED_URL", "/school-application/closed/" )
 
-APPLICATIONPROCESS_HANDLER_EMAILS = getattr( settings, "APPLICATIONPROCESS_HANDLER_EMAILS", ( "email@example.com", ) )
+APPLICATIONPROCESS_HANDLER_EMAILS = getattr( settings, "APPLICATIONPROCESS_HANDLER_EMAILS", ( "webvalley@fbk.eu", ) )
 APPLICATIONPROCESS_EMAIL_SUBJECT = getattr( settings, "APPLICATIONPROCESS_EMAIL_SUBJECT", "WebValley Application Submitted")
 
 

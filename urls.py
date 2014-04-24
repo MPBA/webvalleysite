@@ -19,6 +19,7 @@ urlpatterns = i18n_patterns("",
 )
 
 urlpatterns += patterns('',
+    url(r"^su/", include("django_su.urls")),
     # Time Table
     url(r'^timetable[a-zA-Z0-9\-_]*/', include('timetable.urls')),
     # Accounts
@@ -77,7 +78,6 @@ urlpatterns += patterns('',
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
     ("^", include("mezzanine.urls")),
-    url(r"^su/", include("django_su.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------
