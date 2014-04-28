@@ -11,6 +11,7 @@
   </thead>
 
   {% for file in filelist %}
+    {{ file.download }}
     {% ifequal file.type 'directory' %}
     <tr>
         <td><a href="{% url 'browse_applications' file.link %}">{{ file.name }}</a></td>
