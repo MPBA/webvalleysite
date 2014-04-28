@@ -1,0 +1,30 @@
+{# extends "sidebar_layout.html" #}
+
+{% extends "pages/page.html" %}
+
+{# block page #}
+{% block main %}
+  <h1>File Browser</h1>
+  <table role="table" class="table table-striped ">
+  <thead>
+    <tr><th>Filename/Folder</th><th>Type</th><th></th></tr>
+  </thead>
+
+  {% for file in filelist %}
+    {% ifequal file.type 'directory' %}
+    <tr>
+        <td><a href="{% url 'browse_applications' file.link %}">{{ file.name }}</a></td>
+        <td>{{ file.type }}</td>
+        <td><a href="{% url 'download_zip' file.link file.name %}">[Download .zip]</a></td>
+    </tr>
+    {% endifequal %}
+    {% ifequal file.type 'file' %}
+    <tr>
+        <td><a href="{{ file.link }}">{{ file.name }}</a></td>
+        <td>{{ file.type }}</td>
+        <td>&nbsp;</td>
+    </tr>
+    {% endifequal %}
+  {% endfor %}
+  </table>
+{% endblock %}

@@ -32,4 +32,4 @@ def edit(request):
         return render(request, 'profile/edit.html',
                 {'form': form,
                  'page_title': 'profile/edit',
-                 'sidebar_item':'view-profile'})
+                 'sidebar_item': 'view-profile'})

@@ -5,15 +5,17 @@ import datetime
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.template.loader import render_to_string
 from django.db import transaction
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import views as auth_views
 from django.core.mail import send_mail
 from django.contrib.sites.models import Site
 from django.utils.timezone import utc
+
+from django.template import RequestContext
 
 from theme.views import home
 from website.models import UserProfile
@@ -22,6 +24,41 @@ from applicationprocess.models import ApplicationStatus
 from .forms import RegistrationForm
 from .accounts_settings import CONFIRMATION_EMAIL_SUBJECT, CONFIRMATION_EMAIL_TEMPLATE, WEBVALLEY_EMAIL_ADDRESS
 from local_settings import DEBUG
+import os
+from django.conf import settings
+
+from cStringIO import StringIO # caveats for Python 3.0 apply
+import zipfile
+
+
+def download_zip(request, dir, name):
+    file = StringIO()
+    zf = zipfile.ZipFile(file, mode='w', compression=zipfile.ZIP_DEFLATED)
+    for fn in os.listdir(dir):
+        path = os.path.join(dir, fn)
+        zfn = path[len(dir)+len(os.sep):] #XXX: relative path
+        zf.write(path, zfn)
+    zf.close()
+    response = HttpResponse(file.getvalue(), mimetype="application/zip")
+    response['Content-Disposition'] = 'attachment; filename=' + name + '.zip'
+    return response
+
+
+def browse_applications(request, url):
+    path = settings.PROJECT_ROOT
+    myfiles = os.path.join(path, 'static/media/')
+    mylist = os.path.join(myfiles, url)
+    os.chdir(mylist)
+    files = os.listdir(".")
+    file_dict = []
+    for f in files:
+        if os.path.isdir(f):
+            file_dict.append({'name': f, 'link': os.path.join(mylist, f), 'type': 'directory'})
+        else:
+            file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
+    context = {'filelist': file_dict}
+    return render_to_response('browse_applications.html', context, context_instance=RequestContext(request))
+
 
 def signup(request):
     if request.user.is_authenticated():
