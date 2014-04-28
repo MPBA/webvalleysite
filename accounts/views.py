@@ -48,13 +48,12 @@ def browse_applications(request, url):
     path = settings.PROJECT_ROOT
     myfiles = os.path.join(path, 'static/media/')
     mylist = os.path.join(myfiles, url)
-    print mylist
     os.chdir(mylist)
     files = os.listdir(".")
     file_dict = []
     for f in files:
         if os.path.isdir(f):
-            file_dict.append({'name': f, 'link': os.path.join(f), 'type': 'directory'})
+            file_dict.append({'name': f, 'link': os.path.join(url, f), 'type': 'directory'})
         else:
             file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
     context = {'filelist': file_dict}
