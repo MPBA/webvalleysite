@@ -15,7 +15,7 @@
     <tr>
         <td><a href="{% url 'browse_applications' file.link %}">{{ file.name }}</a></td>
         <td>{{ file.type }}</td>
-        <td><a href="{% url 'download_zip' file.link file.name %}">[Download .zip]</a></td>
+        <td><a href="{% url 'download_zip' file.download file.name %}">[Download .zip]</a></td>
     </tr>
     {% endifequal %}
     {% ifequal file.type 'file' %}
