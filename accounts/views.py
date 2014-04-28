@@ -54,7 +54,7 @@ def browse_applications(request, url):
     file_dict = []
     for f in files:
         if os.path.isdir(f):
-            file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'directory'})
+            file_dict.append({'name': f, 'link': os.path.join('/static/media', f), 'type': 'directory'})
         else:
             file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
     context = {'filelist': file_dict}
