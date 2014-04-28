@@ -24,23 +24,31 @@ from applicationprocess.models import ApplicationStatus
 from .forms import RegistrationForm
 from .accounts_settings import CONFIRMATION_EMAIL_SUBJECT, CONFIRMATION_EMAIL_TEMPLATE, WEBVALLEY_EMAIL_ADDRESS
 from local_settings import DEBUG
-import os
+import sys
 from django.conf import settings
 
-from cStringIO import StringIO # caveats for Python 3.0 apply
 import zipfile
+import os,stat
+from cStringIO import StringIO
 
 
 def download_zip(request, dir, name):
-    file = StringIO()
-    zf = zipfile.ZipFile(file, mode='w', compression=zipfile.ZIP_DEFLATED)
-    for fn in os.listdir(dir):
-        path = os.path.join(dir, fn)
-        zfn = path[len(dir)+len(os.sep):] #XXX: relative path
-        zf.write(path, zfn)
-    zf.close()
-    response = HttpResponse(file.getvalue(), mimetype="application/zip")
-    response['Content-Disposition'] = 'attachment; filename=' + name + '.zip'
+    dir = os.path.join(settings.PROJECT_ROOT, dir)
+    relroot = os.path.abspath(os.path.join(dir, os.pardir))
+    response = HttpResponse(mimetype='application/zip')
+    response['Content-Disposition'] = 'filename=%s.zip' % name
+    zipfile_final = StringIO()
+    with zipfile.ZipFile(zipfile_final, "w", zipfile.ZIP_DEFLATED) as zip:
+        for root, dirs, files in os.walk(dir):
+            zip.write(root, os.path.relpath(root, relroot))
+            for file in files:
+                filename = os.path.join(root, file)
+                if os.path.isfile(filename):
+                    arcname = os.path.join(os.path.relpath(root, relroot), file)
+                zip.write(filename, arcname)
+        zip.close()
+    zipfile_final.seek(0)
+    response.write(zipfile_final.read())
     return response
 
 
@@ -53,9 +61,8 @@ def browse_applications(request, url):
     file_dict = []
 
     for f in files:
-        print os.path.join(mylist, f)
         if os.path.isdir(f):
-            file_dict.append({'name': f, 'link': os.path.join(url, f), 'download':  os.path.join(mylist, f), 'type': 'directory'})
+            file_dict.append({'name': f, 'link': os.path.join(url, f), 'download':  os.path.join('static/media', url, f), 'type': 'directory'})
         else:
             file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
     context = {'filelist': file_dict}
