@@ -61,7 +61,7 @@ def do_submission( user_profile ):
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
     _send_submission_email_to_user( user_profile )
-    _send_submission_email_to_handler( user_profile, data_path, user_number )
+    # _send_submission_email_to_handler( user_profile, data_path, user_number )
 
 def do_final_submission( user_profile ):
     """
