@@ -31,7 +31,10 @@ import zipfile
 import os,stat
 from cStringIO import StringIO
 
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def download_zip(request, dir, name):
     dir = os.path.join(settings.PROJECT_ROOT, dir)
     relroot = os.path.abspath(os.path.join(dir, os.pardir))
@@ -51,7 +54,8 @@ def download_zip(request, dir, name):
     response.write(zipfile_final.read())
     return response
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def browse_applications(request, url):
     path = settings.PROJECT_ROOT
     myfiles = os.path.join(path, 'static/media/')
