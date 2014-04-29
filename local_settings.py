@@ -1,5 +1,5 @@
 
-DEBUG = True
+DEBUG = False
 
 TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 
@@ -27,3 +27,5 @@ EMAIL_HOST_USER = "gsgisng@gmail.com"
 EMAIL_HOST_PASSWORD = "ciaociaociao"
 
 SECRET_KEY = "asfakojngusadifjisodkpjq387894017rysadiouhy8uerqwkd"
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
