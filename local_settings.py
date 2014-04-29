@@ -1,5 +1,5 @@
 
-DEBUG = False
+DEBUG = True
 
 TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 
