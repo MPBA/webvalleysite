@@ -1,6 +1,7 @@
 from __future__ import print_function
 from sys import argv
 from reportlab.pdfgen import canvas
+from PyPDF2 import PdfFileReader, PdfFileMerger
 import shutil
 import os
 import json
@@ -69,7 +70,7 @@ def do_final_submission( user_profile ):
     user_number = user_profile.applicationstatus.pk
     user_name = " ".join( [str(user_profile.user.last_name), str(user_profile.user.first_name)] )
     application_process_name = user_profile.applicationstatus.application_process.name
-    data_path = os.path.join(USER_DATA_ROOT,"submitted_applications",application_process_name,user_name)
+    data_path = os.path.join(USER_DATA_ROOT, "submitted_applications", application_process_name, user_name)
 
     if os.path.exists( data_path ):
         # if data_path exists, so there are namesakes, rename it appending _num where num is a counter
@@ -90,6 +91,7 @@ def do_final_submission( user_profile ):
             user_profile.user.username),
         data_path
     )
+
     """
 	generate json
     """
@@ -99,7 +101,6 @@ def do_final_submission( user_profile ):
     """
 	generate csv
     """
-
     with codecs.open( os.path.join( data_path, 'data.csv'), 'w', encoding='utf-8' ) as data_file:
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
@@ -127,6 +128,17 @@ def do_final_submission( user_profile ):
     c.showPage()
     c.save()
 
+    """
+    merge pdf in signed-form
+    """
+
+    merger = PdfFileMerger()
+    sf_dir = os.path.join(data_path, 'signed-forms')
+    for filename in os.listdir(sf_dir):
+        if os.path.splitext(filename)[1] == '.pdf':
+            merger.append(PdfFileReader(open(os.path.join(sf_dir, filename), 'rb')))
+
+    merger.write(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'w'))
 
 
 def _get_json( data ):
@@ -163,7 +175,6 @@ def _get_form_data( user_profile ):
                              key=lambda u: u.index ):
         data[ user_form.form.name ] = user_form.form_data
     return data
-
 
 def _get_csv( data ):
     buf = StringIO()
