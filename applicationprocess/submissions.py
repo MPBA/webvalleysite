@@ -81,8 +81,6 @@ def do_final_submission( user_profile ):
                 break
             n += 1
         shutil.move( data_path, new_path )
-            
-            
 
     shutil.copytree(
         os.path.join(
@@ -104,12 +102,20 @@ def do_final_submission( user_profile ):
     with codecs.open( os.path.join( data_path, 'data.csv'), 'w', encoding='utf-8' ) as data_file:
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
-
     """
-	generate pdf
+	generate pdf (without the School report, CV and certifications part)
     """
     with open (os.path.join(data_path, 'data.json'), 'r') as json_file:
+        js = json.load(json_file)
+
+    js.pop('School report, CV and certifications')
+    with open( os.path.join( data_path, 'tmp.json'), 'w' ) as data_file:
+        data_file.write(_get_json(js))
+
+    with open (os.path.join(data_path, 'tmp.json'), 'r') as json_file:
 		data=json_file.read()
+    os.remove('tmp.json')
+
     data = data.replace("{", "")
     data = data.replace("}", "")
     data = data.replace("\"", "")
@@ -131,7 +137,6 @@ def do_final_submission( user_profile ):
     """
     merge pdf in signed-form
     """
-
     merger = PdfFileMerger()
     sf_dir = os.path.join(data_path, 'signed-forms')
     for filename in os.listdir(sf_dir):
