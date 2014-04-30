@@ -24,7 +24,7 @@
     {% endif %}
     {% csrf_token %}
     <fieldset>
-        <legend> Upload here your signed copy of {{ form_name }} </legend>
+        <legend> Upload here your signed copy of {{ form_name }} (PDF Format)</legend>
         {% for field in form %}
         <div class="form-group">
 	    {% if field.errors %}
