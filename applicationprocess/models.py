@@ -11,6 +11,7 @@ from django.conf import settings
 import jsonfield
 
 from website.models import UserProfile
+from .customfilefield import ContentTypeRestrictedFileField
 
 from applicationprocess_settings import USER_DATA_ROOT, FormStatusChoices
 
@@ -188,7 +189,12 @@ class UserForm( models.Model ):
         'docs', instance.application_status.user_profile.user.username,
         'signed-forms', instance.form.name + u'.' + filename.split('.')[-1])
 
-    signed_copy = models.FileField( upload_to=_get_upload_to, blank=True, null=True )
+    # signed_copy = models.FileField( upload_to=_get_upload_to, blank=True, null=True )
+    signed_copy = ContentTypeRestrictedFileField(
+        upload_to='pdf',
+        content_types=['application/pdf'],
+        max_upload_size=10485760 # 10 MB
+    )
     
     class Meta:
         unique_together = (( 'application_status', 'form' ), )
