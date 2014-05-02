@@ -103,12 +103,18 @@ def do_final_submission( user_profile ):
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
     """
-	generate pdf (without the School report, CV and certifications part)
+	generate pdf (without the 'School report, CV and certifications' and the form accepted part)
     """
     with open (os.path.join(data_path, 'data.json'), 'r') as json_file:
         js = json.load(json_file)
 
     js.pop('School report, CV and certifications')
+    js.pop("Code of Conduct") 
+    js.pop("Parent Agreement") 
+    js.pop("Assignment of Laptop") 
+    js.pop("Media Consent Form")
+    js.pop("Motivation letter") 
+
     with open( os.path.join( data_path, 'tmp.json'), 'w' ) as data_file:
         data_file.write(_get_json(js))
 
