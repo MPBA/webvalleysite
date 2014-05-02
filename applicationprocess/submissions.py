@@ -120,7 +120,7 @@ def do_final_submission( user_profile ):
 
     with open (os.path.join(data_path, 'tmp.json'), 'r') as json_file:
 		data=json_file.read()
-    os.remove('tmp.json')
+    os.remove(os.path.join( data_path, 'tmp.json'))
 
     data = data.replace("{", "")
     data = data.replace("}", "")
