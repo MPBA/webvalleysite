@@ -83,3 +83,10 @@ def browse_applications(request, url):
             file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
     context = {'filelist': file_dict}
     return render_to_response('profile/read_apps.html', context, context_instance=RequestContext(request))
+
+
+def test_view(request):
+    return render(request, 'profile/read_apps.html',
+                {
+                 'page_title': 'profile/test',
+                 'sidebar_item': 'view-profile'})
