@@ -69,19 +69,22 @@ def download_zip(request, dir, name):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def browse_applications(request, url):
+    def_path = os.getcwd()
     path = settings.PROJECT_ROOT
     myfiles = os.path.join(path, 'static/media/')
     mylist = os.path.join(myfiles, url)
-    #os.chdir(mylist)
-    files = os.listdir(mylist)
+    os.chdir(mylist)
+    files = os.listdir(".")
     file_dict = []
 
     for f in files:
+        print f
         if os.path.isdir(f):
             file_dict.append({'name': f, 'link': os.path.join(url, f), 'download':  os.path.join('static/media', url, f), 'type': 'directory'})
         else:
             file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
     context = {'filelist': file_dict}
+    os.chdir(def_path)
     return render_to_response('profile/read_apps.html', context, context_instance=RequestContext(request))
 
 
