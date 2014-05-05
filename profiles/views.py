@@ -72,8 +72,8 @@ def browse_applications(request, url):
     path = settings.PROJECT_ROOT
     myfiles = os.path.join(path, 'static/media/')
     mylist = os.path.join(myfiles, url)
-    os.chdir(mylist)
-    files = os.listdir(".")
+    #os.chdir(mylist)
+    files = os.listdir(mylist)
     file_dict = []
 
     for f in files:
