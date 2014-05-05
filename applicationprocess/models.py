@@ -191,9 +191,11 @@ class UserForm( models.Model ):
 
     # signed_copy = models.FileField( upload_to=_get_upload_to, blank=True, null=True )
     signed_copy = ContentTypeRestrictedFileField(
-        upload_to='pdf',
+        upload_to=_get_upload_to,
         content_types=['application/pdf'],
         max_upload_size=10485760 # 10 MB
+        blank=True,
+        null=True
     )
     
     class Meta:
