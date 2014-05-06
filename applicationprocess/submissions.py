@@ -144,7 +144,7 @@ def do_final_submission( user_profile ):
     sf_dir = os.path.join(data_path, 'signed-forms')
     for filename in os.listdir(sf_dir):
         if os.path.splitext(filename)[1].lower() == '.pdf':
-            merger.append(PdfFileReader(open(os.path.join(sf_dir, filename), 'rb')), strict=False)
+            merger.append(PdfFileReader(open(os.path.join(sf_dir, filename), 'rb'), strict=False))
 
     merger.write(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'w'))
 
