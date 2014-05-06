@@ -60,9 +60,6 @@ def do_submission( user_profile ):
     with codecs.open( os.path.join(data_path, 'data.csv'), 'w', encoding='utf-8' ) as data_file:
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
-    _send_submission_email_to_user( user_profile )
-    _send_submission_email_to_handler( user_profile, data_path, user_number )
-
 def do_final_submission( user_profile ):
     """
     Places a copy of the user's data into a folder containing only submitted applications
@@ -150,6 +147,9 @@ def do_final_submission( user_profile ):
             merger.append(PdfFileReader(open(os.path.join(sf_dir, filename), 'rb')))
 
     merger.write(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'w'))
+
+    _send_submission_email_to_user( user_profile )
+    _send_submission_email_to_handler( user_profile, data_path, user_number )
 
 
 def _get_json( data ):
