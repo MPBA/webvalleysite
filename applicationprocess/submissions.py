@@ -123,6 +123,7 @@ def do_final_submission( user_profile ):
     data = data.replace("}", "")
     data = data.replace("\"", "")
     data = data.replace(",", "")
+    data = data.replace("    ", "")
     filename = "".join([str(user_name),".pdf"])
     profile_picture = os.listdir(data_path) # submitted folder
     for file in profile_picture:
@@ -133,17 +134,22 @@ def do_final_submission( user_profile ):
     point = 1
     inch = 72
     pagesize = (8.5 * inch, 11 * inch)
-    c = canvas.Canvas('tmp', pagesize=pagesize)
+
+    c = canvas.Canvas(os.path.join(data_path, 'tmp'), pagesize=pagesize)
+    c.drawImage(profile_picture, pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
     c.setStrokeColorRGB(0,0,0)
     c.setFillColorRGB(0,0,0)
-    line_height = point * 11
-    c.setFont("Courier", line_height)
-    v = line_height
-    for subtline in data.split( '\n' ):
+    line_height = point * 13
+    c.setFont("Helvetica", line_height)
+    v = 10 * inch
+    for subtline in (data).split( '\n' ):
         c.drawString( 1 * inch, v, subtline )
         v -= line_height * 2 # Jump a line
+        # if v < line_height * 2:
+        #     c.showPage()
+        #     v = 10 * inch
+        #     c.setFont("Helvetica", line_height)
 
-    c.drawImage(profile_picture, pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
     c.showPage()
     c.save()
 
