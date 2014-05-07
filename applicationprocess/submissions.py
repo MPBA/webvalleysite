@@ -116,7 +116,7 @@ def do_final_submission( user_profile ):
         data_file.write(_get_json(js))
 
     with open (os.path.join(data_path, 'tmp.json'), 'r') as json_file:
-		data=json_file.read()
+        data=json_file.read()
     os.remove(os.path.join( data_path, 'tmp.json'))
 
     data = data.replace("{", "")
@@ -124,17 +124,26 @@ def do_final_submission( user_profile ):
     data = data.replace("\"", "")
     data = data.replace(",", "")
     filename = "".join([str(user_name),".pdf"])
+    profile_picture = os.listdir(data_path) # submitted folder
+    for file in profile_picture:
+        if file.startswith('profile')
+            profile_picture = file;
+            break;
+
     point = 1
     inch = 72
-    c = canvas.Canvas(os.path.join( data_path, filename), pagesize=(8.5 * inch, 11 * inch))
+    pagesize = (8.5 * inch, 11 * inch)
+    c = canvas.Canvas('tmp', pagesize=pagesize)
     c.setStrokeColorRGB(0,0,0)
     c.setFillColorRGB(0,0,0)
-    c.setFont("Helvetica", 12 * point)
-    v = 10 * inch
-    for subtline in (data).split( '\n' ):
+    line_height = point * 11
+    c.setFont("Courier", line_height)
+    v = line_height
+    for subtline in data.split( '\n' ):
         c.drawString( 1 * inch, v, subtline )
-        v -= 12 * point
-    c.showPage()
+        v -= line_height * 2 # Jump a line
+
+    c.drawImage('profile.jpg', pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
     c.save()
 
     """
