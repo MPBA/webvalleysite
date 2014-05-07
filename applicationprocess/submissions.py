@@ -126,8 +126,8 @@ def do_final_submission( user_profile ):
     filename = "".join([str(user_name),".pdf"])
     profile_picture = os.listdir(data_path) # submitted folder
     for file in profile_picture:
-        if file.startswith('profile')
-            profile_picture = file;
+        if file.startswith('profile'):
+            profile_picture = file
             break;
 
     point = 1
