@@ -144,6 +144,7 @@ def do_final_submission( user_profile ):
         v -= line_height * 2 # Jump a line
 
     c.drawImage(profile_picture, pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
+    c.showPage()
     c.save()
 
     """
