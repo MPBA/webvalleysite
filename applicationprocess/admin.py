@@ -5,6 +5,7 @@ from models import Form,ApplicationProcess,Validator,\
 class ApplicationStatusAdmin(admin.ModelAdmin):
     search_fields = ('user_profile__user__first_name', 'user_profile__user__last_name')
     list_filter = ('application_process', 'status')
+    list_display = ('__unicode__', 'email',)
 
 class UserFormAdmin(admin.ModelAdmin):
     search_fields = ('application_status__user_profile__user__first_name', 'application_status__user_profile__user__last_name')
@@ -19,3 +20,4 @@ admin.site.register(Field)
 admin.site.register(FieldType)
 admin.site.register(ApplicationProcessForm)
 admin.site.register(UserForm, UserFormAdmin)
+
