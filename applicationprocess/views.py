@@ -190,10 +190,10 @@ def submit(request):
     elif request.method == 'POST':
         profile = request.user.get_profile()
         if profile.applicationstatus.ready_for_submission():
-            do_submission( profile )
+            # do_submission( profile )
             do_final_submission( profile )
             a_s = profile.applicationstatus
-            a_s.staftus = 'S_SUB'
+            a_s.status = 'S_SUB'
             a_s.save()
             return render(request, 'application_process/submit_done.html')
         else:
