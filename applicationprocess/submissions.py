@@ -135,7 +135,7 @@ def do_final_submission( user_profile ):
     inch = 72
     pagesize = (8.5 * inch, 11 * inch)
 
-    c = canvas.Canvas(os.path.join(data_path, 'tmp'), pagesize=pagesize)
+    c = canvas.Canvas(os.path.join(data_path, filename), pagesize=pagesize)
     c.drawImage(os.path.join(data_path, profile_picture), pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
     c.setStrokeColorRGB(0,0,0)
     c.setFillColorRGB(0,0,0)
@@ -143,6 +143,9 @@ def do_final_submission( user_profile ):
     c.setFont("Helvetica", line_height)
     v = 10 * inch
     for subtline in (data).split( '\n' ):
+        subtline = subtline.split(':')
+        subtline[0] = subtline[0].replace('_', ' ').capitalize();
+        subtline = ":".join(subtline)
         c.drawString( 1 * inch, v, subtline )
         v -= line_height * 2 # Jump a line
         # if v < line_height * 2:
