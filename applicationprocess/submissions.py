@@ -136,7 +136,7 @@ def do_final_submission( user_profile ):
     pagesize = (8.5 * inch, 11 * inch)
 
     c = canvas.Canvas(os.path.join(data_path, 'tmp'), pagesize=pagesize)
-    c.drawImage(profile_picture, pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
+    c.drawImage(os.path.join(data_path, profile_picture), pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
     c.setStrokeColorRGB(0,0,0)
     c.setFillColorRGB(0,0,0)
     line_height = point * 13
