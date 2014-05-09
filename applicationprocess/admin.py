@@ -21,3 +21,15 @@ admin.site.register(FieldType)
 admin.site.register(ApplicationProcessForm)
 admin.site.register(UserForm, UserFormAdmin)
 
+
+# from mezzanine.utils.models import get_user_model
+# from mezzanine.core.admin import SitePermissionUserAdmin
+
+# class UserAdmin(SitePermissionUserAdmin):
+# 	list_display = SitePermissionUserAdmin.list_display + ('date_joined',)
+# 	list_filter = SitePermissionUserAdmin.list_filter + ('date_joined',)
+# 	search_fields = ('date_joined',)
+
+# User = get_user_model()
+# admin.site.unregister(User)
+# admin.site.register(User, UserAdmin)
