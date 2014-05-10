@@ -4,19 +4,6 @@ from models import Form,ApplicationProcess,Validator,\
 from django.http import HttpResponse
 import csv
 
-
-def extract_email(modeladmin, request, queryset):
-	for obj in queryset:
-		print obj.email()
-
-extract_email.short_description = "Extract email"
-
-# def export_as_csv(description="Download selected rows as CSV file",header=True):
-#     """
-#     This function returns an export csv action
-#     This function ONLY downloads the columns shown in the list_display of the admin
-#     'header' is whether or not to output the column names as the first row
-#     """
 def export_as_csv(modeladmin, request, queryset):
     """
     Generic csv export admin action.
@@ -48,9 +35,6 @@ def export_as_csv(modeladmin, request, queryset):
             values.append(unicode(value).encode('utf-8'))
         writer.writerow(values)
     return response
-
-#     export_as_csv.short_description = description
-#     return export_as_csv
 
 class ApplicationStatusAdmin(admin.ModelAdmin):
     search_fields = ('user_profile__user__first_name', 'user_profile__user__last_name')
