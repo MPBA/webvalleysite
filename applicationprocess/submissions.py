@@ -60,9 +60,6 @@ def do_submission( user_profile ):
     with codecs.open( os.path.join(data_path, 'data.csv'), 'w', encoding='utf-8' ) as data_file:
         data_file.write( _get_csv( _get_csv_data( user_profile ) ) )
 
-    _send_submission_email_to_user( user_profile )
-    _send_submission_email_to_handler( user_profile, data_path, user_number )
-
 def do_final_submission( user_profile ):
     """
     Places a copy of the user's data into a folder containing only submitted applications
@@ -119,24 +116,43 @@ def do_final_submission( user_profile ):
         data_file.write(_get_json(js))
 
     with open (os.path.join(data_path, 'tmp.json'), 'r') as json_file:
-		data=json_file.read()
+        data=json_file.read()
     os.remove(os.path.join( data_path, 'tmp.json'))
 
     data = data.replace("{", "")
     data = data.replace("}", "")
     data = data.replace("\"", "")
     data = data.replace(",", "")
+    data = data.replace("    ", "")
     filename = "".join([str(user_name),".pdf"])
+    profile_picture = os.listdir(data_path) # submitted folder
+    for file in profile_picture:
+        if file.startswith('profile'):
+            profile_picture = file
+            break;
+
     point = 1
     inch = 72
-    c = canvas.Canvas(os.path.join( data_path, filename), pagesize=(8.5 * inch, 11 * inch))
+    pagesize = (8.5 * inch, 11 * inch)
+
+    c = canvas.Canvas(os.path.join(data_path, filename), pagesize=pagesize)
+    c.drawImage(os.path.join(data_path, profile_picture), pagesize[0] - 200, pagesize[1] - 200, 150, 150, preserveAspectRatio=True)
     c.setStrokeColorRGB(0,0,0)
     c.setFillColorRGB(0,0,0)
-    c.setFont("Helvetica", 12 * point)
+    line_height = point * 13
+    c.setFont("Helvetica", line_height)
     v = 10 * inch
     for subtline in (data).split( '\n' ):
+        subtline = subtline.split(':')
+        subtline[0] = subtline[0].replace('_', ' ').capitalize();
+        subtline = ":".join(subtline)
         c.drawString( 1 * inch, v, subtline )
-        v -= 12 * point
+        v -= line_height * 2 # Jump a line
+        # if v < line_height * 2:
+        #     c.showPage()
+        #     v = 10 * inch
+        #     c.setFont("Helvetica", line_height)
+
     c.showPage()
     c.save()
 
@@ -144,12 +160,16 @@ def do_final_submission( user_profile ):
     merge pdf in signed-form
     """
     merger = PdfFileMerger()
+    merger.strict = False
     sf_dir = os.path.join(data_path, 'signed-forms')
     for filename in os.listdir(sf_dir):
         if os.path.splitext(filename)[1].lower() == '.pdf':
-            merger.append(PdfFileReader(open(os.path.join(sf_dir, filename), 'rb')))
+            merger.append(PdfFileReader(open(os.path.join(sf_dir, filename), 'rb'), strict=False))
 
-    merger.write(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'w'))
+    merger.write(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'wb'))
+
+    _send_submission_email_to_user( user_profile )
+    _send_submission_email_to_handler( user_profile, data_path, user_number )
 
 
 def _get_json( data ):

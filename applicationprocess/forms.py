@@ -20,7 +20,7 @@ class ApplicationProcessSelectForm(forms.ModelForm):
         data = self.cleaned_data['application_process']
         today = date.today()
         if today > data.deadline:
-            raise ValidationError(_(u'Applications are closed for the selected application process.'))
+            raise ValidationError(_(u'Applications are closed for the selected application process. If you encountered some problems during your submission please contact us webvalley@fbk.eu'))
         elif today < data.start:
             raise ValidationError(_(u'We are not accepting any applications for this application process yet. Applications will start on ') + str(data.start))
         return data
