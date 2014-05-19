@@ -5,7 +5,7 @@ from .models import UserProfile, Country
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', '__unicode__', 'nationality', 'gender', 'birth_date', 'key_expires',)
     list_filter = ('key_expires', 'nationality', 'gender')
-    search_fields = ('user__first_name', )
+    search_fields = ('user__first_name', 'nationality' )
 
 
 admin.site.register(Country)
