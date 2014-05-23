@@ -29,7 +29,7 @@ class UserProfile(models.Model):
     nationality = models.ForeignKey(Country, blank=True, null=True, verbose_name=_('nationality'))
     # General information :
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, blank=True, null=True)
-    birth_date = models.DateField(_('birth date'), help_text=u'dd/mm/yyyy', blank=True, null=True)
+    birth_date = models.DateField(_('birth date'), help_text=u'mm/dd/yyyy', blank=True, null=True)
     birth_place = models.CharField(_('birth place'), max_length=30, blank=True, null=True)
     #home_phone = models.IntegerField(_('home phone'), blank=True, null=True)
     #mobile_phone = models.IntegerField(_('mobile phone'), blank=True, null=True)
