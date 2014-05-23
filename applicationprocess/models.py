@@ -176,6 +176,9 @@ class ApplicationStatus( models.Model ):
             .format(user=self.user_profile.full_name,
                     application_process=self.application_process.name )
 
+    def email(self):
+        return self.user_profile.email
+
     class Meta:
         verbose_name = _( 'Application status' )
         verbose_name_plural = _( 'Application statuses' )

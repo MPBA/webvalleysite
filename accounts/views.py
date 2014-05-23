@@ -58,7 +58,7 @@ def signup(request):
 
 
 
-                #send_confirmation_email( new_user )
+                send_confirmation_email( new_user )
 
             return home(request, notifications=[_('Your account has been created. Check your email and follow the instructions to activate it.')])
     else:
