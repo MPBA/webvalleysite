@@ -28,6 +28,7 @@ urlpatterns += patterns('',
     url(r'^profile/', include('profiles.urls')),
     # Application process
     (r'^school-application/', include('applicationprocess.urls')),
+    (r'^robots\.txt$', include('robots.urls')),
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
@@ -78,7 +79,7 @@ urlpatterns += patterns('',
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
     ("^", include("mezzanine.urls")),
-    (r'^robots\.txt$', include('robots.urls')),
+
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------
     # You can also mount all of Mezzanine's urlpatterns under a
