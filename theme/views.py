@@ -14,6 +14,13 @@ def home(request, errors=None, notifications=None):
         'login_redirect_to' : '/',
         })
 
+def photo_gallery(request):
+    return render(request, 'photo_gallery.html', {
+            'page_title': 'Photo Gallery',
+            'sidebar_item': 'photo-gallery',
+            'picasa_user': getattr(settings, 'PICASAWEB_USER')
+        })
+
 # def search(request):
 #     search_results = []
 #     if request.GET and 'q' in request.GET and request.GET['q']:
