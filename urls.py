@@ -18,6 +18,11 @@ urlpatterns = i18n_patterns("",
     ("^admin/", include(admin.site.urls)),
 )
 
+urlpatterns += patterns('theme.views',
+        # Photo gallery
+        url(r'^photo-gallery/$', 'photo_gallery', name="photo-gallery"),
+    )
+
 urlpatterns += patterns('',
     url(r"^su/", include("django_su.urls")),
     # Time Table
@@ -29,8 +34,6 @@ urlpatterns += patterns('',
     # Application process
     (r'^school-application/', include('applicationprocess.urls')),
     (r'^robots\.txt$', include('robots.urls')),
-    # Photo gallery
-    url(r'^photo-gallery/$',  direct_to_template, {"template": "photo_gallery.html"}, name="photo-gallery"),
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
