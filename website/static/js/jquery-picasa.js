@@ -208,6 +208,7 @@
     	    }
 	        else {
                 $this.prepend($album_list);
+                console.log("ciao");
                 $.getJSON('//picasaweb.google.com/data/feed/api/user/' 
                     + user + '?kind=album&access=visible' + authkey 
                     + '&alt=json-in-script&thumbsize=' + meta_opts.size + 'c&callback=?',
