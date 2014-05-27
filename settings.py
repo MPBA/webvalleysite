@@ -376,3 +376,6 @@ else:
 # TIMETABLE_SPREADSHEET_GID = 7
 
 AUTH_PROFILE_MODULE = 'website.UserProfile'
+
+# Photo gallery settings
+PICASAWEB_USER = 'webvalleyfbk'
