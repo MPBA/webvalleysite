@@ -29,6 +29,8 @@ urlpatterns += patterns('',
     # Application process
     (r'^school-application/', include('applicationprocess.urls')),
     (r'^robots\.txt$', include('robots.urls')),
+    # Photo gallery
+    url(r'^photo-gallery/$',  direct_to_template, {"template": "photo_gallery.html"}, name="photo-gallery"),
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
