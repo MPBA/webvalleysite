@@ -208,7 +208,7 @@
     	    }
 	        else {
                 $this.prepend($album_list);
-                $.getJSON('http://picasaweb.google.com/data/feed/api/user/' 
+                $.getJSON('https://picasaweb.google.com/data/feed/api/user/' 
                     + user + '?kind=album&access=visible' + authkey 
                     + '&alt=json-in-script&thumbsize=' + meta_opts.size + 'c&callback=?',
                     renderAlbumList
@@ -372,7 +372,7 @@
             if (meta_opts.authkey){
                authkey = '&authkey=' + meta_opts.authkey;
             }
-            $.getJSON('http://picasaweb.google.com/data/feed/api/user/' 
+            $.getJSON('https://picasaweb.google.com/data/feed/api/user/' 
                 + user + '/albumid/' 
                 + album + '?kind=photo&access=visible' + authkey + '&alt=json-in-script&thumbsize='+meta_opts.size+'c&imgmax=800&callback=?',
                 renderAlbum
