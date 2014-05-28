@@ -71,7 +71,7 @@ class UserProfile(models.Model):
 
     @property
     def full_name(self):
-        return u"{first_name} {last_name}".format( first_name=self.first_name, last_name=self.last_name )
+        return u"{first_name} {last_name}".format(first_name=self.first_name, last_name=self.last_name)
 
     # Fields that need not to be blank in order to complete application to the school
     _application_needed_fields = ["nationality",

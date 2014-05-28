@@ -20,7 +20,7 @@ from django.contrib.sites.models import Site
 from django.conf import settings
 
 from applicationprocess_settings import APPLICATIONPROCESS_EMAIL_SUBJECT,\
-    APPLICATIONPROCESS_HANDLER_EMAILS,USER_DATA_ROOT
+    APPLICATIONPROCESS_HANDLER_EMAILS, USER_DATA_ROOT
 from accounts.accounts_settings import WEBVALLEY_EMAIL_ADDRESS
 
 
