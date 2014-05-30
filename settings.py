@@ -378,3 +378,6 @@ TIMETABLE_SPREADSHEET = '0AhzzlCwVguzddEFTSXNRN0hzWjZtUGM0UmRGdUNBMEE'
 TIMETABLE_SPREADSHEET_GID = 25
 
 AUTH_PROFILE_MODULE = 'website.UserProfile'
+
+# Photo gallery settings
+PICASAWEB_USER = 'webvalleyfbk'

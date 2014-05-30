@@ -18,6 +18,11 @@ urlpatterns = i18n_patterns("",
     ("^admin/", include(admin.site.urls)),
 )
 
+urlpatterns += patterns('theme.views',
+        # Photo gallery
+        url(r'^photo-gallery/$', 'photo_gallery', name="photo-gallery"),
+    )
+
 urlpatterns += patterns('',
     url(r"^su/", include("django_su.urls")),
     # Time Table

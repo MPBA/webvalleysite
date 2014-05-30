@@ -38,7 +38,7 @@ def edit(request):
             return render(request, 'profile/edit.html', {'form': form})
 
     else:
-        profile.birth_date = profile.birth_date.strftime("%m/%d/%Y")
+        profile.birth_date = profile.birth_date.strftime("%m/%d/%Y") if profile.birth_date else profile.birth_date
         form = EditProfileForm(instance=profile)
         return render(request, 'profile/edit.html',
                 {'form': form,
