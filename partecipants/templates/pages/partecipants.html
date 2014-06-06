@@ -9,22 +9,34 @@
 <div class="container-fluid">
 	<table class="table">
 		<tr>
-			<th>Photo</th>
-			<th>Name</th>
-			<th>City</th>
+			<th class="text-center" style="font-size:25px;">Photo</th>
+			<th class="text-center" style="font-size:25px;">Name</th>
+			<th class="text-center" style="font-size:25px;">City</th>
+			<th class="text-center" style="font-size:25px;">Confirmed</th>
 		</tr>
-		{% for partecipant in page.partecipants.person_set.all %}
+		{% for partecipant in page.partecipants.person_set.all|dictsort:"name" %}
 		<tr>
-			<td class="col-md-2">
+			<td class="col-md-2" style="vertical-align: middle">
 				<a href="#" class="thumbnail">
-					<img src="{{ MEDIA_URL }}{{ partecipant.photo }}" />
+				  <img src="{{ MEDIA_URL }}{{ partecipant.photo }}" />
 				</a>
 			</td>
-			<td>
-			    <p style="margin-top:10px;">{{ partecipant.name }}</p>
+			<td class="text-center" style="vertical-align: middle" >
+			  <p style="margin-top:10px; font-size:20px">
+			      {{ partecipant.name }}</p>
 			</td>
-		    <td>
-				<p style="font-size:13px;">{{ partecipant.city }}</p>    
+		    <td style="vertical-align: middle">
+		      <p style="font-size:20px;">{{ partecipant.city }}</p>    
+				
+		    </td>
+			<td class="text-center" style="vertical-align: middle">
+			  {% if partecipant.confirmed %}
+			  <!-- <span style="font-size:170%; color: green" class="glyphicon glyphicon-ok"></span> -->
+			  <img src="{{ MEDIA_URL }}/uploads/ok.png" style="width:55px"/>
+			  {% else %}
+			  <!-- <span style="font-size:170%; color:red" class="glyphicon glyphicon-remove"></span> -->
+			  <img src="{{ MEDIA_URL }}/uploads/cross.png" style="width:45px"/>
+			  {% endif %}
 			</td>
 		</tr>
 		{% endfor %}
