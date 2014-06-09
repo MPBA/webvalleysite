@@ -17,9 +17,11 @@
 		{% for partecipant in page.partecipants.person_set.all|dictsort:"name" %}
 		<tr>
 			<td class="col-md-2" style="vertical-align: middle">
-				<a href="#" class="thumbnail">
-				  <img src="{{ MEDIA_URL }}{{ partecipant.photo }}" />
-				</a>
+			  <!-- <a href="#" class="thumbnail"> -->
+				  <button type="button" class="btn btn-block">
+				    <img src="{{ MEDIA_URL }}{{ partecipant.photo }}" />
+				  </button>
+<!-- </a> -->
 			</td>
 			<td class="text-center" style="vertical-align: middle" >
 			  <p style="margin-top:10px; font-size:20px">
