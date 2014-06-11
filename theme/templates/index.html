@@ -43,38 +43,52 @@
 	<div class="col-md-12" >
 		<blockquote>
 			<p style="font-size:170%; line-height:130%;">
-				<a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2014 - International in San Lorenzo in Banale, Trentino (June 22 - July 12, 2014).</strong><br/>
+				<a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2014 - International in San Lorenzo in Banale, Trentino (June 22 - July 12, 2014).</strong><!-- <br/> -->
 			</p>
-			<br>
-			<p style="font-size:170%; line-height:130%" align="center">
-				<strong>
-					{% if user.is_authenticated %}
-					<a href="/school-application/">On-line applications</a>
-					{% else %}
-					<a href="/account/signup/">On-line applications</a>
-					{% endif %}
+			<!-- <br> -->
+			<!-- <p style="font-size:170%; line-height:130%" align="center"> -->
+			<!-- 	<strong> -->
+			<!-- 		{% if user.is_authenticated %} -->
+			<!-- 		<a href="/school-application/">On-line applications</a> -->
+			<!-- 		{% else %} -->
+			<!-- 		<a href="/account/signup/">On-line applications</a> -->
+			<!-- 		{% endif %} -->
 					
 					<!-- <span class="glyphicon glyphicon-ok"></span> -->
-					<br>
-					NYEX track: April 28 - June 03, 11:59 am
-					<span class="glyphicon glyphicon-remove" style="color: red"></span>
-					<br>
-					FAST track:  April 28 - June 03, 11:59 am
-					<span class="glyphicon glyphicon-remove" style="color: red"></span>
-					<br>
-					General track:  April 28 - June 03, 11:59 am
-					<span class="glyphicon glyphicon-remove" style="color: red"></span>
-					<br>
-					EDULIFE track: May 09 - May 25 
-					<span class="glyphicon glyphicon-remove" style="color: red"></span>
-					<br>
-					Intel ISEF track: Apr 18 - May 11 
-					<span class="glyphicon glyphicon-remove" style="color: red"></span>
-				</strong>
-			</p>
+					<!-- <br> -->
+					<!-- NYEX track: April 28 - June 03, 11:59 am -->
+					<!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
+					<!-- <br> -->
+					<!-- FAST track:  April 28 - June 03, 11:59 am -->
+					<!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
+					<!-- <br> -->
+					<!-- General track:  April 28 - June 03, 11:59 am -->
+					<!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
+					<!-- <br> -->
+					<!-- EDULIFE track: May 09 - May 25  -->
+					<!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
+					<!-- <br> -->
+					<!-- Intel ISEF track: Apr 18 - May 11  -->
+					<!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
+			<!-- 	</strong> -->
+			<!-- </p> -->
 		</blockquote>
 		<img src="{% static 'img/lab.jpg' %}" class="thumbnail col-md-8 col-lg-offset-2">
 	</div>
+	<div class="col-md-12">
+	  <br>
+	  <p style="font-size:120%; line-height:130%;"><strong>The WebValley 2014 Summer School is supported by:</strong></p>
+	  <table class="table">
+	      <tr>
+		<td style="vertical-align:middle"><img src="{{ STATIC_URL }}img/CR_Giudicarie_Paganella-Top.png" alt='' align="middle"/></td>
+		<td style="vertical-align:middle"><img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/></td>
+	      </tr>
+	    </table>
+	</div>
+	<!-- <div class="col-md-6"> -->
+	<!--   <img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/> -->
+	<!-- </div> -->
+
 </div>
 
 <!--<div class="row">
