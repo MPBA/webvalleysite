@@ -17,19 +17,19 @@
 		{% for partecipant in page.partecipants.person_set.all|dictsort:"name" %}
 		<tr>
 			<td class="col-md-2" style="vertical-align: middle">
-			  <!-- <a href="#" class="thumbnail"> -->
-				  <button type="button" class="btn btn-block">
+				  <button class="btn btn-block" style="padding: 0px">
 				    <img src="{{ MEDIA_URL }}{{ partecipant.photo }}" />
 				  </button>
-<!-- </a> -->
 			</td>
-			<td class="text-center" style="vertical-align: middle" >
+			<td class="text-center" style="vertical-align: middle;" >
 			  <p style="margin-top:10px; font-size:20px">
 			      {{ partecipant.name }}</p>
 			</td>
-		    <td style="vertical-align: middle">
-		      <p style="font-size:20px;">{{ partecipant.city }}</p>    
-				
+		    <td style="vertical-align: middle; font-size: 20px">
+		      {% comment %}<p style="font-size:20px;">{% endcomment %}
+                    {{ partecipant.city }}
+                {% comment %}</p> {% endcomment %}
+
 		    </td>
 			<td class="text-center" style="vertical-align: middle">
 			  {% if partecipant.confirmed %}
