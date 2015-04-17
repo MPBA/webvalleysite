@@ -124,7 +124,7 @@ def do_final_submission( user_profile ):
     data = data.replace("\"", "")
     data = data.replace(",", "")
     data = data.replace("    ", "")
-    filename = "".join([str(user_name),".pdf"])
+    filename = "".join([str(user_name)," info.pdf"])
     profile_picture = os.listdir(data_path) # submitted folder
     for file in profile_picture:
         if file.startswith('profile'):
@@ -172,7 +172,7 @@ def do_final_submission( user_profile ):
     final_pdf.strict = False
     final_pdf.append(PdfFileReader(open(os.path.join(data_path, filename), 'rb'), strict=False))
     final_pdf.append(PdfFileReader(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'rb'), strict=False))
-    final_filename = "".join([str(user_name), "_final.pdf"])
+    final_filename = "".join([str(user_name), ".pdf"])
     final_pdf.write(open(os.path.join(data_path, final_filename), 'wb'))
 
     _send_submission_email_to_user( user_profile )
