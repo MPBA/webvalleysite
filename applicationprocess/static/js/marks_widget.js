@@ -21,7 +21,7 @@ var mw_params = {
     other_suggestion: "Type the subject name",
     select_text: "[Choose]",
     remove_button: "<span class='close' style='float:none;'> &times;</span>",
-    add_button: "<span class='btn btn-small'>Add field</span>"
+    add_button: "<span class='btn btn-sm btn-primary'>Add field</span>"
 }
 var mw_globals = {
     'counter': 0,

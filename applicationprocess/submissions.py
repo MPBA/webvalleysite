@@ -162,11 +162,18 @@ def do_final_submission( user_profile ):
     merger = PdfFileMerger()
     merger.strict = False
     sf_dir = os.path.join(data_path, 'signed-forms')
-    for filename in os.listdir(sf_dir):
-        if os.path.splitext(filename)[1].lower() == '.pdf':
-            merger.append(PdfFileReader(open(os.path.join(sf_dir, filename), 'rb'), strict=False))
+    for form_filename in os.listdir(sf_dir):
+        if os.path.splitext(form_filename)[1].lower() == '.pdf':
+            merger.append(PdfFileReader(open(os.path.join(sf_dir, form_filename), 'rb'), strict=False))
 
     merger.write(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'wb'))
+
+    final_pdf = PdfFileMerger()
+    final_pdf.strict = False
+    final_pdf.append(PdfFileReader(open(os.path.join(data_path, filename), 'rb'), strict=False))
+    final_pdf.append(PdfFileReader(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'rb'), strict=False))
+    final_filename = "".join([str(user_name), "_final.pdf"])
+    final_pdf.write(open(os.path.join(data_path, final_filename), 'wb'))
 
     _send_submission_email_to_user( user_profile )
     _send_submission_email_to_handler( user_profile, data_path, user_number )

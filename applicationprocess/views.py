@@ -140,8 +140,8 @@ def form_edit(request, form_id):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('applicationprocess.views.home'))
-    elif (user_form.form_data and user_form.form_data <> '{}'):
-        form = FormClass( initial=user_form.form_data )
+    elif user_form.form_data and user_form.form_data <> '{}':
+        form = FormClass(initial=user_form.form_data)
     else:
         form = FormClass(initial = {})
     # else:
