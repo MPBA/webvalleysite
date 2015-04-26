@@ -48,11 +48,13 @@
 			<!-- <br> -->
 {#			<p style="font-size:170%; line-height:130%" align="center">#}
 {#			    <strong>#}
-			<!-- 		{% if user.is_authenticated %} -->
-			<!-- 		<a href="/school-application/">On-line applications</a> -->
-			<!-- 		{% else %} -->
-			<!-- 		<a href="/account/signup/">On-line applications</a> -->
-			<!-- 		{% endif %} -->
+                    <h2 style="text-align:center">
+                        {% if user.is_authenticated %}
+                        <a href="/school-application/">On-line applications</a>
+                        {% else %}
+                        <a href="/account/signup/">Sign up!</a>
+         		        {% endif %}
+                    </h2>
                     </br>
                     <h2 style="color: red; font-weight: bold" align="center">Deadlines:</h2>
                     <table style="font-size:170%; line-height:130%" align="center"  cellpadding="100">
