@@ -25,7 +25,19 @@ class RegistrationForm(forms.Form):
         return password2
 
     def clean_mail(self):
-        form_email = self.cleaned_data.get('mail')
+        """
+        Normalize mail like django's models.BaseUserManager
+        """
+        email = self.cleaned_data.get('mail')
+        email = email or ''
+        try:
+            email_name, domain_part = email.strip().rsplit('@', 1)
+        except ValueError:
+            pass
+        else:
+            email = '@'.join([email_name, domain_part.lower()])
+
+        form_email = email
         try:
             u = User.objects.get(email=form_email)
         except User.DoesNotExist:
