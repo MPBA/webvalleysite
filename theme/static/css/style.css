@@ -92,6 +92,7 @@ td h4 {
 
 .navbar-collapse ul.nav {
 	margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .navbar-collapse ul.nav > li > a{
