@@ -14,27 +14,27 @@ class Client(object):
         super(Client, self).__init__()
         self.email = email
         self.password = password
-
-    def _get_auth_token(self, email, password, source, service):
-        url = "https://www.google.com/accounts/ClientLogin"
-        print email, password, source, service
-        params = {
-            "Email": email, "Passwd": password,
-            "service": service,
-            "accountType": "HOSTED_OR_GOOGLE",
-            "source": source
-        }
-        req = urllib2.Request(url, urllib.urlencode(params))
-        return re.findall(r"Auth=(.*)", urllib2.urlopen(req).read())[0]
-
-    def get_auth_token(self):
-        source = type(self).__name__
-        return self._get_auth_token(self.email, self.password, source, service="wise")
+    #
+    # def _get_auth_token(self, email, password, source, service):
+    #     url = "https://www.google.com/accounts/ClientLogin"
+    #     print email, password, source, service
+    #     params = {
+    #         "Email": email, "Passwd": password,
+    #         "service": service,
+    #         "accountType": "HOSTED_OR_GOOGLE",
+    #         "source": source
+    #     }
+    #     req = urllib2.Request(url, urllib.urlencode(params))
+    #     return re.findall(r"Auth=(.*)", urllib2.urlopen(req).read())[0]
+    #
+    # def get_auth_token(self):
+    #     source = type(self).__name__
+    #     return self._get_auth_token(self.email, self.password, source, service="wise")
 
     def download(self, spreadsheet, gid=0, format="csv"):
         url_format = "https://docs.google.com/spreadsheets/export?id=%s&exportFormat=%s&gid=%d"
-
         req = urllib2.Request(url_format % (spreadsheet.key, format, gid))
+        print url_format % (spreadsheet.key, format, gid)
         return urllib2.urlopen(req)
 
 
