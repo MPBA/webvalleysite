@@ -1,12 +1,6 @@
 import csv
-import logging
 
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-import httplib2
-from django.conf import settings
 from django.shortcuts import render
-from django.core.urlresolvers import reverse
 from django.core.cache import cache
 
 try:
@@ -18,16 +12,7 @@ import gspreadsheet as gss
 
 from mezzanine.pages.models import Page
 
-import os
-import logging
-import httplib2
-
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
-from django.http import HttpResponseBadRequest
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
 
 
 def display(request):
