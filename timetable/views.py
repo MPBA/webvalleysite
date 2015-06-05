@@ -20,6 +20,7 @@ def display(request):
     raw_data = csv.reader(StringIO(_csv_get(page)))
     data = []
     for row in raw_data:
+        print row
         if row[1]:
             data.append({
                 'date': row[0]+u', '+row[1],
@@ -45,7 +46,7 @@ def display(request):
         data[-1]['activities'].append(act)
     return render(request, "timetable/display.html", {'data': data,
                                                       'page_title': 'Time table',
-                                                      'sidebar_item': 'timetable',})
+                                                      'sidebar_item': 'timetable'})
 
 
 def _csv_get(page):
@@ -60,7 +61,6 @@ def _csv_get(page):
     else:
         ret = _csv_download(page)
         cache.set(cache_key, ret, timeout=15)  # cache lasts 15 seconds
-
         return ret
 
 
