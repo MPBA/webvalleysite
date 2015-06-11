@@ -1,8 +1,8 @@
 from django.shortcuts import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 
-from forms import EditProfileForm
+from forms import EditProfileForm, UploadPaperForm, CreateDirForm
 
 from website.models import UserProfile
 from django.template import RequestContext
@@ -89,8 +89,64 @@ def browse_applications(request, url):
     return render_to_response('profile/read_apps.html', context, context_instance=RequestContext(request))
 
 
+@login_required
+def browse_paper(request, url):
+
+    def_path = os.getcwd()
+    path = settings.PROJECT_ROOT
+    myfiles = os.path.join(path, 'static/media/uploads/papers/')
+    mylist = os.path.join(myfiles, url)
+    os.chdir(mylist)
+    if request.method == 'POST':
+        form = UploadPaperForm(request.POST, request.FILES['file'])
+        #if form.is_valid():
+        handle_uploaded_file(request.FILES['file'], dir='.')
+
+    files = os.listdir(".")
+    file_dict = []
+    print url
+    for f in files:
+        print url
+        if os.path.isdir(f):
+            file_dict.append({'name': f, 'link': os.path.join(url, f), 'download':  os.path.join('static/media/uploads/papers', url, f), 'type': 'directory'})
+        else:
+            file_dict.append({'name': f, 'link': os.path.join('/static/media/uploads/papers', url, f), 'download':  os.path.join('static/media/uploads/papers', url), 'type': 'file'})
+    context = {'filelist': file_dict,
+               'form': UploadPaperForm(),
+               'formdir': CreateDirForm(),
+               'myurl': url}
+    os.chdir(def_path)
+    return render_to_response('profile/read_papers.html', context, context_instance=RequestContext(request))
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def remove_file(request, myurl, mydir):
+    path = settings.PROJECT_ROOT
+    myfile = os.path.join(path, myurl, mydir)
+    os.remove(myfile)
+    return redirect(browse_paper, url="")
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def make_dir(request, url):
+    if request.method == 'POST':
+        form = CreateDirForm(request.POST)
+        path = settings.PROJECT_ROOT
+        myfiles = os.path.join(path, 'static/media/uploads/papers/')
+        mylist = os.path.join(myfiles, url)
+        os.chdir(mylist)
+        os.mkdir(request.POST['mydir'])
+    return redirect('browse_papers', url="")
+
+
 def test_view(request):
     return render(request, 'profile/read_apps.html',
                 {
                  'page_title': 'profile/test',
                  'sidebar_item': 'view-profile'})
+
+
+def handle_uploaded_file(f, dir):
+    with open('{}'.format(f.name), 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

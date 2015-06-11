@@ -1,0 +1,65 @@
+{# extends "sidebar_layout.html" #}
+
+{% extends "pages/page.html" %}
+{% block extra_head %}
+    <script>
+        $( document ).ready(function() {
+
+        });
+    </script>
+{% endblock %}
+
+{# block page #}
+{% block main %}
+  <h1>File Browser</h1>
+  <table role="table" class="table table-striped ">
+  <thead>
+    <tr><th>Filename/Folder</th><th>Type</th><th></th></tr>
+  </thead>
+
+  {% for file in filelist %}
+    {% ifequal file.type 'directory' %}
+    <tr>
+        <td><a href="{% url 'browse_papers' file.link %}">{{ file.name }}</a></td>
+        <td>{{ file.type }}</td>
+        <td> </td>
+{#        <td><a href="{% url 'download_zip' file.download file.name %}">[Download .zip]</a></td>#}
+    </tr>
+    {% endifequal %}
+    {% ifequal file.type 'file' %}
+    <tr>
+        <td><a href="{{ file.link }}">{{ file.name }}</a></td>
+        <td>{{ file.type }}</td>
+        <td>&nbsp;</td>
+        <td><a href="{% url 'del_paper' file.download file.name %}"><span class="glyphicon glyphicon-remove"></span></a>{{ request.path }}</td>
+    </tr>
+    {% endifequal %}
+  {% endfor %}
+  </table>
+    {% if request.user.is_superuser %}
+        <div class="col-md-6">
+            <div class="form form-inline">
+                <form action="#" method="post" class="form form-inline" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class="form-group">
+                    <input type="submit" value="Submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form form-inline">
+                <form action="{% url 'create_dir' myurl %}" method="post" class="form form-inline">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="submit" value="Create Directory">
+                    </div>
+                    {{ formdir.mydir }}
+{#                    <input class="form-control" id="dir_input" type="text">#}
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

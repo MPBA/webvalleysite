@@ -18,3 +18,18 @@ class EditProfileForm(forms.ModelForm): # God bless ModelForms!
     def __init__(self, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
         self.fields['birth_date'].help_text = self._meta.model._meta.get_field("birth_date").help_text
+
+
+class UploadPaperForm(forms.Form):
+    #title = forms.CharField(widget=forms.TextInput(attrs={'required': 'True', 'class': 'form-control'}), max_length=50)
+    file = forms.FileField(widget=forms.FileInput(attrs={'required': 'True', 'class': 'form-control'}))
+
+    def __init__(self, *args, **kwargs):
+        super(UploadPaperForm, self).__init__(*args, **kwargs)
+
+
+class CreateDirForm(forms.Form):
+    mydir = forms.CharField(required=True,  widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'True'}))
+
+    def __init__(self, *args, **kwargs):
+        super(CreateDirForm, self).__init__(*args, **kwargs)
