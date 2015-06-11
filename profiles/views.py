@@ -100,7 +100,7 @@ def browse_paper(request, url):
     if request.method == 'POST':
         form = UploadPaperForm(request.POST, request.FILES['file'])
         #if form.is_valid():
-        handle_uploaded_file(request.FILES['file'], dir='.')
+        handle_uploaded_file(request.FILES.getlist('file'), dir='.')
 
     files = os.listdir(".")
     file_dict = []
@@ -147,6 +147,7 @@ def test_view(request):
 
 
 def handle_uploaded_file(f, dir):
-    with open('{}'.format(f.name), 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+    for ff in f:
+        with open('{}'.format(ff.name), 'wb+') as destination:
+            for chunk in ff.chunks():
+                destination.write(chunk)

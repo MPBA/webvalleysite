@@ -22,7 +22,7 @@ class EditProfileForm(forms.ModelForm): # God bless ModelForms!
 
 class UploadPaperForm(forms.Form):
     #title = forms.CharField(widget=forms.TextInput(attrs={'required': 'True', 'class': 'form-control'}), max_length=50)
-    file = forms.FileField(widget=forms.FileInput(attrs={'required': 'True', 'class': 'form-control'}))
+    file = forms.FileField(widget=forms.FileInput(attrs={'required': 'True', 'class': 'form-control', 'multiple': 'True'}))
 
     def __init__(self, *args, **kwargs):
         super(UploadPaperForm, self).__init__(*args, **kwargs)
