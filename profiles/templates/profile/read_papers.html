@@ -1,13 +1,6 @@
 {# extends "sidebar_layout.html" #}
 
 {% extends "pages/page.html" %}
-{% block extra_head %}
-    <script>
-        $( document ).ready(function() {
-
-        });
-    </script>
-{% endblock %}
 
 {# block page #}
 {% block main %}
@@ -31,7 +24,10 @@
         <td><a href="{{ file.link }}">{{ file.name }}</a></td>
         <td>{{ file.type }}</td>
         <td>&nbsp;</td>
-        <td><a href="{% url 'del_paper' file.download file.name %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        <td>{% if request.user.is_superuser %}
+            <a href="{% url 'del_paper' file.download file.name %}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% endif %}
+        </td>
     </tr>
     {% endifequal %}
   {% endfor %}
