@@ -31,7 +31,7 @@
         <td><a href="{{ file.link }}">{{ file.name }}</a></td>
         <td>{{ file.type }}</td>
         <td>&nbsp;</td>
-        <td><a href="{% url 'del_paper' file.download file.name %}"><span class="glyphicon glyphicon-remove"></span></a>{{ request.path }}</td>
+        <td><a href="{% url 'del_paper' file.download file.name %}"><span class="glyphicon glyphicon-remove"></span></a></td>
     </tr>
     {% endifequal %}
   {% endfor %}
