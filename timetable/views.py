@@ -3,6 +3,7 @@ import csv
 from django.shortcuts import render
 from django.core.cache import cache
 import gspread
+import googleoauth
 
 try:
     from cStringIO import StringIO
@@ -71,7 +72,8 @@ def _csv_download(page):
     """
     Return the downloaded csv as a string.
     """
-    gc = gspread.login(page.timetable.google_user, page.timetable.google_passwd)
+    # gc = gspread.login(page.timetable.google_user, page.timetable.google_passwd)
+    gc = googleoauth.authenticate_google_docs()
     csv_file = gc.open('WebValley2015')
 
     # gsession = gss.Client(page.timetable.google_user, page.timetable.google_passwd)
