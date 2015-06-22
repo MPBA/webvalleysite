@@ -20,7 +20,6 @@ def display(request):
     raw_data = csv.reader(StringIO(_csv_get(page)))
     data = []
     for row in raw_data:
-        print row
         if row[1]:
             data.append({
                 'date': row[0]+u', '+row[1],
@@ -71,4 +70,6 @@ def _csv_download(page):
     gsession = gss.Client(page.timetable.google_user, page.timetable.google_passwd)
     ss = gss.Spreadsheet(page.timetable.spreadsheet)
     csv_file = gsession.download(ss, gid=page.timetable.spreadsheet_gid)
-    return csv_file.read()
+    read = csv_file.read()
+    # print "csv", read
+    return read

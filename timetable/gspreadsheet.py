@@ -1,6 +1,6 @@
 # Taken from: https://gist.github.com/1650271
 
-import re, urllib, urllib2
+import re, urllib, urllib2, json
 
 
 class Spreadsheet(object):
@@ -32,9 +32,15 @@ class Client(object):
     #     return self._get_auth_token(self.email, self.password, source, service="wise")
 
     def download(self, spreadsheet, gid=0, format="csv"):
-        url_format = "https://docs.google.com/spreadsheets/export?id=%s&exportFormat=%s&gid=%d"
-        req = urllib2.Request(url_format % (spreadsheet.key, format, gid))
-        print url_format % (spreadsheet.key, format, gid)
+        dev_key = 'AIzaSyC13P3RmTltG7hUZG_TsfDtIxNLlxT8MlY'
+        json_url = 'https://www.googleapis.com/drive/v2/files/%s?key=%s' % (spreadsheet.key, dev_key)
+        req = urllib2.Request(json_url)
+
+        res = urllib2.urlopen(req)
+        j = json.loads(res.read())
+
+        req = urllib2.Request(j["exportLinks"]["text/csv"] + "&gid=%s" % gid)
+
         return urllib2.urlopen(req)
 
 
