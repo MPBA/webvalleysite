@@ -1,6 +1,7 @@
 # Taken from: https://gist.github.com/1650271
 
 import re, urllib, urllib2, json
+import gspread
 
 
 class Spreadsheet(object):
@@ -14,6 +15,8 @@ class Client(object):
         super(Client, self).__init__()
         self.email = email
         self.password = password
+        self.gc = gspread.login(self.email, self.password)
+
     #
     # def _get_auth_token(self, email, password, source, service):
     #     url = "https://www.google.com/accounts/ClientLogin"

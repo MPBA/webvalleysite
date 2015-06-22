@@ -2,6 +2,7 @@ import csv
 
 from django.shortcuts import render
 from django.core.cache import cache
+import gspread
 
 try:
     from cStringIO import StringIO
@@ -17,7 +18,8 @@ from django.core.urlresolvers import reverse
 
 def display(request):
     page = Page.objects.get(slug=request.META['PATH_INFO'][1:-1])
-    raw_data = csv.reader(StringIO(_csv_get(page)))
+    #raw_data = csv.reader(StringIO(_csv_get(page)))
+    raw_data = _csv_get(page)
     data = []
     for row in raw_data:
         if row[1]:
@@ -56,8 +58,10 @@ def _csv_get(page):
 
     ret = cache.get(cache_key)
     if ret is not None:
+        print 'hola'
         return ret
     else:
+        print 'ciao'
         ret = _csv_download(page)
         cache.set(cache_key, ret, timeout=15)  # cache lasts 15 seconds
         return ret
@@ -67,9 +71,13 @@ def _csv_download(page):
     """
     Return the downloaded csv as a string.
     """
-    gsession = gss.Client(page.timetable.google_user, page.timetable.google_passwd)
-    ss = gss.Spreadsheet(page.timetable.spreadsheet)
-    csv_file = gsession.download(ss, gid=page.timetable.spreadsheet_gid)
-    read = csv_file.read()
+    gc = gspread.login(page.timetable.google_user, page.timetable.google_passwd)
+    csv_file = gc.open('WebValley2015')
+
+    # gsession = gss.Client(page.timetable.google_user, page.timetable.google_passwd)
+    # ss = gss.Spreadsheet(page.timetable.spreadsheet)
+    # csv_file = gsession.download(ss, gid=page.timetable.spreadsheet_gid)
+    # read = csv_file.read()
+    read = csv_file.worksheet('TIMETABLE').get_all_values()
     # print "csv", read
     return read
