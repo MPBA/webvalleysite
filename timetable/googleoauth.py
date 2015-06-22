@@ -3,7 +3,7 @@ from oauth2client.client import SignedJwtAssertionCredentials
 
 
 def authenticate_google_docs():
-    f = file(os.path.join('/media/data/work/devel/git/webvalley/webvalleysite/timetable/WebValley2014-72837d7af4fc.p12'), 'rb')
+    f = file(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'WebValley2014-72837d7af4fc.p12'), 'rb')
     SIGNED_KEY = f.read()
     f.close()
     scope = ['https://spreadsheets.google.com/feeds', 'https://docs.google.com/feeds']
