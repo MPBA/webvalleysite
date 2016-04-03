@@ -11,16 +11,17 @@ import sys
 from django.conf import settings
 
 import zipfile
-import os,stat
+import os, stat
 from cStringIO import StringIO
 
 from django.contrib.auth.decorators import login_required, user_passes_test
 
+
 @login_required
 def my(request):
     return render(request, 'profile/my.html', {
-        'page_title' : 'profile/view',
-        'sidebar_item' : 'view-profile',
+        'page_title': 'profile/view',
+        'sidebar_item': 'view-profile',
     })
 
 
@@ -41,9 +42,9 @@ def edit(request):
         profile.birth_date = profile.birth_date.strftime("%m/%d/%Y") if profile.birth_date else profile.birth_date
         form = EditProfileForm(instance=profile)
         return render(request, 'profile/edit.html',
-                {'form': form,
-                 'page_title': 'profile/edit',
-                 'sidebar_item': 'view-profile'})
+                      {'form': form,
+                       'page_title': 'profile/edit',
+                       'sidebar_item': 'view-profile'})
 
 
 @login_required
@@ -67,6 +68,7 @@ def download_zip(request, dir, name):
     response.write(zipfile_final.read())
     return response
 
+
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def browse_applications(request, url):
@@ -81,7 +83,8 @@ def browse_applications(request, url):
     for f in files:
         print f
         if os.path.isdir(f):
-            file_dict.append({'name': f, 'link': os.path.join(url, f), 'download':  os.path.join('static/media', url, f), 'type': 'directory'})
+            file_dict.append({'name': f, 'link': os.path.join(url, f), 'download': os.path.join('static/media', url, f),
+                              'type': 'directory'})
         else:
             file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
     context = {'filelist': file_dict}
@@ -91,7 +94,6 @@ def browse_applications(request, url):
 
 @login_required
 def browse_paper(request, url):
-
     def_path = os.getcwd()
     path = settings.PROJECT_ROOT
     myfiles = os.path.join(path, 'static/media/uploads/papers/')
@@ -99,7 +101,7 @@ def browse_paper(request, url):
     os.chdir(mylist)
     if request.method == 'POST':
         form = UploadPaperForm(request.POST, request.FILES['file'])
-        #if form.is_valid():
+        # if form.is_valid():
         handle_uploaded_file(request.FILES.getlist('file'), dir='.')
 
     files = os.listdir(".")
@@ -108,15 +110,18 @@ def browse_paper(request, url):
     for f in files:
         print url
         if os.path.isdir(f):
-            file_dict.append({'name': f, 'link': os.path.join(url, f), 'download':  os.path.join('static/media/uploads/papers', url, f), 'type': 'directory'})
+            file_dict.append({'name': f, 'link': os.path.join(url, f),
+                              'download': os.path.join('static/media/uploads/papers', url, f), 'type': 'directory'})
         else:
-            file_dict.append({'name': f, 'link': os.path.join('/static/media/uploads/papers', url, f), 'download':  os.path.join('static/media/uploads/papers', url), 'type': 'file'})
+            file_dict.append({'name': f, 'link': os.path.join('/static/media/uploads/papers', url, f),
+                              'download': os.path.join('static/media/uploads/papers', url), 'type': 'file'})
     context = {'filelist': file_dict,
                'form': UploadPaperForm(),
                'formdir': CreateDirForm(),
                'myurl': url}
     os.chdir(def_path)
     return render_to_response('profile/read_papers.html', context, context_instance=RequestContext(request))
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -125,6 +130,7 @@ def remove_file(request, myurl, mydir):
     myfile = os.path.join(path, myurl, mydir)
     os.remove(myfile)
     return redirect(browse_paper, url="")
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -141,9 +147,9 @@ def make_dir(request, url):
 
 def test_view(request):
     return render(request, 'profile/read_apps.html',
-                {
-                 'page_title': 'profile/test',
-                 'sidebar_item': 'view-profile'})
+                  {
+                      'page_title': 'profile/test',
+                      'sidebar_item': 'view-profile'})
 
 
 def handle_uploaded_file(f, dir):

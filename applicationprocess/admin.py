@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.core.exceptions import PermissionDenied
-from models import Form,ApplicationProcess,Validator,\
-    Field, FieldType, ValidatorType, ApplicationStatus, ApplicationProcessForm, UserForm
+from models import Form, ApplicationProcess, Validator, \
+    Field, FieldType, ValidatorType, ApplicationStatus, ApplicationProcessForm, UserForm, APPLICATION_STATUS_OPTIONS
 from django.http import HttpResponse
 import csv
+
 
 def export_as_csv(modeladmin, request, queryset):
     """
@@ -37,15 +38,38 @@ def export_as_csv(modeladmin, request, queryset):
         writer.writerow(values)
     return response
 
+
 class ApplicationStatusAdmin(admin.ModelAdmin):
     search_fields = ('user_profile__user__first_name', 'user_profile__user__last_name')
     list_filter = ('application_process', 'status')
-    list_display = ('__unicode__', 'email',)
-    actions = [export_as_csv]
+    list_display = ('__unicode__', 'email', 'status')
+    actions = [export_as_csv, 'set_application_status_as_old']
+
+    def set_application_status_as_old(self, request, queryset):
+        rows_updated = queryset.update(status='S_OLD')
+        if rows_updated == 1:
+            message_bit = "1 application was"
+        else:
+            message_bit = "%s applications were" % rows_updated
+        self.message_user(request, "%s successfully marked as old." % message_bit)
+
+    set_application_status_as_old.short_description = "Mark selected application as old"
+
+    ordering = ('status',)
+
 
 class UserFormAdmin(admin.ModelAdmin):
-    search_fields = ('application_status__user_profile__user__first_name', 'application_status__user_profile__user__last_name')
-    list_filter = ('form',)
+    list_display = ('__unicode__', 'get_status',)
+    search_fields = (
+        'application_status__user_profile__user__first_name', 'application_status__user_profile__user__last_name')
+    list_filter = ('form', 'application_status__status')
+
+    def get_status(self, obj):
+        return obj.application_status.get_status_display()
+
+    get_status.short_description = 'Application Status'
+
+    ordering = ('application_status__status',)
 
 
 class ApplicationProcessAdmin(admin.ModelAdmin):

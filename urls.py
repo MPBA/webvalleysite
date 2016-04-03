@@ -33,7 +33,9 @@ urlpatterns += patterns('',
     url(r'^profile/', include('profiles.urls')),
     # Application process
     (r'^school-application/', include('applicationprocess.urls')),
-    (r'^robots\.txt$', include('robots.urls')),
+    # TODO re add robots
+    # FIXME re add robots
+    # (r'^robots\.txt$', include('robots.urls')),
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
