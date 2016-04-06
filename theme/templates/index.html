@@ -58,7 +58,7 @@
 			<p style="font-size:170%; line-height:130%; text-align: center">
 {#				<a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2015 - International in <a target="_blank" href=https://www.google.it/maps/place/San+Lorenzo+in+banale+TN/@46.1063886,10.9058339,11z/">#}
 {#                San Lorenzo in Banale, Trentino </a>  (June 21 - July 11, 2015).</strong><!-- <br/> -->#}
-                <strong>WebValley 2016</strong> is coming with a brand new Data Science project: Machine Learning for Portable Spectroscopy (June 19 - July 9, 2016).<!-- <br/> -->
+                <strong>WebValley 2016</strong> is coming <br> A brand new Data Science project<br> <strong>Machine Learning for Portable Spectroscopy</strong> <br>(June 19 - July 9, 2016)<!-- <br/> -->
 {#                The WebValley2015 Lab is open from </br><strong>June 21 - July 11, 2015</strong> for our <a href="/partecipants/">students</a>/<a href="/%23/team/">researcher</a> team.#}
 			</p>
 			<!-- <br> -->
@@ -128,17 +128,22 @@
 {#					Intel ISEF track: April 20 - May 11, 11:59 am#}
 {#                    <span class="glyphicon glyphicon-ok" style="color: green"></span>#}
 {#			    </strong>#}
-{#			</p>#}
-		</blockquote>
-		<div class="col-md-6"> 
-			<!--<img src="{% static 'img/lab.jpg' %}" class="thumbnail col-md-8 col-lg-offset-2">-->
-		        <img src="{% static 'img/lab.jpg' %}" class="thumbnail">
-		</div>
-		<div class="col-md-6">
-			<img src="{% static 'img/physiolitix.png' %}" class="thumbnail" width="250">
-		</div>
-	
-	</div>
+            {#			</p>#}
+        </blockquote>
+        <div class="col-md-6">
+            <!--<img src="{% static 'img/lab.jpg' %}" class="thumbnail col-md-8 col-lg-offset-2">-->
+            <a href="http://www.rai.tv/dl/RaiTV/programmi/media/ContentItem-92433af3-f053-4e41-ab56-fac572a4413a.html"
+               target="_blank" class='thumbnail'>
+                <img src="{% static 'img/lab.jpg' %}">
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="http://www.rai.tv/dl/RaiTV/programmi/media/ContentItem-92433af3-f053-4e41-ab56-fac572a4413a.html"
+               target="_blank" class='thumbnail'>
+                <img src="{% static 'img/physiolitix.png' %}">
+            </a>
+        </div>
+    </div>
     {# Sponsor #}
 {#	<div class="col-md-12">#}
 {#	  <br>#}
@@ -165,7 +170,7 @@
 
 	<!-- HTTP://abp.dipsco.unitn.it-->
 	<!-- <div class="col-md-6"> -->
-	<!--   <img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/> -->
+{#	<!--   <img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/> -->#}
 	<!-- </div> -->
 
 </div>
@@ -206,7 +211,7 @@
 <blockquote class="index-news"><!-- Recent Posts -->
 	{% load blog_tags keyword_tags i18n %}
 	{% blog_recent_posts 5 as recent_posts %}
-	
+
 	{% if recent_posts %}
 	<h3>Recent News</h3>
 	{% for recent_post in recent_posts %}
