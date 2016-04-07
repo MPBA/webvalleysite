@@ -5,177 +5,194 @@
     <script src="https://s3.amazonaws.com/cc.silktide.com/cookieconsent.latest.min.js"></script>
     <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
     <script type="text/javascript">
-        window.cookieconsent_options = {"message":"Questo sito utilizza cookies per permettere una migliore esperienza di navigazione. " +
-                "Chiudendo questo banner, scorrendo questa pagina o cliccando qualunque suo elemento acconsenti all'uso dei cookie." +
-                "Se vuoi saperne di più o negare il consenso a tutti o ad alcuni cookie " ,
-            "dismiss":"Accetto","learnMore":"clicca qui","link":"/informativa-cookies/","theme":"light-top"};
+        window.cookieconsent_options = {
+            "message": "Questo sito utilizza cookies per permettere una migliore esperienza di navigazione. " +
+            "Chiudendo questo banner, scorrendo questa pagina o cliccando qualunque suo elemento acconsenti all'uso dei cookie." +
+            "Se vuoi saperne di più o negare il consenso a tutti o ad alcuni cookie ",
+            "dismiss": "Accetto", "learnMore": "clicca qui", "link": "/informativa-cookies/", "theme": "light-top"
+        };
     </script>
-<!-- End Cookie Consent plugin -->
+    <!-- End Cookie Consent plugin -->
 {% endblock extra_head %}
 
 {% block main %}
 
-{{ block.super }}
+    {{ block.super }}
 
-{# ERROR AREA #}
-{% if errors %}
-<div class="alert alert-error fade in" data-alert="alert">
-	<a class="close" data-dismiss="alert" href="#">&times;</a>
+    {# ERROR AREA #}
+    {% if errors %}
+        <div class="alert alert-error fade in" data-alert="alert">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
 
-	{% for error in errors %}
-	<p><strong>Error: </strong> {{ error }}</p>
-	{% endfor %}
-</div>
-{% endif %}
-
-{# NOTIFICATION AREA #}
-{% if notifications %}
-<div class="alert alert-success fade in" data-alert="alert">
-	<a class="close" data-dismiss="alert" href="#">&times;</a>
-	{% for notification in notifications %}
-	<p><strong>Heads up!</strong> {{ notification }}</p>
-	{% endfor %}
-</div>
-{% endif %}
-
-<div class="row">
-	<!--<div class="col-md-10">-->
-	<div class="col-md-4 col-md-offset-1 visible-lg visible-md" ><img class="img-responsive" src="{{STATIC_URL}}img/logowvfbk-300.png"/></div>
-	<div class="col-md-4 col-md-offset-1">
-		<div><img src="{{STATIC_URL}}img/gruppo.jpg" class=" thumbnail img-responsive"><img/>
-            {# Brochure #}
-{#			<a href="/static/media/pdf/WebValley2015_v0.8.pdf"><strong> Download WebValley 2015 Brochure</strong></a>#}
-			<!--<p><strong>The list of the selected students is available <a href="/sp/webvalley2012/" style="color:red;">here</a>!</p>
-			<p><strong>Webvalley 2012 Welcome Dinner <a href="/news/welcomedinner/1/" style="color:red;">more info...</a></p>
-			<p><strong>Departure to Transacqua <a href="/news/departure-transacqua-planned-sunday-17th-2012-1400/1/" style="color:red;">more info...</a></p>-->
-		</div>
-		<!--</div>-->
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12" >
-		<blockquote>
-			<p style="font-size:170%; line-height:130%; text-align: center">
-{#				<a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2015 - International in <a target="_blank" href=https://www.google.it/maps/place/San+Lorenzo+in+banale+TN/@46.1063886,10.9058339,11z/">#}
-{#                San Lorenzo in Banale, Trentino </a>  (June 21 - July 11, 2015).</strong><!-- <br/> -->#}
-                <strong>WebValley 2016</strong> is coming <br> A brand new Data Science project<br> <strong>Machine Learning for Portable Spectroscopy</strong> <br>(June 19 - July 9, 2016)<!-- <br/> -->
-{#                The WebValley2015 Lab is open from </br><strong>June 21 - July 11, 2015</strong> for our <a href="/partecipants/">students</a>/<a href="/%23/team/">researcher</a> team.#}
-			</p>
-			<!-- <br> -->
-{#			<p style="font-size:170%; line-height:130%" align="center">#}
-{#			    <strong>#}
-{#                    <h2 style="text-align:center">#}
-{#                        {% if user.is_authenticated %}#}
-{#                        <a href="/school-application/">On-line applications</a>#}
-{#                        {% else %}#}
-{#                        <a href="/account/signup/">Sign up!</a>#}
-{#         		        {% endif %}#}
-{#                    </h2>#}
-                    </br>
-{#                    <h2 style="color: red; font-weight: bold" align="center">Applications closed</h2>#}
-{#                    <table style="font-size:170%; line-height:130%" align="center"  cellpadding="100">#}
-{#                        <tr>#}
-{#                        <td style="padding-right:20px; font-weight:bold">EDULIFE track:</td>#}
-{#                        <td>May 31, 11:59 pm CEST</td>#}
-{#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
-{#                        </tr>#}
-{##}
-{#                        <tr>#}
-{#                        <td style="padding-right:20px; font-weight:bold">INTERNATIONAL track:</td>#}
-{#                        <td>May 31, 11:59 pm CEST</td>#}
-{#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
-{#                        </tr>#}
-{##}
-{#                        <tr>#}
-{#                        <td style="padding-right:20px; font-weight:bold">FAST track:</td>#}
-{#                        <td>May 31, 11:59 pm CEST</td>#}
-{#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
-{#                        </tr>#}
-{##}
-{#                        <tr>#}
-{#                        <td style="padding-right:20px; font-weight:bold">General track:</td>#}
-{#                        <td>May 31, 11:59 pm CEST</td>#}
-{#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
-{#                        </tr>#}
-{##}
-{#                        <tr>#}
-{#                        <td style="padding-right:20px; font-weight:bold">Intel ISEF track:</td>#}
-{#                        <td>May 11, 11:59 pm CEST</td>#}
-{#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
-{#                        </tr>#}
-{##}
-{#                    </table>#}
-					<!-- <span class="glyphicon glyphicon-ok"></span> -->
-					<!-- <br> -->
-					<!-- NYEX track: April 28 - June 03, 11:59 am -->
-					<!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
-{#                    <br>#}
-{#                    Intel ISEF track: April 20 - May 11, 11:59 am#}
-{#                    <span class="glyphicon glyphicon-ok" style="color: green"></span>#}
-{#                    <br>#}
-{#					INTERNATIONAL track:  April 20 - May 31, 11:59 am#}
-{#					<span class="glyphicon glyphicon-ok" style="color: green"></span>#}
-{#					<br>#}
-{#					FAST track:  April 20 - May 31, 11:59 am#}
-{#					<span class="glyphicon glyphicon-ok" style="color: green"></span>#}
-{#					<br>#}
-{#					General track:  April 20 - May 31, 11:59 am#}
-{#					<span class="glyphicon glyphicon-ok" style="color: green"></span>#}
-					<!-- <br> -->
-					<!-- EDULIFE track: May 09 - May 25  -->
-					<!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
-{#					<br>#}
-{#					Intel ISEF track: April 20 - May 11, 11:59 am#}
-{#                    <span class="glyphicon glyphicon-ok" style="color: green"></span>#}
-{#			    </strong>#}
-            {#			</p>#}
-        </blockquote>
-        <div class="col-md-6">
-            <!--<img src="{% static 'img/lab.jpg' %}" class="thumbnail col-md-8 col-lg-offset-2">-->
-            <a href="http://www.rai.tv/dl/RaiTV/programmi/media/ContentItem-92433af3-f053-4e41-ab56-fac572a4413a.html"
-               target="_blank" class='thumbnail'>
-                <img src="{% static 'img/lab.jpg' %}">
-            </a>
+            {% for error in errors %}
+                <p><strong>Error: </strong> {{ error }}</p>
+            {% endfor %}
         </div>
-        <div class="col-md-6">
-            <a href="http://www.rai.tv/dl/RaiTV/programmi/media/ContentItem-92433af3-f053-4e41-ab56-fac572a4413a.html"
-               target="_blank" class='thumbnail'>
-                <img src="{% static 'img/physiolitix.png' %}">
-            </a>
+    {% endif %}
+
+    {# NOTIFICATION AREA #}
+    {% if notifications %}
+        <div class="alert alert-success fade in" data-alert="alert">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            {% for notification in notifications %}
+                <p><strong>Heads up!</strong> {{ notification }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <!--<div class="col-md-10">-->
+        <div class="col-md-4 col-md-offset-1 visible-lg visible-md"><img class="img-responsive"
+                                                                         src="{{ STATIC_URL }}img/logowvfbk-300.png"/>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            <div><img src="{{ STATIC_URL }}img/gruppo.jpg" class=" thumbnail img-responsive"><img/>
+                {# Brochure #}
+                {#			<a href="/static/media/pdf/WebValley2015_v0.8.pdf"><strong> Download WebValley 2015 Brochure</strong></a>#}
+                <!--<p><strong>The list of the selected students is available <a href="/sp/webvalley2012/" style="color:red;">here</a>!</p>
+                <p><strong>Webvalley 2012 Welcome Dinner <a href="/news/welcomedinner/1/" style="color:red;">more info...</a></p>
+                <p><strong>Departure to Transacqua <a href="/news/departure-transacqua-planned-sunday-17th-2012-1400/1/" style="color:red;">more info...</a></p>-->
+            </div>
+            <!--</div>-->
         </div>
     </div>
-    {# Sponsor #}
-{#	<div class="col-md-12">#}
-{#	  <br>#}
-{#	  <p style="font-size:120%; line-height:130%;"><strong>The WebValley 2015 Summer School is supported by:</strong></p>#}
-{#	  <table class="table">#}
-{#	      <tr>#}
-{#		<td style="vertical-align:middle" class="col-md-8">#}
-{#            <img src="{{ STATIC_URL }}img/ABP_Banner_2_LQ-01.png" alt='' align="middle"/>#}
-{#            <a href="http://abp.dipsco.unitn.it">Affiliative Behaviour and Physiology Lab</a>#}
-{#            <div class="row">#}
-{#                <div class="col-md-8">#}
-{#                Some of the work leading to this program has received funding from the People Programme (Marie Curie Actions)#}
-{#                of the European Union's Seventh Framework Programme (FP7/2007-2013) under REA grant agreement n° 630166.#}
-{#                </div>#}
-{#                <div class="col-md-4">#}
-{#                    <img src="{{ STATIC_URL }}img/odflab_logo.jpg" alt='' align="middle" width="1000px"/>#}
-{#                </div>#}
-{#            </div>#}
-{#        </td>#}
-{#		<td style="vertical-align:middle"><img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/></td>#}
-{#	      </tr>#}
-{#	    </table>#}
-{#	</div>#}
+    <div class="row">
+        <div class="col-md-12">
+            <blockquote>
+                <p style="font-size:170%; line-height:130%; text-align: center">
+                    {#				<a href="http://www.fbk.eu">Fondazione Bruno Kessler (FBK)</a> is glad to announce the organization of <strong>WebValley 2015 - International in <a target="_blank" href=https://www.google.it/maps/place/San+Lorenzo+in+banale+TN/@46.1063886,10.9058339,11z/">#}
+                    {#                San Lorenzo in Banale, Trentino </a>  (June 21 - July 11, 2015).</strong><!-- <br/> -->#}
+                    <strong>WebValley 2016</strong> is coming <br> A brand new Data Science project<br> <strong>Machine
+                    Learning for Portable Spectroscopy</strong> <br>(June 19 - July 9, 2016)<!-- <br/> -->
+                    {#                The WebValley2015 Lab is open from </br><strong>June 21 - July 11, 2015</strong> for our <a href="/partecipants/">students</a>/<a href="/%23/team/">researcher</a> team.#}
+                </p>
+                <!-- <br> -->
+                {#			<p style="font-size:170%; line-height:130%" align="center">#}
+                {#			    <strong>#}
+                {#                    <h2 style="text-align:center">#}
+                {#                        {% if user.is_authenticated %}#}
+                {#                        <a href="/school-application/">On-line applications</a>#}
+                {#                        {% else %}#}
+                {#                        <a href="/account/signup/">Sign up!</a>#}
+                {#         		        {% endif %}#}
+                {#                    </h2>#}
+                </br>
+                {#                    <h2 style="color: red; font-weight: bold" align="center">Applications closed</h2>#}
+                {#                    <table style="font-size:170%; line-height:130%" align="center"  cellpadding="100">#}
+                {#                        <tr>#}
+                {#                        <td style="padding-right:20px; font-weight:bold">EDULIFE track:</td>#}
+                {#                        <td>May 31, 11:59 pm CEST</td>#}
+                {#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
+                {#                        </tr>#}
+                {##}
+                {#                        <tr>#}
+                {#                        <td style="padding-right:20px; font-weight:bold">INTERNATIONAL track:</td>#}
+                {#                        <td>May 31, 11:59 pm CEST</td>#}
+                {#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
+                {#                        </tr>#}
+                {##}
+                {#                        <tr>#}
+                {#                        <td style="padding-right:20px; font-weight:bold">FAST track:</td>#}
+                {#                        <td>May 31, 11:59 pm CEST</td>#}
+                {#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
+                {#                        </tr>#}
+                {##}
+                {#                        <tr>#}
+                {#                        <td style="padding-right:20px; font-weight:bold">General track:</td>#}
+                {#                        <td>May 31, 11:59 pm CEST</td>#}
+                {#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
+                {#                        </tr>#}
+                {##}
+                {#                        <tr>#}
+                {#                        <td style="padding-right:20px; font-weight:bold">Intel ISEF track:</td>#}
+                {#                        <td>May 11, 11:59 pm CEST</td>#}
+                {#                        <td><span class="glyphicon glyphicon-remove" style="color: red"></span></td>#}
+                {#                        </tr>#}
+                {##}
+                {#                    </table>#}
+                <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                <!-- <br> -->
+                <!-- NYEX track: April 28 - June 03, 11:59 am -->
+                <!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
+                {#                    <br>#}
+                {#                    Intel ISEF track: April 20 - May 11, 11:59 am#}
+                {#                    <span class="glyphicon glyphicon-ok" style="color: green"></span>#}
+                {#                    <br>#}
+                {#					INTERNATIONAL track:  April 20 - May 31, 11:59 am#}
+                {#					<span class="glyphicon glyphicon-ok" style="color: green"></span>#}
+                {#					<br>#}
+                {#					FAST track:  April 20 - May 31, 11:59 am#}
+                {#					<span class="glyphicon glyphicon-ok" style="color: green"></span>#}
+                {#					<br>#}
+                {#					General track:  April 20 - May 31, 11:59 am#}
+                {#					<span class="glyphicon glyphicon-ok" style="color: green"></span>#}
+                <!-- <br> -->
+                <!-- EDULIFE track: May 09 - May 25  -->
+                <!-- <span class="glyphicon glyphicon-remove" style="color: red"></span> -->
+                {#					<br>#}
+                {#					Intel ISEF track: April 20 - May 11, 11:59 am#}
+                {#                    <span class="glyphicon glyphicon-ok" style="color: green"></span>#}
+                {#			    </strong>#}
+                {#			</p>#}
+                <div class="col-md-12" style="text-align: center">
+                    <p style="font-size:170%; line-height:130%;">
+{#                        <img src="https://upload.wikimedia.org/wikipedia/en/2/21/Nvidia_logo.svg" width="55px"/>#}
+                        Also with Deep Learning on NVIDIA GPU
+                    </p>
+                    <a class='thumbnail col-md-6 col-md-offset-3'>
+                        <img src="{% static 'img/gpu5.jpg' %}">
+                    </a>
+                </div>
+            </blockquote>
+            <div class="col-md-12">
 
-	<!-- HTTP://abp.dipsco.unitn.it-->
-	<!-- <div class="col-md-6"> -->
-{#	<!--   <img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/> -->#}
-	<!-- </div> -->
+            </div>
+            <div class="col-md-6">
+                <!--<img src="{% static 'img/lab.jpg' %}" class="thumbnail col-md-8 col-lg-offset-2">-->
+                <a href="http://www.rai.tv/dl/RaiTV/programmi/media/ContentItem-92433af3-f053-4e41-ab56-fac572a4413a.html"
+                   target="_blank" class='thumbnail'>
+                    <img src="{% static 'img/lab.jpg' %}">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="http://www.rai.tv/dl/RaiTV/programmi/media/ContentItem-92433af3-f053-4e41-ab56-fac572a4413a.html"
+                   target="_blank" class='thumbnail'>
+                    <img src="{% static 'img/physiolitix.png' %}">
+                </a>
+            </div>
+        </div>
+        {# Sponsor #}
+        {#	<div class="col-md-12">#}
+        {#	  <br>#}
+        {#	  <p style="font-size:120%; line-height:130%;"><strong>The WebValley 2015 Summer School is supported by:</strong></p>#}
+        {#	  <table class="table">#}
+        {#	      <tr>#}
+        {#		<td style="vertical-align:middle" class="col-md-8">#}
+        {#            <img src="{{ STATIC_URL }}img/ABP_Banner_2_LQ-01.png" alt='' align="middle"/>#}
+        {#            <a href="http://abp.dipsco.unitn.it">Affiliative Behaviour and Physiology Lab</a>#}
+        {#            <div class="row">#}
+        {#                <div class="col-md-8">#}
+        {#                Some of the work leading to this program has received funding from the People Programme (Marie Curie Actions)#}
+        {#                of the European Union's Seventh Framework Programme (FP7/2007-2013) under REA grant agreement n° 630166.#}
+        {#                </div>#}
+        {#                <div class="col-md-4">#}
+        {#                    <img src="{{ STATIC_URL }}img/odflab_logo.jpg" alt='' align="middle" width="1000px"/>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </td>#}
+        {#		<td style="vertical-align:middle"><img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/></td>#}
+        {#	      </tr>#}
+        {#	    </table>#}
+        {#	</div>#}
 
-</div>
+        <!-- HTTP://abp.dipsco.unitn.it-->
+        <!-- <div class="col-md-6"> -->
+        {#	<!--   <img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/> -->#}
+        <!-- </div> -->
 
-<!--<div class="row">
+    </div>
+
+    <!--<div class="row">
 	<div class="col-md-4">
 		<a href="#" class="thumbnail">
 			<img src="{{ STATIC_URL }}/img_home/gruppo.JPG" />
@@ -208,25 +225,25 @@
 	</div>
 </div>-->
 
-<blockquote class="index-news"><!-- Recent Posts -->
-	{% load blog_tags keyword_tags i18n %}
-	{% blog_recent_posts 5 as recent_posts %}
+    <blockquote class="index-news"><!-- Recent Posts -->
+        {% load blog_tags keyword_tags i18n %}
+        {% blog_recent_posts 5 as recent_posts %}
 
-	{% if recent_posts %}
-	<h3>Recent News</h3>
-	{% for recent_post in recent_posts %}
-	<h4><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h4>
+        {% if recent_posts %}
+            <h3>Recent News</h3>
+            {% for recent_post in recent_posts %}
+                <h4><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h4>
 
-	<h5>{{ recent_post.publish_date|timesince }} {% trans "ago" %}</h5>
-	<div class="recent-summary">
-		{{ recent_post.description_from_content|safe }}
+                <h5>{{ recent_post.publish_date|timesince }} {% trans "ago" %}</h5>
+                <div class="recent-summary">
+                    {{ recent_post.description_from_content|safe }}
 
-		<a href="{{ recent_post.get_absolute_url }}" class="">{% trans "more" %}</a>
-		<hr>
-	</div><!-- /recent-summary -->
-	{% endfor %}
-	{% endif %}
-</blockquote><!-- /Recent Posts -->
+                    <a href="{{ recent_post.get_absolute_url }}" class="">{% trans "more" %}</a>
+                    <hr>
+                </div><!-- /recent-summary -->
+            {% endfor %}
+        {% endif %}
+    </blockquote><!-- /Recent Posts -->
 
 {% endblock %}
 
