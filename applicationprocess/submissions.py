@@ -72,7 +72,7 @@ def do_final_submission(user_profile):
     suffix = os.path.join("submitted_applications", application_process_name, user_name)
     data_path = os.path.join(USER_DATA_ROOT, suffix)
 
-    data_url = suffix
+    data_url = ''.join(suffix)
 
     if os.path.exists(data_path):
         # if data_path exists, so there are namesakes, rename it appending _num where num is a counter
