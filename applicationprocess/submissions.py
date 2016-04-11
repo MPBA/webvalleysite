@@ -1,4 +1,5 @@
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
+
 from sys import argv
 from reportlab.pdfgen import canvas
 from PyPDF2 import PdfFileReader, PdfFileMerger
@@ -66,7 +67,7 @@ def do_final_submission(user_profile):
     Places a copy of the user's data into a folder containing only submitted applications
     """
     user_number = user_profile.applicationstatus.pk
-    user_name = " ".join([str(user_profile.user.last_name), str(user_profile.user.first_name)])
+    user_name = " ".join([unicode(user_profile.user.last_name), unicode(user_profile.user.first_name)])
     application_process_name = user_profile.applicationstatus.application_process.name
     suffix = os.path.join("submitted_applications", application_process_name, user_name)
     data_path = os.path.join(USER_DATA_ROOT, suffix)
@@ -129,7 +130,7 @@ def do_final_submission(user_profile):
     data = data.replace("\"", "")
     data = data.replace(",", "")
     data = data.replace("    ", "")
-    filename = "".join([str(user_name), " info.pdf"])
+    filename = "".join([unicode(user_name), " info.pdf"])
     profile_picture = os.listdir(data_path)  # submitted folder
     for file in profile_picture:
         if file.startswith('profile'):
@@ -178,7 +179,7 @@ def do_final_submission(user_profile):
     final_pdf.strict = False
     final_pdf.append(PdfFileReader(open(os.path.join(data_path, filename), 'rb'), strict=False))
     final_pdf.append(PdfFileReader(open(os.path.join(data_path, 'signed-forms', 'merged_pdf.pdf'), 'rb'), strict=False))
-    final_filename = "".join([str(user_name), ".pdf"])
+    final_filename = "".join([unicode(user_name), ".pdf"])
     final_pdf.write(open(os.path.join(data_path, final_filename), 'wb'))
 
     _send_submission_email_to_user(user_profile)
