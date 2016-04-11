@@ -7,6 +7,7 @@ import os
 import json
 import csv
 import codecs
+import urllib2
 
 try:
     from cStringIO import StringIO
@@ -67,7 +68,10 @@ def do_final_submission(user_profile):
     user_number = user_profile.applicationstatus.pk
     user_name = " ".join([str(user_profile.user.last_name), str(user_profile.user.first_name)])
     application_process_name = user_profile.applicationstatus.application_process.name
-    data_path = os.path.join(USER_DATA_ROOT, "submitted_applications", application_process_name, user_name)
+    suffix = os.path.join("submitted_applications", application_process_name, user_name)
+    data_path = os.path.join(USER_DATA_ROOT, suffix)
+
+    data_url = urllib2.quote(suffix)
 
     if os.path.exists(data_path):
         # if data_path exists, so there are namesakes, rename it appending _num where num is a counter
@@ -178,7 +182,7 @@ def do_final_submission(user_profile):
     final_pdf.write(open(os.path.join(data_path, final_filename), 'wb'))
 
     _send_submission_email_to_user(user_profile)
-    _send_submission_email_to_handler(user_profile, data_path, user_number)
+    _send_submission_email_to_handler(user_profile, data_path, user_number, data_url)
 
 
 def _get_json(data):
@@ -300,9 +304,13 @@ def _send_submission_email_to_user(user_profile):
     _send_mail_to_user('submitted.html', user_profile)
 
 
-def _send_submission_email_to_handler(user_profile, data_path, application_number):
+def _send_submission_email_to_handler(user_profile, data_path, application_number, data_url):
     _send_mail_to_handler('submitted.html', user_profile,
-                          context={'data_path': data_path, 'application_number': application_number})
+                          context={
+                              'data_path': data_path,
+                              'application_number': application_number,
+                              'data_url': data_url
+                          })
 
 
 def _send_mail_to_handler(template, user_profile, context=None):
@@ -321,7 +329,8 @@ def _send_mail_to_user(template, user_profile, context=None):
 
 def _send_mail_from_template(template, context, recipients):
     mail_body = render_to_string(template, context)
-    send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
+    # send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
+    send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, ['luca.coviello@studenti.unitn.it'], fail_silently=False)
 
 
 ########## FOR TESTING ###########
