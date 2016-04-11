@@ -83,8 +83,6 @@ def browse_applications(request, url):
     file_dict = []
 
     for f in files:
-        print f
-        f = f.encode('utf-8')
         if os.path.isdir(f):
             file_dict.append({'name': f, 'link': os.path.join(url, f), 'download': os.path.join('static/media', url, f),
                               'type': 'directory'})
@@ -111,7 +109,7 @@ def browse_paper(request, url):
     file_dict = []
     print url
     for f in files:
-        print url
+        print f
         if os.path.isdir(f):
             file_dict.append({'name': f, 'link': os.path.join(url, f),
                               'download': os.path.join('static/media/uploads/papers', url, f), 'type': 'directory'})
