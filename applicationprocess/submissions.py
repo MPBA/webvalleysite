@@ -72,8 +72,7 @@ def do_final_submission(user_profile):
     suffix = os.path.join("submitted_applications", application_process_name, user_name)
     data_path = os.path.join(USER_DATA_ROOT, suffix)
 
-    data_url = ''.join(suffix)
-
+    data_url = urllib2.quote(suffix.encode('utf8'))
     if os.path.exists(data_path):
         # if data_path exists, so there are namesakes, rename it appending _num where num is a counter
         n = 1
@@ -330,8 +329,8 @@ def _send_mail_to_user(template, user_profile, context=None):
 
 def _send_mail_from_template(template, context, recipients):
     mail_body = render_to_string(template, context)
-    send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
-
+    # send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
+    send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, ['luca.coviello@gmail.com'], recipients, fail_silently=False)
 
 
 ########## FOR TESTING ###########
