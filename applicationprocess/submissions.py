@@ -330,9 +330,8 @@ def _send_mail_to_user(template, user_profile, context=None):
 
 def _send_mail_from_template(template, context, recipients):
     mail_body = render_to_string(template, context)
-    # send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
-    send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, ['luca.coviello@studenti.unitn.it'],
-              fail_silently=False)
+    send_mail(APPLICATIONPROCESS_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, recipients, fail_silently=False)
+
 
 
 ########## FOR TESTING ###########
