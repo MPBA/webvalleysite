@@ -180,7 +180,7 @@ def do_final_submission(user_profile):
     final_pdf.write(open(os.path.join(data_path, final_filename), 'wb'))
 
     _send_submission_email_to_user(user_profile)
-    _send_submission_email_to_handler(user_profile, data_path, user_number, data_url)
+    _send_submission_email_to_handler(user_profile, data_path, user_number)
 
 
 def _get_json(data):
@@ -302,12 +302,11 @@ def _send_submission_email_to_user(user_profile):
     _send_mail_to_user('submitted.html', user_profile)
 
 
-def _send_submission_email_to_handler(user_profile, data_path, application_number, data_url):
+def _send_submission_email_to_handler(user_profile, data_path, application_number):
     _send_mail_to_handler('submitted.html', user_profile,
                           context={
                               'data_path': data_path,
                               'application_number': application_number,
-                              'data_url': data_url
                           })
 
 
