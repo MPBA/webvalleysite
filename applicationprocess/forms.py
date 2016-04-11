@@ -20,17 +20,21 @@ class ApplicationProcessSelectForm(forms.ModelForm):
         data = self.cleaned_data['application_process']
         today = date.today()
         if today > data.deadline:
-            raise ValidationError(_(u'Applications are closed for the selected application process. If you encountered some problems during your submission please contact us webvalley@fbk.eu'))
+            raise ValidationError(_(
+                u'Applications are closed for the selected application process. If you encountered some problems during your submission please contact us webvalley@fbk.eu'))
         elif today < data.start:
-            raise ValidationError(_(u'We are not accepting any applications for this application process yet. Applications will start on ') + str(data.start))
+            raise ValidationError(_(
+                u'We are not accepting any applications for this application process yet. Applications will start on ') + str(
+                data.start))
         return data
 
     def save(self, user):
         application_process = self.cleaned_data['application_process']
-        user_profile = UserProfile.objects.get_or_create( user=user )[0]
-        a = ApplicationStatus( application_process=application_process,
-            user_profile=user_profile)
+        user_profile = UserProfile.objects.get_or_create(user=user)[0]
+        a = ApplicationStatus(application_process=application_process,
+                              user_profile=user_profile)
         a.save()
+
 
 class UploadSignedCopyForm(forms.ModelForm):
     class Meta:
@@ -40,8 +44,8 @@ class UploadSignedCopyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UploadSignedCopyForm, self).__init__(*args, **kwargs)
         self.fields['signed_copy'].required = True
-    
-#    def clean_signed_copy(self):
+
+# def clean_signed_copy(self):
 #        accepted_half_mimes = ['image'] # like 'image/*'
 #        accepted_whole_mimes = ['application/pdf']
 #        error_message = _(u'The file must be either an image or a pdf file.')
@@ -63,4 +67,3 @@ class UploadSignedCopyForm(forms.ModelForm):
 #            raise forms.ValidationError(error_message)
 #        # Always return the cleaned data.
 #        return file
-
