@@ -88,7 +88,8 @@ def browse_applications(request, url):
                               'type': 'directory'})
         else:
             file_dict.append({'name': f, 'link': os.path.join('/static/media', url, f), 'type': 'file'})
-    context = {'filelist': file_dict}
+    context = {'filelist': file_dict,
+               'bkurl': os.path.join(url, '..')}
     os.chdir(def_path)
     return render_to_response('profile/read_apps.html', context, context_instance=RequestContext(request))
 

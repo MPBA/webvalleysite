@@ -4,27 +4,40 @@
 
 {# block page #}
 {% block main %}
-  <h1>File Browser</h1>
-  <table role="table" class="table table-striped ">
-  <thead>
-    <tr><th>Filename/Folder</th><th>Type</th><th></th></tr>
-  </thead>
 
-  {% for file in filelist %}
-    {% ifequal file.type 'directory' %}
-    <tr>
-        <td><a href="{% url 'browse_applications' file.link %}">{{ file.name }}</a></td>
-        <td>{{ file.type }}</td>
-        <td><a href="{% url 'download_zip' file.download file.name %}">[Download .zip]</a></td>
-    </tr>
-    {% endifequal %}
-    {% ifequal file.type 'file' %}
-    <tr>
-        <td><a href="{{ file.link }}">{{ file.name }}</a></td>
-        <td>{{ file.type }}</td>
-        <td>&nbsp;</td>
-    </tr>
-    {% endifequal %}
-  {% endfor %}
-  </table>
+    <div class="col-md-12">
+      <div class="col-md-10">
+          <h1>File Browser</h1>
+      </div>
+      <div class="col-md-1">
+        <a href="{% url 'browse_applications' bkurl %}">Back</a>
+      </div>
+      <div class="col-md-1">
+        <a href="{% url 'browse_applications' '' %}">Topdir</a>
+      </div>
+
+      <table role="table" class="table table-striped ">
+      <thead>
+        <tr><th>Filename/Folder</th><th>Type</th><th></th></tr>
+      </thead>
+
+      {% for file in filelist %}
+        {% ifequal file.type 'directory' %}
+        <tr>
+            <td><a href="{% url 'browse_applications' file.link %}">{{ file.name }}</a></td>
+            <td>{{ file.type }}</td>
+            <td><a href="{% url 'download_zip' file.download file.name %}">[Download .zip]</a></td>
+        </tr>
+        {% endifequal %}
+        {% ifequal file.type 'file' %}
+        <tr>
+            <td><a href="{{ file.link }}">{{ file.name }}</a></td>
+            <td>{{ file.type }}</td>
+            <td>&nbsp;</td>
+        </tr>
+        {% endifequal %}
+      {% endfor %}
+      </table>
+    </div>
+
 {% endblock %}
