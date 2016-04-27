@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Country
+from .models import UserProfile, Country, Brochure
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -18,3 +18,4 @@ admin.site.register(Country)
 admin.site.register(UserProfile, ProfileAdmin)
 # admin.site.register(Document)
 # admin.site.register(DocumentType)
+admin.site.register(Brochure)

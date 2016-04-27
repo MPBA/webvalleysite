@@ -33,6 +33,7 @@ urlpatterns += patterns('',
     url(r'^profile/', include('profiles.urls')),
     # Application process
     (r'^school-application/', include('applicationprocess.urls')),
+    (r'^brochure/', 'website.views.brochure'),
     # TODO re add robots
     # FIXME re add robots
     # (r'^robots\.txt$', include('robots.urls')),

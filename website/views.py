@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.http.response import HttpResponse
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.conf import settings
+from .models import Brochure
 
 
 def home(request, errors=None, notifications=None):
@@ -25,3 +27,8 @@ def home(request, errors=None, notifications=None):
     #         'page_title': 'Search Result',
     #         'search_results': search_results
     #     })
+
+
+def brochure(request):
+    b = Brochure.objects.get()
+    return redirect(b.brochure.url)

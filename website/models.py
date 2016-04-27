@@ -1,4 +1,5 @@
 from os.path import join
+import os
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -100,3 +101,20 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = _('user profile')
         verbose_name_plural = _('user profiles')
+
+
+class Brochure(models.Model):
+    _get_upload_to_templates = (lambda instance, filename: join("pdf", "brochure", filename))
+
+    brochure = models.FileField(upload_to=_get_upload_to_templates, blank=True, null=True)
+
+    @property
+    def name(self):
+        return os.path.basename(self.brochure.path)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Brochure')
+        verbose_name_plural = _('Brochure')
