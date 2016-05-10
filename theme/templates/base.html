@@ -159,6 +159,17 @@
 
             <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
             {% endblock %}
+
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+{#                    {% ifinstalled mezzanine.twitter %}#}
+                        {% include "twitter/tweets.html" %}
+{#                    {% endifinstalled %}#}
+                </div>
+            </div>
+
+
         </div>
         {% block blog_title %}{% endblock %}
         <div class="col-md-9 middle">
@@ -181,7 +192,7 @@
     <!-- <div class="col-md-4"> -->
     <!--   <img src="{{ STATIC_URL }}img/logo_visitacomano.png" alt='' align="middle"/> -->
     <!-- </div> -->
-      
+
   </div>
 </footer>
 {% include "includes/footer_scripts.html" %}
