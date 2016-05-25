@@ -11,6 +11,7 @@
     <div class="container-fluid">
         {% for c,l in page.team.teamcomponent_set.all|categories_dict %}
             <h2>{{ c }}</h2>
+            <br>
             {% for tc in l|dictsort:'id' %}
                 <div style="margin-bottom:30px" class="row">
                     <div class="col-md-2">
