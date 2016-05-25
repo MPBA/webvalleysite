@@ -1,33 +1,33 @@
 {% extends "pages/page.html" %}
 
-{% load mezzanine_tags staticfiles %}
+{% load mezzanine_tags staticfiles customtags %}
 
 {% block meta_title %}{{ page.title }}{% endblock %}
 
 {% block main %}
 
-{{ block.super }}
+    {{ block.super }}
 
-<div class="container-fluid">
-	{% for tc in page.team.teamcomponent_set.all|dictsort:'id' %}
-	<div style="margin-bottom:30px" class="row">
-		<div class="col-md-2">
-			<a href="#" class="thumbnail">
-				<img src="{{ MEDIA_URL }}{{ tc.img }}" />
-			</a>
-		</div>
-		<div class="col-md-10">
-		    <h3 style="margin-top:10px;">{{ tc.name }}</h3>
-		    <div style="margin-top:10px;">
-				<blockquote><p>{{ tc.desc }}</p></blockquote>
-			</div>    
-		</div>
-	</div>
-	{% endfor %}
-    E3DA research unit: <a href="http://e3da.fbk.eu/">http://e3da.fbk.eu/</a>
-</div>
-
-
-
-
+    <div class="container-fluid">
+        {% for c,l in page.team.teamcomponent_set.all|categories_dict %}
+            <h2>{{ c }}</h2>
+            {% for tc in l|dictsort:'id' %}
+                <div style="margin-bottom:30px" class="row">
+                    <div class="col-md-2">
+                        <a href="#" class="thumbnail">
+                            <img src="{{ MEDIA_URL }}{{ tc.img }}"/>
+                        </a>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 style="margin-top:10px;">{{ tc.name }}</h3>
+                        <div style="margin-top:10px;">
+                            <blockquote><p>{{ tc.desc }}</p></blockquote>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <hr>
+        {% endfor %}
+        {#    E3DA research unit: <a href="http://e3da.fbk.eu/">http://e3da.fbk.eu/</a>#}
+    </div>
 {% endblock %}
