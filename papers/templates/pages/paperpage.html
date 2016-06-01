@@ -17,7 +17,7 @@
                     WebValley {{ page.paperpage.year }} School.
                 </p>
                 <table class="table table-striped">
-                    <tbody>
+                    <thead>
                     <tr>
                         <th><strong>#</strong></th>
                         <th><strong>Year</strong></th>
@@ -25,6 +25,8 @@
                         <th><strong>Title</strong></th>
                         <th><strong>Link</strong></th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {% for paper in page.paperpage.paper_set.all %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
