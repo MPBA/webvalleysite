@@ -229,6 +229,7 @@ INSTALLED_APPS = (
     "theme",
     "team",
     "partecipants",
+    "papers",
     "django_su",
     "django.contrib.admin",
     "django.contrib.auth",
