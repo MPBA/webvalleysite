@@ -31,6 +31,8 @@ urlpatterns += patterns('',
     url(r'^account/', include('accounts.urls')),
     # Profiles
     url(r'^profile/', include('profiles.urls')),
+    url(r'^alumni/', include('alumni.urls')),
+
     # Application process
     (r'^school-application/', include('applicationprocess.urls')),
     (r'^brochure/', 'website.views.brochure'),
