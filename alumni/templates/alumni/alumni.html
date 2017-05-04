@@ -1,0 +1,73 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles customtags %}
+
+{% block meta_title %}{{ page.title }}{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+          integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+          crossorigin=""/>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet'/>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+            integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+            crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>
+{% endblock %}
+{% block main %}
+    <h1>Webvalley Alumni</h1>
+    {{ block.super }}
+    {#    <div class="container-fluid">#}
+    {#        {% for tc in page.alumni.alumnistudent_set.all %}#}
+    {#            <p>prova</p>#}
+    {#            <div style="margin-bottom:30px" class="row">#}
+    {#                <div class="col-md-2">#}
+    {#                    <a target="_blank" class="thumbnail">#}
+    {#                        <img src="{{ MEDIA_URL }}{{ tc.img }}"/>#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#                <div class="col-md-10">#}
+    {#                    <h3 style="margin-top:10px;">{{ tc.name }}</h3>#}
+    {#                    <div style="margin-top:10px;">#}
+    {#                        <blockquote><p>{{ tc.desc }}</p></blockquote>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        {% endfor %}#}
+    {#            E3DA research unit: <a href="http://e3da.fbk.eu/">http://e3da.fbk.eu/</a>#}
+    {#    </div>#}
+    <div id="map" class="row" style="height: 700px; width: 100%"></div>
+    <br>
+    <form action="alumni/" method="post" class="form-group" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+    </form>
+    <script>
+        function initMap() {
+            var map = L.map('map').setView([46.0748, 12.1217], 2);
+            L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2VidmFsbGV5IiwiYSI6ImNqMXoyZXg1NjAwOW0zM3EzNXRnY3Y0dm8ifQ.64N5Ah9fov0V3eYZ4wN4eA', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18
+            }).addTo(map);
+            var add_marker = function (name, loc_string, desc, lat, lon, year, img) {
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup('<div id="content">' +
+                        '<img style="margin-right: 10px; margin-bottom: 1px; float: left; height: auto; width: 128px" src="{{ MEDIA_URL }}' + img + '"/>' +
+                        '<h3>' + name + '</h3>' +
+                        '<h4>' + loc_string + '</h4>' +
+                        '<h5> WebValley ' + year + '</h5>' +
+                        '<p>' + desc + '</p>' +
+                        '</div>');
+
+            };
+            {% for tc in alumnis %}
+                add_marker('{{ tc.name }}', '{{ tc.loc_string }}', '{{ tc.desc }}', {{ tc.lat }}, {{ tc.lon }}, '{{ tc.year_in_school }}', '{{ tc.img }}');
+            {% endfor %}
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap"
+            async defer></script>
+{% endblock %}
