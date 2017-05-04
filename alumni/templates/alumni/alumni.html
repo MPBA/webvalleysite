@@ -9,13 +9,20 @@
           integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
           crossorigin=""/>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet'/>
+    <style type="text/css">
+        .search_marker_class {
+            display: none;
+        }
+    </style>
 {% endblock %}
 
 {% block extra_js %}
+    {#    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBZ72t-6hcAl-x8XFiYgAdvT5KiYd0LAg&libraries=places"></script>#}
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
             integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
             crossorigin=""></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBZ72t-6hcAl-x8XFiYgAdvT5KiYd0LAg&libraries=places"></script>
 {% endblock %}
 {% block main %}
     <h1>Webvalley Alumni</h1>
@@ -39,11 +46,16 @@
     {#        {% endfor %}#}
     {#            E3DA research unit: <a href="http://e3da.fbk.eu/">http://e3da.fbk.eu/</a>#}
     {#    </div>#}
+    {% if success %}
+        <h4>{{ success }}</h4>
+    {% endif %}
     <div id="map" class="row" style="height: 700px; width: 100%"></div>
-    <br>
-    <form action="alumni/" method="post" class="form-group" enctype="multipart/form-data">
+    <p style="text-align: center; cursor: pointer"><a id="formtoggle">Are you a Webvalley Alumni? Fill in the form here!</a></p>
+    <form action="/alumni/" id="alumniform" method="post" style="display: none;"class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
+        <br>
+        <input type="submit" class="btn btn-success" value="Submit" style="float: right">
     </form>
     <script>
         function initMap() {
@@ -54,20 +66,74 @@
             }).addTo(map);
             var add_marker = function (name, loc_string, desc, lat, lon, year, img) {
                 L.marker([lat, lon]).addTo(map)
-                    .bindPopup('<div id="content">' +
-                        '<img style="margin-right: 10px; margin-bottom: 1px; float: left; height: auto; width: 128px" src="{{ MEDIA_URL }}' + img + '"/>' +
-                        '<h3>' + name + '</h3>' +
+                    .bindPopup('<div id="content" class="container-fluid"><div class="row">' +
+                        '<div class="col-sm-4"><img class="thumbnail" src="{{ MEDIA_URL }}' + img + '"/></div><div class="col-sm-8">' +
+                        '<h3>' + name + '<span style="float: right; text-align: right;"><small>WebValley ' + year + '</small></span></h3>' +
                         '<h4>' + loc_string + '</h4>' +
-                        '<h5> WebValley ' + year + '</h5>' +
                         '<p>' + desc + '</p>' +
-                        '</div>');
-
+                        '</div></div></div>', {
+                            minWidth: 550,
+                            maxWidth: 650
+                    });
             };
             {% for tc in alumnis %}
                 add_marker('{{ tc.name }}', '{{ tc.loc_string }}', '{{ tc.desc }}', {{ tc.lat }}, {{ tc.lon }}, '{{ tc.year_in_school }}', '{{ tc.img }}');
             {% endfor %}
+
+            var autocomplete = new google.maps.places.Autocomplete(
+                (document.getElementById('autocomplete')), {types: ['geocode']}
+            );
+
+            var search_marker = L.marker([0, 0]).addTo(map);
+            search_marker.setIcon(L.icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            }));
+            map.removeLayer(search_marker);
+            var selected_place = false;
+
+            function panMap() {
+                var place = autocomplete.getPlace();
+                var lat = place.geometry.location.lat();
+                var lon = place.geometry.location.lng();
+                map.panTo([lat, lon]);
+                search_marker.setLatLng(new L.LatLng(lat, lon)).update();
+                map.addLayer(search_marker);
+                $("#form-lat").val(lat);
+                $("#form-lon").val(lon);
+                selected_place = true;
+            }
+
+            autocomplete.addListener('place_changed', panMap);
+            $("#autocomplete").on('keydown', function () {
+                selected_place = false;
+            });
+
+            $("#alumniform").on("submit", function () {
+                if(!selected_place){
+                    alert("Please select a valid Google Maps location.");
+                };
+                return selected_place;
+            });
+            $("#alumniform").css("display", "block");
+            $("#alumniform").hide();
+            $("#formtoggle").on("click", function () {
+                 $("#alumniform").toggle("fast");
+            });
         }
+
+        google.maps.event.addDomListener(window, 'load', initMap);
+
+        $(document).on('keyup keypress', 'form input[type="text"]', function (e) {
+            if (e.which == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBZ72t-6hcAl-x8XFiYgAdvT5KiYd0LAg&libraries=places&callback=initMap"
-            async defer></script>
 {% endblock %}
