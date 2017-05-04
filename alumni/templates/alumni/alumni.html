@@ -24,8 +24,7 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
 {% endblock %}
-{% block main %}
-    <h1>Webvalley Alumni</h1>
+{% block main %}<h1>Webvalley Alumni</h1>
     {{ block.super }}
     {#    <div class="container-fluid">#}
     {#        {% for tc in page.alumni.alumnistudent_set.all %}#}
@@ -49,7 +48,7 @@
     {% if success %}
         <h4>{{ success }}</h4>
     {% endif %}
-    <div id="map" class="row" style="height: 700px; width: 100%"></div>
+    <div id="map" class="row" style="height: 700px; width: 100%; margin-left: auto; margin-right: auto"></div>
     <p style="text-align: center; cursor: pointer"><a id="formtoggle">Are you a Webvalley Alumni? Fill in the form here!</a></p>
     <form action="/alumni/" id="alumniform" method="post" style="display: none;"class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
@@ -116,13 +115,13 @@
             $("#alumniform").on("submit", function () {
                 if(!selected_place){
                     alert("Please select a valid Google Maps location.");
-                };
+                }
                 return selected_place;
             });
             $("#alumniform").css("display", "block");
             $("#alumniform").hide();
             $("#formtoggle").on("click", function () {
-                 $("#alumniform").toggle("fast");
+                 $("#alumniform").toggle("slow");
             });
         }
 
