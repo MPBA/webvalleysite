@@ -88,7 +88,7 @@
             };
             map.addLayer(markers);
             {% for tc in alumnis %}
-                add_marker('{{ tc.name | safe}}', '{{ tc.loc_string | safe}}', '{{ tc.desc | safe}}', {{ tc.lat }}, {{ tc.lon }}, '{{ tc.year_in_school }}', '{{ tc.img }}');
+                add_marker('{{ tc.name | escapejs }}', '{{ tc.loc_string | escapejs }}', '{{ tc.desc | escapejs }}', {{ tc.lat }}, {{ tc.lon }}, '{{ tc.year_in_school }}', '{{ tc.img }}');
             {% endfor %}
 
             var autocomplete = new google.maps.places.Autocomplete(
