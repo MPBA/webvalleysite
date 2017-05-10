@@ -7,6 +7,9 @@ class AlumniStudentForm(forms.ModelForm):
         'class': 'form-control',
         'id': 'autocomplete',
     }))
+    email = forms.CharField(label="Current email:", max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+    }))
     desc = forms.CharField(label="Description", widget=forms.Textarea(attrs={
         'placeholder': "Tell us your story!",
         'style': 'resize: vertical; width: 100%; height: 150px; min-height: 100px',
@@ -27,4 +30,13 @@ class AlumniStudentForm(forms.ModelForm):
 
     class Meta:
         model = AlumniStudent
-        fields = ['name', 'loc_string', 'desc', 'year_in_school', 'img', 'lat', 'lon']
+        fields = ['name', 'loc_string', 'email', 'desc', 'year_in_school', 'img', 'lat', 'lon']
+
+    def clean_desc(self):
+        return self.cleaned_data['desc'].strip()
+    
+    def clean_email(self):
+        return self.cleaned_data['email'].strip()
+    
+    def clean_loc_string(self):
+        return self.cleaned_data['loc_string'].strip()

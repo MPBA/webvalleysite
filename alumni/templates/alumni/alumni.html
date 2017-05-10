@@ -50,8 +50,10 @@
     {% endif %}
     <div id="map" class="row" style="height: 700px; width: 100%; margin-left: auto; margin-right: auto"></div>
     <br>
-    <h3 style="text-align: center; cursor: pointer"><a id="formtoggle">To join the Webvalley Alumni, fill in the form here!</a></h3>
-    <form action="/alumni/" id="alumniform" method="post" style="display: none;"class="form-horizontal" enctype="multipart/form-data">
+    <h3 style="text-align: center; cursor: pointer"><a id="formtoggle">To join the Webvalley Alumni, fill in the form
+        here!</a></h3>
+    <form action="/alumni/" id="alumniform" method="post" style="display: none;" class="form-horizontal"
+          enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <br>
@@ -72,8 +74,8 @@
                         '<h4>' + loc_string + '</h4>' +
                         '<p>' + desc + '</p>' +
                         '</div></div></div>', {
-                            minWidth: 550,
-                            maxWidth: 650
+                        minWidth: 550,
+                        maxWidth: 650
                     });
             };
             {% for tc in alumnis %}
@@ -109,12 +111,14 @@
             }
 
             autocomplete.addListener('place_changed', panMap);
-            $("#autocomplete").on('keydown', function () {
-                selected_place = false;
+            $("#autocomplete").on('keydown', function (e) {
+                if (e.which !== 9) {
+                    selected_place = false;
+                }
             });
 
             $("#alumniform").on("submit", function () {
-                if(!selected_place){
+                if (!selected_place) {
                     alert("Please select a valid Google Maps location.");
                 }
                 return selected_place;
@@ -122,7 +126,7 @@
             $("#alumniform").css("display", "block");
             $("#alumniform").hide();
             $("#formtoggle").on("click", function () {
-                 $("#alumniform").toggle("slow");
+                $("#alumniform").toggle("slow");
             });
         }
 
