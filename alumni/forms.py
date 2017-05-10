@@ -14,7 +14,7 @@ class AlumniStudentForm(forms.ModelForm):
         'placeholder': "Tell us your story!",
         'style': 'resize: vertical; width: 100%; height: 150px; min-height: 100px',
     }))
-    year_in_school = forms.ChoiceField(choices=((year, str(year)) for year in range(2001, 2017)),
+    year_in_school = forms.ChoiceField(label="Year of partecipation:", choices=((year, str(year)) for year in range(2001, 2017)),
                                        widget=forms.Select(attrs={
                                            'class': 'form-control',
                                            'style': 'display: inline-block; width: 100px; margin-left: 5px; margin-right: 50px;'
@@ -40,3 +40,7 @@ class AlumniStudentForm(forms.ModelForm):
     
     def clean_loc_string(self):
         return self.cleaned_data['loc_string'].strip()
+
+class AlumniApprovalForm(forms.Form):
+    id = forms.IntegerField()
+    approved = forms.BooleanField(required=False)

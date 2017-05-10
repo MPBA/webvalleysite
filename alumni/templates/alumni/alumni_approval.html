@@ -1,0 +1,60 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles customtags %}
+
+{% block meta_title %}{{ page.title }}{% endblock %}
+
+{% block extra_js %}
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        $(function () {
+            $('.student-toggle').change(function (e) {
+                var id = $(this).closest("span").find(".student-id").val();
+                var approved_val = $(this).prop('checked');
+                var post_data = {
+                    csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                    id: id,
+                    approved: approved_val
+                };
+                console.log(post_data);
+                console.log($(this));
+                $.ajax('/alumni/approval/', {
+                    data: post_data,
+                    type: 'POST',
+                    method: 'POST'
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block extra_css %}
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}<h1>Webvalley Alumni Approval</h1>
+    {{ block.super }}
+    {% csrf_token %}
+    <hr>
+    {% for student in alumnis %}
+        <div class="row">
+            <div class="col-sm-4"><img class="thumbnail" src="{{ MEDIA_URL }}{{ student.img }}"/></div>
+            <div class="col-sm-8">
+                <h3>{{ student.name }}
+                    <small>{{ student.email }}</small>
+                    <span style="float: right; text-align: right;"><small>WebValley {{ student.year_in_school }}</small></span>
+                </h3>
+                <h4>{{ student.loc_string }}</h4>
+                <p>{{ student.desc }}</p>
+            </div>
+            <span style="float: right;">
+                <input type="hidden" class="student-id" value="{{ student.id }}">
+                <input class="student-toggle" {% if student.approved %}checked{% endif %} data-toggle="toggle"
+                       data-size="large" data-on="<i class='glyphicon glyphicon-ok'></i> Approved"
+                       data-off="<i class='glyphicon glyphicon-remove'></i> Pending" data-onstyle="success"
+                       data-offstyle="danger" type="checkbox">
+            </span>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
