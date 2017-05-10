@@ -49,7 +49,8 @@
         <h4>{{ success }}</h4>
     {% endif %}
     <div id="map" class="row" style="height: 700px; width: 100%; margin-left: auto; margin-right: auto"></div>
-    <p style="text-align: center; cursor: pointer"><a id="formtoggle">Are you a Webvalley Alumni? Fill in the form here!</a></p>
+    <br>
+    <h3 style="text-align: center; cursor: pointer"><a id="formtoggle">To join the Webvalley Alumni, fill in the form here!</a></h3>
     <form action="/alumni/" id="alumniform" method="post" style="display: none;"class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
@@ -76,7 +77,7 @@
                     });
             };
             {% for tc in alumnis %}
-                add_marker('{{ tc.name }}', '{{ tc.loc_string }}', '{{ tc.desc }}', {{ tc.lat }}, {{ tc.lon }}, '{{ tc.year_in_school }}', '{{ tc.img }}');
+                add_marker('{{ tc.name | safe}}', '{{ tc.loc_string | safe}}', '{{ tc.desc | safe}}', {{ tc.lat }}, {{ tc.lon }}, '{{ tc.year_in_school }}', '{{ tc.img }}');
             {% endfor %}
 
             var autocomplete = new google.maps.places.Autocomplete(

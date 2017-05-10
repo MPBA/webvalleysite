@@ -13,6 +13,7 @@ def alumni_views(request):
     elif request.method == "POST":
         form = AlumniStudentForm(request.POST, request.FILES)
         if form.is_valid():
+            form['desc'] = form['desc'].strip()
             form.save()
             context['form'] = AlumniStudentForm()
             context['success'] = "Thank you! An administrator will approve your alumni submission as soon as possible."
