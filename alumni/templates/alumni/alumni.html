@@ -9,6 +9,9 @@
           integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
           crossorigin=""/>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet'/>
+    <link href='https://unpkg.com/leaflet.markercluster@1.0.5/dist/MarkerCluster.css' rel='stylesheet'/>
+    <link href='https://unpkg.com/leaflet.markercluster@1.0.5/dist/MarkerCluster.Default.css' rel='stylesheet'/>
+
     <style type="text/css">
         .search_marker_class {
             display: none;
@@ -23,6 +26,7 @@
             crossorigin=""></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places"></script>
+    <script src='https://unpkg.com/leaflet.markercluster@1.0.5/dist/leaflet.markercluster.js'></script>
 {% endblock %}
 {% block main %}<h1>Webvalley Alumni</h1>
     {{ block.super }}
@@ -55,7 +59,7 @@
     <form action="/alumni/" id="alumniform" method="post" style="display: none;" class="form-horizontal"
           enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <br>
         <input type="submit" class="btn btn-success" value="Submit" style="float: right">
     </form>
@@ -66,9 +70,12 @@
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18
             }).addTo(map);
+            var markers = L.markerClusterGroup({
+                showCoverageOnHover: false
+            });
             var add_marker = function (name, loc_string, desc, lat, lon, year, img) {
-                L.marker([lat, lon]).addTo(map)
-                    .bindPopup('<div id="content" class="container-fluid"><div class="row">' +
+                var marker = L.marker([lat, lon]);
+                marker.bindPopup('<div id="content" class="container-fluid"><div class="row"git>' +
                         '<div class="col-sm-4"><img class="thumbnail" src="{{ MEDIA_URL }}' + img + '"/></div><div class="col-sm-8">' +
                         '<h3>' + name + '<span style="float: right; text-align: right;"><small>WebValley ' + year + '</small></span></h3>' +
                         '<h4>' + loc_string + '</h4>' +
@@ -76,8 +83,10 @@
                         '</div></div></div>', {
                         minWidth: 550,
                         maxWidth: 650
-                    });
+                });
+                markers.addLayer(marker)
             };
+            map.addLayer(markers);
             {% for tc in alumnis %}
                 add_marker('{{ tc.name | safe}}', '{{ tc.loc_string | safe}}', '{{ tc.desc | safe}}', {{ tc.lat }}, {{ tc.lon }}, '{{ tc.year_in_school }}', '{{ tc.img }}');
             {% endfor %}

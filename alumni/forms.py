@@ -16,13 +16,11 @@ class AlumniStudentForm(forms.ModelForm):
     }))
     year_in_school = forms.ChoiceField(label="Year of partecipation:", choices=((year, str(year)) for year in range(2001, 2017)),
                                        widget=forms.Select(attrs={
-                                           'class': 'form-control',
-                                           'style': 'display: inline-block; width: 100px; margin-left: 5px; margin-right: 50px;'
+                                           'class': 'form-control'
                                        }))
 
     img = forms.ImageField(label="Picture of yourself", widget=forms.FileInput(attrs={
         'class': 'form-control-file',
-        'style': 'display: inline-block; margin-left: 5px;',
         'type': 'image'
     }))
     lat = forms.FloatField(widget=forms.HiddenInput(attrs={'id': 'form-lat'}))
