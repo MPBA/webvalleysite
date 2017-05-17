@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
 from django.contrib.auth.models import User
-
+from captcha.fields import ReCaptchaField
 
 class RegistrationForm(forms.Form):
     first_name = forms.CharField(max_length=30, required=True, label=_('First name'))
@@ -12,7 +12,7 @@ class RegistrationForm(forms.Form):
                                 label=_('Password'))
     password2 = forms.CharField(max_length=30, required=True, widget=forms.PasswordInput(render_value=False),
                                 label=_('Confirm password'))
-
+    captcha = ReCaptchaField()
     # def __init__(self, *args, **kwargs):
     #     super(RegistrationForm, self).__init__(*args, **kwargs)
     #     self.fields['first_name'].widget.attrs.update({'class' : 'form_group'})

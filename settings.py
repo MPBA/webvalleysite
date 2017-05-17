@@ -252,6 +252,7 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     #"mezzanine.accounts",
     #"mezzanine.mobile",
+    "captcha"
 )
 
 # List of processors used by RequestContext to populate the context.
