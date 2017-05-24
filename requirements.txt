@@ -50,3 +50,4 @@ setuptools
 appdirs
 packaging
 six
+django-recaptcha==1.3.0
