@@ -12,11 +12,11 @@
                 <th class="text-center" style="font-size:25px;">Photo</th>
                 <th class="text-center" style="font-size:25px;">Name</th>
                 <th class="text-center" style="font-size:25px;">City</th>
-                <th class="text-center" style="font-size:25px;">Confirmed</th>
+{#                <th class="text-center" style="font-size:25px;">Confirmed</th>#}
             </tr>
             {% for partecipant in page.partecipants.person_set.all|dictsort:"name" %}
                 <tr>
-                    <td class="col-md-3" style="vertical-align: middle">
+                    <td class="col-md-2" style="vertical-align: middle">
                         <button class="btn btn-block" style="padding: 0px">
                             <img src="{{ MEDIA_URL }}{{ partecipant.photo }}"/>
                         </button>
