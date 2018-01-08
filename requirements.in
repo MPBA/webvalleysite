@@ -1,5 +1,5 @@
 Django<1.7
-psycopg2>2.7
+
 Mezzanine<4
 Markdown<3
 Pillow<3
@@ -47,5 +47,5 @@ yolk<1
 appdirs
 packaging
 six
-pip-tools
 django-recaptcha<2
+psycopg2<2.7
