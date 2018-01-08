@@ -54,12 +54,13 @@
   ga('create', 'UA-31374325-1', 'fbk.eu');
   ga('send', 'pageview');
 
-  $(document).ready(function () {
-      findAndReplaceDOMText(document.getElementById('body'), {
-          find: /\w+/g,
-          replace: 'apple'
-      });
-  });
+  {#$(document).ready(function () {#}
+  {#    findAndReplaceDOMText(document.getElementById('body'), {#}
+  {#        find: /\w+/g,#}
+  {#        replace: 'apple'#}
+  {#    });#}
+  {# }); #}
+
 </script>
 {% block extra_head %}{% endblock %}
 </head>
