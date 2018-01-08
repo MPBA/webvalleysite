@@ -1,5 +1,5 @@
 Django<1.7
-
+psycopg2<2.7
 Mezzanine<4
 Markdown<3
 Pillow<3
@@ -48,4 +48,3 @@ appdirs
 packaging
 six
 django-recaptcha<2
-psycopg2<2.7
