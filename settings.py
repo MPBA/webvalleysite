@@ -219,42 +219,41 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 ################
 
 INSTALLED_APPS = (
-    # giopede
-    "website",
-    "timetable",
-    "accounts",
-    "applicationprocess",
-    "profiles",
-	"press",
-    # covix
-    "theme",
-    "team",
-    "partecipants",
-    "papers",
-    "alumni",
-    "django_su",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.redirects",
-    "django.contrib.sessions",
-    "django.contrib.sites",
-    "django.contrib.sitemaps",
-    "django.contrib.staticfiles",
-    "mezzanine.boot",
-    "mezzanine.conf",
-    "mezzanine.core",
-    "mezzanine.generic",
-    "mezzanine.blog",
-    "mezzanine.forms",
-    "mezzanine.pages",
-    "mezzanine.galleries",
-    "mezzanine.twitter",
-    #"mezzanine.accounts",
-    #"mezzanine.mobile",
-    "captcha"
+   # giopede
+   "website",
+   "timetable",
+   "accounts",
+   "applicationprocess",
+   "profiles",
+    "press",
+   # covix
+   "theme",
+   "team",
+   "partecipants",
+   "papers",
+   "alumni",
+   "mezzanine.boot",
+   "mezzanine.conf",
+   "mezzanine.core",
+   "mezzanine.generic",
+   "mezzanine.blog",
+   "mezzanine.forms",
+   "mezzanine.pages",
+   "mezzanine.galleries",
+   "mezzanine.twitter",
+   # "mezzanine.accounts",
+   # "mezzanine.mobile",
+   "django_su",
+   "django.contrib.admin",
+   "django.contrib.auth",
+   "django.contrib.contenttypes",
+   "django.contrib.redirects",
+   "django.contrib.sessions",
+   "django.contrib.sites",
+   "django.contrib.sitemaps",
+   "django.contrib.staticfiles",
+   "captcha"
 )
-
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
 # only parameter and returns a dictionary to add to the context.
@@ -268,6 +267,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.core.context_processors.tz",
     "mezzanine.conf.context_processors.settings",
+    "mezzanine.pages.context_processors.page",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
