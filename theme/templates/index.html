@@ -1,19 +1,6 @@
 {% extends "pages/page.html" %}
 {% load static %}
 {% load mezzanine_tags staticfiles %}
-{% block extra_head %}
-    <script src="https://s3.amazonaws.com/cc.silktide.com/cookieconsent.latest.min.js"></script>
-    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-    <script type="text/javascript">
-        window.cookieconsent_options = {
-            "message": "Questo sito utilizza cookies per permettere una migliore esperienza di navigazione. " +
-            "Chiudendo questo banner, scorrendo questa pagina o cliccando qualunque suo elemento acconsenti all'uso dei cookie." +
-            "Se vuoi saperne di più o negare il consenso a tutti o ad alcuni cookie ",
-            "dismiss": "Accetto", "learnMore": "clicca qui", "link": "/informativa-cookies/", "theme": "light-top"
-        };
-    </script>
-    <!-- End Cookie Consent plugin -->
-{% endblock extra_head %}
 
 {% block main %}
 
@@ -195,7 +182,7 @@
                         {#                        miniaturised sensors.#}
                         Learn advanced Python for cutting edge Data
                         Science and Deep Learning to develop a new solution for on-field evaluation of fruit quality and
-                        safety, with brand new AI algorithms and miniaturised sensors! A team of 20 international
+                        safety, with brand new AI algorithms and miniaturised sensors! A team of international
                         students will learn how to integrate vision and portable spectrometry using Deep Learning, the
                         revolutionary tech that has enabled autonomous driving. WebValley will provide an unique
                         interdisciplinary experience on biology of environmental safety, GPU cloud computing, 3D
@@ -267,15 +254,15 @@
                     <img src="{% static 'img/wv2016_team2.jpg' %}">
                 </a>
             </div>
-            <div class="col-md-12">
-                <p style="font-size:130%; text-align:justify">
-                    The outcome products of the project will be evaluated by major national companies, including CAVIT
-                    (wine producer) and S. Orsola (#1 berry producer in Italy). Collaborations with Microsoft Azure and
-                    Mario Boella Institute will allow to test in the cloud machine learning methods and IOT solutions,
-                    in combination with the Hololens device for augmented reality.
-                </p>
-                <hr>
-            </div>
+{#            <div class="col-md-12">#}
+{#                <p style="font-size:130%; text-align:justify">#}
+{#                    The outcome products of the project will be evaluated by major national companies, including CAVIT#}
+{#                    (wine producer) and S. Orsola (#1 berry producer in Italy). Collaborations with Microsoft Azure and#}
+{#                    Mario Boella Institute will allow to test in the cloud machine learning methods and IOT solutions,#}
+{#                    in combination with the Hololens device for augmented reality.#}
+{#                </p>#}
+{#                <hr>#}
+{#            </div>#}
 
         </div>
         {# Sponsor #}
