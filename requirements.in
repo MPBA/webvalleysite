@@ -48,3 +48,4 @@ appdirs
 packaging
 six
 django-recaptcha<2
+django-cookie-law
