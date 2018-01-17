@@ -2,7 +2,7 @@ from django import forms
 from models import AlumniStudent
 
 class AlumniStudentForm(forms.ModelForm):
-    name = forms.CharField(max_length=40, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    name = forms.CharField(label="Name and Surname", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control'}))
     loc_string = forms.CharField(label="Where do you live now?", max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'id': 'autocomplete',
@@ -10,7 +10,7 @@ class AlumniStudentForm(forms.ModelForm):
     email = forms.CharField(label="Current email:", max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control',
     }))
-    desc = forms.CharField(label="Description", widget=forms.Textarea(attrs={
+    desc = forms.CharField(label="Short bio", widget=forms.Textarea(attrs={
         'placeholder': "Tell us your story!",
         'style': 'resize: vertical; width: 100%; height: 150px; min-height: 100px',
     }))
