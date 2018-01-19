@@ -7,7 +7,7 @@ class AlumniStudentForm(forms.ModelForm):
         'class': 'form-control',
         'id': 'autocomplete',
     }))
-    email = forms.CharField(label="Current email:", max_length=100, widget=forms.TextInput(attrs={
+    email = forms.CharField(label="Current email (not published):", max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control',
     }))
     desc = forms.CharField(label="Short bio", widget=forms.Textarea(attrs={
