@@ -2,8 +2,8 @@ from django import forms
 from models import AlumniStudent
 
 class AlumniStudentForm(forms.ModelForm):
-    name = forms.CharField(label="Name and Surname", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    loc_string = forms.CharField(label="Where do you live now?", max_length=100, widget=forms.TextInput(attrs={
+    name = forms.CharField(label="Name and surname:", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    loc_string = forms.CharField(label="Your current city:", max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'id': 'autocomplete',
     }))
