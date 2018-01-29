@@ -272,15 +272,16 @@ def _get_csv_form_data(user_profile):
     # for user_form in user_profile.applicationstatus.userform_set.all():
     for user_form in sorted(user_profile.applicationstatus.userform_set.all(),
                             key=lambda u: u.index):
-        if u'School report, CV and certifications' in user_form.form.name:
-            data[user_form.form.name] = OrderedDict()
-            for field in user_form.form.fields.all():  # TODO: filter dictfields...
-                data[user_form.form.name][field.name] = OrderedDict()
-                for subject in field.extra_options[u'mandatory_choices']:
-                    data[user_form.form.name][field.name][subject] = \
-                        user_form.form_data[field.name][subject]
-        else:
-            data[user_form.form.name] = user_form.form_data
+        # Removed: old school grades input
+        # if u'School report, CV and certifications' in user_form.form.name:
+        #     data[user_form.form.name] = OrderedDict()
+        #     for field in user_form.form.fields.all():  # TODO: filter dictfields...
+        #         data[user_form.form.name][field.name] = OrderedDict()
+        #         for subject in field.extra_options[u'mandatory_choices']:
+        #             data[user_form.form.name][field.name][subject] = \
+        #                 user_form.form_data[field.name][subject]
+        # else:
+        data[user_form.form.name] = user_form.form_data
 
     return data
 
@@ -289,12 +290,13 @@ def _get_other_subjects_data(user_profile):
     data = OrderedDict()
     user_form = user_profile.applicationstatus.userform_set \
         .get(form__name__startswith=u'School report, CV and certifications')
-    for field in user_form.form.fields.order_by('name'):  # TODO: filter dictfields...
-        data[field.name] = OrderedDict()
-        for subject in sorted(user_form.form_data[field.name]):
-            if subject not in field.extra_options[u'mandatory_choices']:
-                data[field.name][subject] = \
-                    user_form.form_data[field.name][subject]
+    # Removed: old school grades input
+    # for field in user_form.form.fields.order_by('name'):  # TODO: filter dictfields...
+    #     data[field.name] = OrderedDict()
+    #     for subject in sorted(user_form.form_data[field.name]):
+    #         if subject not in field.extra_options[u'mandatory_choices']:
+    #             data[field.name][subject] = \
+    #                 user_form.form_data[field.name][subject]
     return data
 
 
