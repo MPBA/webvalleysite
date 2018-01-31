@@ -114,6 +114,7 @@ def do_final_submission(user_profile):
     js.pop("Assignment of Laptop")
     js.pop("Media Consent Form")
     js.pop("Motivation letter")
+    js.pop("Confidentiality Agreement")
 
     with open(os.path.join(data_path, 'tmp.json'), 'w') as data_file:
         data_file.write(_get_json(js))
