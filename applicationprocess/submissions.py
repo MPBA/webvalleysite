@@ -108,13 +108,13 @@ def do_final_submission(user_profile):
     with open(os.path.join(data_path, 'data.json'), 'r') as json_file:
         js = json.load(json_file)
 
-    js.pop('School report, CV and certifications')
+    js.pop('School reports, CV and certifications')
     js.pop("Code of Conduct")
     js.pop("Parent Agreement")
-    js.pop("Assignment of Laptop")
+    # js.pop("Assignment of Laptop")
     js.pop("Media Consent Form")
     js.pop("Motivation letter")
-    js.pop("Confidentiality Agreement")
+    js.pop("Confidentiality and Property Rights Acknowledgement")
 
     with open(os.path.join(data_path, 'tmp.json'), 'w') as data_file:
         data_file.write(_get_json(js))
