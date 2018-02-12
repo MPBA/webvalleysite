@@ -112,7 +112,7 @@ def do_final_submission(user_profile):
     js.pop("Code of Conduct")
     js.pop("Parent Agreement")
     # js.pop("Assignment of Laptop")
-    js.pop("Media Consent Form")
+    # js.pop("Media Consent Form")
     js.pop("Motivation letter")
     js.pop("Confidentiality and Property Rights Acknowledgement")
 
