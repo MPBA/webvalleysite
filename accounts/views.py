@@ -60,7 +60,7 @@ def signup(request):
 
                 send_confirmation_email( new_user )
 
-            return home(request, notifications=[_('Your account has been created. Check your email and follow the instructions to activate it.')])
+            return home(request, notifications=[_('Your account has been created. Check your email and follow the instructions to activate it. (Make sure to check your spam folder)')])
     else:
         form = RegistrationForm()
 
@@ -87,7 +87,7 @@ def confirm(request, activation_key):
     else: # everythig is right
         user_account.is_active = True
         user_account.save()
-        return home(request, notifications=[_('Your account has been activated')])
+        return home(request, notifications=[_('Your account has been activated.')])
 
 def login(request):
     next_page = request.GET.get('next', '/')
