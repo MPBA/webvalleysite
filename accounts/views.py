@@ -60,7 +60,7 @@ def signup(request):
 
                 send_confirmation_email( new_user )
 
-            return home(request, notifications=[_('Your account has been created. Check your email and follow the instructions to activate it. (Make sure to check your spam folder)')])
+            return home(request, notifications=[_('Your account has been created. Check your email and follow the instructions to activate it. (Make sure to check your spam folder!)')])
     else:
         form = RegistrationForm()
 
@@ -127,7 +127,7 @@ def send_confirmation_email( new_user ):
                 'first_name' : new_user.first_name,
                 'website_url' : Site.objects.get_current().domain}
     mail_body = render_to_string( CONFIRMATION_EMAIL_TEMPLATE, context )
-    send_mail( CONFIRMATION_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, [new_user.email], fail_silently=False)
+    return send_mail( CONFIRMATION_EMAIL_SUBJECT, mail_body, WEBVALLEY_EMAIL_ADDRESS, [new_user.email], fail_silently=False)
 
 def make_username(first_name, last_name):
     # first three characters of the name, first three characters of the surname and the unix timestamp.
