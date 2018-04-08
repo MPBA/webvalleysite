@@ -30,16 +30,16 @@
     <link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
     {% endif %}
     {% endifinstalled %}
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+        <link rel="stylesheet" type="text/css" href="{% static "css/cookieconsent.min.css"%}"/>
 
     {% block extra_css %}{% endblock %}
     {% endcompress %}
 
     {% compress js %}
     <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
-    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script src="{% static "js/bootstrap.js"%}"></script>
     <script src="{% static "js/findAndReplaceDOM.js" %}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script src="{% static "js/cookieconsent.min.js"%}"></script>
 <!--<script src="{% static "js/bootstrap-extras.js" %}"></script>-->
         <!--[if lt IE 9]>
     <script src="{% static "js/html5shiv.js" %}"></script>
