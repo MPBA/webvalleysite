@@ -32,17 +32,17 @@ class Command(BaseCommand):
             # cerca un alumni che ha quel nome, cognome e anno. Se non c'e'
             # crealo. Non ho usato l'email perche' potrebbe essere cambiata
             alumni, created = AlumniStudent.objects.get_or_create(
-                name='%s %s' % (row[NOME], row[COGNOME]),
+                name='%s %s' % (row[NOME].strip(), row[COGNOME].strip()),
                 year_in_school=row[ANNO],
                 defaults={
                     'lat': 0,  # lat e lon tocca farli a mano, le api di google
                     'lon': 0,  # throttlano dopo pochissime richieste
                     'approved': False,
                     'desc': '',
-                    'email': row[EMAIL],
-                    'loc_string': row[POSIZIONE_ATTUALE] or row[PROVENIENZA]
+                    'email': row[EMAIL].strip(),
+                    'loc_string': row[POSIZIONE_ATTUALE].strip() or row[PROVENIENZA].strip()
                 }
             )
 
-            print 'Alumni %s %s' % (alumni, 'succesfully loaded' if created else 'skipped. Already in DB')
+            print 'Alumni %s from WV %s %s' % (alumni, row[ANNO], 'succesfully loaded' if created else 'skipped. Already in DB')
             raw_input('Press enter for the next one')
