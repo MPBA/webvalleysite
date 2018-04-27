@@ -3,7 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class AlumniStudent(models.Model):
-    img = models.ImageField(upload_to="alumni", default='/static/misc/generic-alumni.png')
+    img = models.ImageField(upload_to="alumni", default='alumni/profile-clipart-generic-user-7.png')
     name = models.CharField(max_length=40)
     desc = models.TextField(blank=True, default='')
     year_in_school = models.IntegerField(

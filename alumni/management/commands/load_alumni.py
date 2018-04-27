@@ -4,8 +4,6 @@ from alumni.models import AlumniStudent
 from timetable.googleoauth import authenticate_google_docs
 
 
-GOOGLE_MAPS_API_URL = 'http://maps.googleapis.com/maps/api/geocode/json'
-
 SPREADSHEET, WORKSHEET = 'WV-studenti-2001_2017', 'NOW_TO_DB'
 
 NOME, COGNOME = 'NOME', 'COGNOME'
@@ -32,7 +30,7 @@ class Command(BaseCommand):
             # cerca un alumni che ha quel nome, cognome e anno. Se non c'e'
             # crealo. Non ho usato l'email perche' potrebbe essere cambiata
             alumni, created = AlumniStudent.objects.get_or_create(
-                name='%s %s' % (row[NOME].strip(), row[COGNOME].strip()).title(),
+                name=('%s %s' % (row[NOME].strip(), row[COGNOME].strip())).title(),
                 year_in_school=row[ANNO],
                 defaults={
                     'lat': 0,  # lat e lon tocca farli a mano, le api di google
