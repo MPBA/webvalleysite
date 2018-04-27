@@ -17,4 +17,4 @@ class AlumniStudent(models.Model):
     approved = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u"{self.name}".format(self=self)
+        return u"{self.name} (WV {self.year_in_school})".format(self=self)
