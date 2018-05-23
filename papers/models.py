@@ -27,3 +27,6 @@ class Paper(models.Model):
         "papers",
         filename))
     paper = models.FileField(upload_to=_get_upload_to, blank=False, null=False)
+
+    class Meta:
+        ordering = ['year']
