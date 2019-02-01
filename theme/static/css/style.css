@@ -2,6 +2,10 @@ body {
     font-size: 14px;
 }
 
+.g-recaptcha{
+    overflow: hidden;
+}
+
 .tree {
     font-size: 13px;
     padding: 0px;
