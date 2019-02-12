@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.conf import settings
+import os
+import csv
 
 def home(request, errors=None, notifications=None):
     errors = errors or []
@@ -14,19 +16,13 @@ def home(request, errors=None, notifications=None):
         'login_redirect_to' : '/',
         })
 
+def loadUrls():
+    with open('./google_photos/album-AMBQJJKPmTQXBgijCw3uqPpIprQL3E-lT69ymYzqiz38ynUHLUpnX7b0V1NRAa_YAErQsPepYrg0.csv', 'rb') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        return list(reader)
+
 def photo_gallery(request):
     return render(request, 'photo_gallery.html', {
             'page_title': 'Photo Gallery',
-            'picasa_user': getattr(settings, 'PICASAWEB_USER')
+            'urls':loadUrls()
     	})
-
-# def search(request):
-#     search_results = []
-#     if request.GET and 'q' in request.GET and request.GET['q']:
-#         search_results = [item for item in News.pubs_objects.filter(title__icontains=request.GET['q'])] + \
-#                          [item2 for item2 in News.pubs_objects.filter(body__icontains=request.GET['q'])]
-
-#     return render(request, 'search.html', {
-#         'page_title': 'Search Result',
-#         'search_results': search_results
-#     })
