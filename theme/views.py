@@ -16,13 +16,31 @@ def home(request, errors=None, notifications=None):
         'login_redirect_to' : '/',
         })
 
-def loadUrls():
-    with open('./google_photos/album-AMBQJJKPmTQXBgijCw3uqPpIprQL3E-lT69ymYzqiz38ynUHLUpnX7b0V1NRAa_YAErQsPepYrg0.csv', 'rb') as csvfile:
+def loadUrls(id):
+    with open('./google_photos/album-{}.csv'.format(id), 'rb') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         return list(reader)
 
+def loadAlbums():
+    with open('./google_photos/albums.csv', 'rb') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        albums = list(reader)
+        populatedAlbums = []
+
+        for id, name in albums:
+            thumbnail = loadUrls(id)[0][0]
+            populatedAlbums.append([id,name,thumbnail])
+        return populatedAlbums
+
+
 def photo_gallery(request):
     return render(request, 'photo_gallery.html', {
+            'page_title': 'Album',
+            'urls':loadUrls("119XURZ4AGwTAhpU5HTu8MuAqBB76NB0e")
+    	})
+
+def photo_gallery_home(request):
+    return render(request, 'photo_gallery_home.html', {
             'page_title': 'Photo Gallery',
-            'urls':loadUrls()
+            'albums':loadAlbums()
     	})

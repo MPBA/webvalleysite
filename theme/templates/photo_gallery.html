@@ -204,15 +204,14 @@ img.hover-shadow {
 
 {% block main %}
 {{ block.super }}
-<!DOCTYPE html>
 
 
-<h2 style="text-align:center">Photo Gallery</h2>
+{% comment %} <h2 style="text-align:center">Gallery</h2> {% endcomment %}
 
 <div class="row tiles">
   {% for url, i in urls %}
   <div class="column galleryTiles" style="display:none;">
-      <img data-src="{{ url }}=w400-h400" style="width:100%" onclick="openModal();currentSlide({{ i }})" class="hover-shadow cursor galleryImages">
+      <img data-src="{{ url }}" style="width:100%" onclick="openModal();currentSlide({{ i }})" class="hover-shadow cursor galleryImages">
   </div>
   {% endfor %}
 </div>
@@ -223,7 +222,7 @@ img.hover-shadow {
 
     {% for url, i in urls %}
     <div class="mySlides">
-      <img class="myImages" data-src="{{ url }}=w2000-h2000">
+      <img class="myImages" data-src="{{ url }}">
     </div>
     {% endfor %}
     
@@ -237,7 +236,7 @@ img.hover-shadow {
 
     {% for url, i in urls %}
     <div class="column demoColumn">
-      <img class="demo cursor" data-src="{{ url }}=w2000-h2000" style="width:100%" onclick="currentSlide({{ i }})">
+      <img class="demo cursor" data-src="{{ url }}" style="width:100%" onclick="currentSlide({{ i }})">
     </div>
     {% endfor %}
   </div>
@@ -280,7 +279,7 @@ window.addEventListener("keydown",  function (e) {
 window.addEventListener("scroll",  function (e) {
     var distanceFromBottom = e.target.scrollingElement.scrollHeight - e.target.scrollingElement.scrollTop - window.innerHeight
     if(distanceFromBottom<500){
-      imagesShown +=50
+      imagesShown +=20
       showImages()
     }
 });

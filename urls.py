@@ -19,8 +19,11 @@ urlpatterns = i18n_patterns("",
 )
 
 urlpatterns += patterns('theme.views',
-        # Photo gallery
-        url(r'^photo-gallery/$', 'photo_gallery', name="photo-gallery"),
+        # Photo gallery home
+        # url(r'^photo-gallery/$', 'photo_gallery_home', name="photo-gallery"),
+        # Photo gallery album
+        url(r'^photo-gallery/$', 'photo_gallery', name="photo-gallery"), # in the future will redirect to album selection page
+        url(r'^gallery-\w*/$', 'photo_gallery', name="photo-gallery"),
     )
 
 urlpatterns += patterns('',
