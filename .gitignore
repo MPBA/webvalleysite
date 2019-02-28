@@ -6,3 +6,6 @@ local_settings.py
 static/media/
 client_secrets.json
 
+credentials.dat
+credentials.json
+token.pickle

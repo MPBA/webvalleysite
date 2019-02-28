@@ -1,0 +1,62 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles %}
+
+{% block extra_head %}
+<style>
+body {
+  font-family: Verdana, sans-serif;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row > .column {
+  padding: 0 8px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+.tiles .column{
+  margin: 8px 0;
+  height: 120px;
+  overflow: hidden;
+  user-select: none;
+}
+.tiles .column img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+</style>
+{% endblock %}
+
+{% block main %}
+{{ block.super }}
+
+<h2 style="text-align:center">Photo Gallery</h2>
+
+<div class="row tiles">
+  {% for id, name, thumbnail in albums %}
+  <div class="column galleryTiles">
+    <a href="/gallery-{{id}}">
+      <img src="{{ thumbnail }}" style="width:100%" onclick="openModal();currentSlide({{ i }})" class="hover-shadow cursor galleryImages">
+      <p>{{ name }}</p>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+
+{% endblock %}

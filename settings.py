@@ -231,6 +231,7 @@ INSTALLED_APPS = (
    "partecipants",
    "papers",
    "alumni",
+   "google_photos",
    "cookielaw",
    "mezzanine.boot",
    "mezzanine.conf",

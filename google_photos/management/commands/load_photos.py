@@ -1,76 +1,108 @@
-import httplib2
-import sys
-
+from __future__ import print_function
+import pickle
+import os.path
 from googleapiclient.discovery import build
-from oauth2client import tools
-from oauth2client.file import Storage
-from oauth2client.client import AccessTokenRefreshError
-from oauth2client.client import OAuth2WebServerFlow
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+import sys
 from django.core.management.base import BaseCommand, CommandError
 from local_settings import CLIENT_ID,CLIENT_SECRET
+
+
+# If modifying these scopes, delete the file token.pickle.
+SCOPES = ['https://www.googleapis.com/auth/drive']
 
 class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
     def handle(self, *args, **options):
-        scope = 'https://www.googleapis.com/auth/photoslibrary'
+        loadAlbums()
 
-        flow = OAuth2WebServerFlow(CLIENT_ID, CLIENT_SECRET, scope)
+loading = False
+shouldRepeat = False
 
-        storage = Storage('credentials.dat')
+def loadAlbums():
+    global loading
+    global shouldRepeat
+    if loading:
+        shouldRepeat = True
+        return
+    
+    loading = True
+    creds = None
+    # The file token.pickle stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    dirname = os.path.dirname(__file__)
+    token_path = os.path.join(dirname, 'token.pickle')
+    cred_path = os.path.join(dirname, 'credentials.json')
 
-        credentials = storage.get()
+    if os.path.exists(token_path):
+        with open(token_path, 'rb') as token:
+            creds = pickle.load(token)
+            print(creds.token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                cred_path, SCOPES)
+            creds = flow.run_local_server()
+        # Save the credentials for the next run
+        with open(token_path, 'wb') as token:
+            pickle.dump(creds, token)
 
-        if credentials is None or credentials.invalid:
-            credentials = tools.run_flow(flow, storage)
+    service = build('drive', 'v3', credentials=creds)
 
-        print("loaded credentials")
+    albums_path = os.path.join(dirname, '../../albums.csv')
 
-        http = httplib2.Http()
-        http = credentials.authorize(http)
+    with open(albums_path, 'w') as f:
+        f.write("")
 
-        print("preparing api")
-        service = build('photoslibrary', 'v1', http=http)
+    rootFolder = "1hnoUcsxODd22-Vauz8zjWhIRvW9JkERJ"
+    loadFiles(rootFolder, service, "root")
 
-        try:
+    loading = False  
+    if shouldRepeat:
+        shouldRepeat = False
+        loadAlbums()
 
-            print("loading albums")
-            albums = service.albums().list(pageSize=50,
-                                        fields="nextPageToken,albums(id,title,coverPhotoBaseUrl)").execute().get('albums', [])
+def loadFiles(folderId, service, name):
+    results = service.files().list(
+        pageSize=100,
+        orderBy="name",
+        fields="nextPageToken, files(id, name, webContentLink, mimeType)",
+        q="'{0}' in parents".format(folderId)
+    ).execute()
 
-            print ("loading images")
-            with open("google_photos/albums.csv",'w') as albumFile:
-                for album in albums:
-                    albumFile.write(album['id'])
+    dirname = os.path.dirname(__file__)
+    album_path = os.path.join(dirname, "../../album-{albumId}.csv".format(albumId=folderId))
+    with open(album_path, 'w') as f:
+        counter = 1
+        while True:
+            for item in results.get('files', []):
+                if item["mimeType"].startswith("image"):
+                    f.write("https://drive.google.com/a/fbk.eu/uc?id={0},{1}\n".format(item["id"], counter))
+                    counter += 1
+                    
+                    sys.stdout.write("\rLoaded {0} files from {1}".format(counter, name))
+                    sys.stdout.flush()
 
-                    query = {
-                        "pageSize": "100",
-                        "albumId": album['id'],
-                    }
-                    request = service.mediaItems().search(
-                        body=query, fields="nextPageToken,mediaItems(id,baseUrl,mimeType)")
+                elif item["mimeType"].startswith("application/vnd.google-apps.folder"):
+                    albums_path = os.path.join(dirname, "../../albums.csv")
+                    with open(albums_path, 'a') as f:
+                        f.write("{},{}\n".format(item["id"],item["name"]))
+                    loadFiles(item["id"], service, item["name"])
 
-                    i = 1
-                    with open("google_photos/album-{albumId}.csv".format(albumId=album['id']), 'w') as f:
-                        while True:
-                            response = request.execute()
-                            for image in response.get('mediaItems', []):
-                                if image['mimeType'].startswith("image"):
-                                    f.write("{baseUrl},{i}\n".format(
-                                        baseUrl=image['baseUrl'], i=i))
-                                    i += 1
+            pageToken = results.get('nextPageToken', '')
+            if pageToken == '':
+                break
 
-                            if response.get('nextPageToken', '') == '':
-                                break
-                            query = {
-                                "pageSize": "100",
-                                "albumId": album['id'],
-                                "pageToken": response.get('nextPageToken', '')
-                            }
-
-                            request = service.mediaItems().search(
-                                body=query, fields="nextPageToken,mediaItems(id,baseUrl,mimeType)")
-
-        except AccessTokenRefreshError:
-            print ('The credentials have been revoked or expired, please re-run'
-                'the application to re-authorize')
+            results = service.files().list(
+                pageSize=100,
+                orderBy="name",
+                fields="nextPageToken, files(id, name, webContentLink, mimeType)",
+                q="'{0}' in parents".format(folderId),
+                pageToken=pageToken
+            ).execute()
