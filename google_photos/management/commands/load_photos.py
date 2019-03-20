@@ -79,11 +79,11 @@ def loadFiles(folderId, service, name):
     dirname = os.path.dirname(__file__)
     album_path = os.path.join(dirname, "../../album-{albumId}.csv".format(albumId=folderId))
     with open(album_path, 'w') as f:
-        counter = 1
+        counter = 0
         while True:
             for item in results.get('files', []):
                 if item["mimeType"].startswith("image"):
-                    f.write("https://drive.google.com/a/fbk.eu/uc?id={0},{1}\n".format(item["id"], counter))
+                    f.write("{0},{1}\n".format(item["id"], counter))
                     counter += 1
                     
                     sys.stdout.write("\rLoaded {0} files from {1}".format(counter, name))

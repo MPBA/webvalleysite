@@ -132,6 +132,9 @@ img {
 .demo {
   opacity: 0.6;
 }
+.demoColumn{
+  display: none;
+}
 
 .active,
 .demo:hover {
@@ -209,9 +212,9 @@ img.hover-shadow {
 {% comment %} <h2 style="text-align:center">Gallery</h2> {% endcomment %}
 
 <div class="row tiles">
-  {% for url, i in urls %}
+  {% for id, i in ids %}
   <div class="column galleryTiles" style="display:none;">
-      <img data-src="{{ url }}" style="width:100%" onclick="openModal();currentSlide({{ i }})" class="hover-shadow cursor galleryImages">
+      <img data-src="https://drive.google.com/a/fbk.eu/thumbnail?id={{ id }}&sz=h200" style="width:100%" onclick="openModal();currentSlide({{ i }})" class="hover-shadow cursor galleryImages">
   </div>
   {% endfor %}
 </div>
@@ -220,9 +223,9 @@ img.hover-shadow {
   <span class="close cursor" onclick="closeModal()">&times;</span>
   <div class="modal-content">
 
-    {% for url, i in urls %}
+    {% for id, i in ids %}
     <div class="mySlides">
-      <img class="myImages" data-src="{{ url }}">
+      <img class="myImages" data-src="https://drive.google.com/a/fbk.eu/thumbnail?id={{ id }}&sz=w1920-h1080">
     </div>
     {% endfor %}
     
@@ -234,9 +237,9 @@ img.hover-shadow {
     </div>
 
 
-    {% for url, i in urls %}
+    {% for id, i in ids %}
     <div class="column demoColumn">
-      <img class="demo cursor" data-src="{{ url }}" style="width:100%" onclick="currentSlide({{ i }})">
+      <img class="demo cursor" data-src="https://drive.google.com/a/fbk.eu/thumbnail?id={{ id }}&sz=h300" style="width:100%" onclick="currentSlide({{ i }})">
     </div>
     {% endfor %}
   </div>
@@ -255,11 +258,11 @@ var slideIndex = 1;
 showSlides(slideIndex);
 
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  showSlides(slideIndex + n);
 }
 
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  showSlides(n);
 }
 
 var imagesShown = 50
@@ -276,10 +279,12 @@ window.addEventListener("keydown",  function (e) {
     }
 });
 
+const IMAGES_SHOWN_STEP = 20
+
 window.addEventListener("scroll",  function (e) {
     var distanceFromBottom = e.target.scrollingElement.scrollHeight - e.target.scrollingElement.scrollTop - window.innerHeight
     if(distanceFromBottom<500){
-      imagesShown +=20
+      imagesShown +=IMAGES_SHOWN_STEP
       showImages()
     }
 });
@@ -291,8 +296,8 @@ function showImages(){
     if(i<imagesShown){
       images[i].src = images[i].getAttribute("data-src")
       tiles[i].style.display = "block";
-    }else{
-      tiles[i].style.display = "none";
+    } else if(i<imagesShown+IMAGES_SHOWN_STEP){
+      images[i].src = images[i].getAttribute("data-src")
     }
   }
 }
@@ -313,33 +318,49 @@ function range(slideIndex, length){
   }
 }
 
+function wideRange(slideIndex, length){
+  var indexes = [slideIndex-3,slideIndex-2,slideIndex-1,slideIndex,slideIndex+1,slideIndex+2,slideIndex+3,slideIndex+4]
+  indexes = indexes.map(idx => idx >= 0 ? idx : length+idx)
+  indexes = indexes.map(idx => idx < length ? idx : idx - length)
+
+  return indexes
+}
+
 function showSlides(n) {
-  var i;
+  console.log("loading")
   var slides = document.getElementsByClassName("mySlides");
   var images = document.getElementsByClassName("myImages");
   var dots = document.getElementsByClassName("demo");
   var dotColumns = document.getElementsByClassName("demoColumn");
 
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
+  var oldSlideIndex = slideIndex
 
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-      images[i].src = "";
-  }
+  if (n > slides.length) {slideIndex = 0}
+  else if (n < 0) {slideIndex = slides.length - 1}
+  else slideIndex = n
+
   var activeRange = range(slideIndex, slides.length)
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-      if(activeRange.indexOf(i+1) === -1){
-        dotColumns[i].style.display = "none";
-      }else{
-        dotColumns[i].style.display = "block";
-        dots[i].src = images[i].getAttribute("data-src")
-      }
+  var wideActiveRange = wideRange(slideIndex, slides.length)
+  var oldActiveRange = range(oldSlideIndex, slides.length)
+
+  // clean old slideshow
+  for(var i =0; i < oldActiveRange.length; i++){
+    dotColumns[oldActiveRange[i]].style.display = "none";
   }
-  slides[slideIndex-1].style.display = "block";
-  images[slideIndex-1].src = images[slideIndex-1].getAttribute("data-src");
-  dots[slideIndex-1].className += " active";
+  slides[oldSlideIndex].style.display = "none";
+  dots[oldSlideIndex].className = dots[oldSlideIndex].className.replace(" active", "");
+
+  // show new slideshow
+  for(var i =0; i < activeRange.length; i++){
+    dotColumns[activeRange[i]].style.display = "block";
+    images[activeRange[i]].src = images[activeRange[i]].getAttribute("data-src"); // pre load all images in active range
+  }
+  for(var i =0; i < wideActiveRange.length; i++){ // preload also thumbnails that will likely be shown next
+    dots[wideActiveRange[i]].src = dots[wideActiveRange[i]].getAttribute("data-src")
+  }
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].className += " active";
+
 }
 </script>
     

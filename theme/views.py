@@ -42,7 +42,7 @@ def photo_gallery(request):
         try:
                 return render(request, 'photo_gallery.html', {
                         'page_title': 'Album',
-                        'urls':loadUrls("119XURZ4AGwTAhpU5HTu8MuAqBB76NB0e")
+                        'ids':loadUrls("119XURZ4AGwTAhpU5HTu8MuAqBB76NB0e")
                         })
         except Exception:
                 return render(request, 'photo_gallery_maintenance.html', {})
