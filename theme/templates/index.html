@@ -130,13 +130,19 @@
       <div class="col-md-12">
         <h1>Applications are <span class="deadline">closed</span></h1>
         <div class="row text-center">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="thumbnail">
               <img src="{% static 'img/ai-artificial-intelligence-blur.jpg' %}">
               <div class="caption">
+
+                  <br>
                 <h3>General Track</h3>
-                <h4>Open Period: Feb 4 - <span style="text-decoration: line-through;">Mar 15</span><br>
-                  <span class="deadline">Extended to Sunday, March 24<span></h4>
+                <h4>Open Period: <br>
+                    Feb 4 - <span style="text-decoration: line-through;">Mar 15</span><br>
+                  <br>
+
+                  <span class="deadline">Extended to <br>
+                    Sunday, March 24<span></h4>
                 <p>
                   <br>
                   <!-- <a href={% if user.is_authenticated %} "/school-application/" {% else %} "/account/signup/" {% endif %}
@@ -146,19 +152,42 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="thumbnail">
               <img src="{% static 'img/adult-announcement-business.jpg' %}">
               <div class="caption">
                 <h3>Communication Officer Track</h3>
-                <h4>Open Period: Feb 4 - <span style="text-decoration: line-through;">Mar 15</span><br>
-                  <span class="deadline">Extended to Sunday, March 24</span><br>
+                <h4>Open Period: <br>
+                    Feb 4 - <span style="text-decoration: line-through;">Mar 15</span><br>
+                  <span class="deadline">Extended to <br>
+                    Sunday, March 24</span><br>
                   <small>Reserved for Istituto Pavoniano Artigianelli di Trento<small>
                 </h4>
                 <p>
 <!--                   <a href={% if user.is_authenticated %} "/school-application/" {% else %} "/account/signup/" {% endif %}
                     class="btn btn-primary" role="button">Apply</a> -->
                   <a href="/communication-track-info/" class="btn btn-info" role="button">Track Info</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://webvalley.fbk.eu/static/media/uploads/images/.thumbnails/intelisef_fbk.jpg/intelisef_fbk-1600x1067.jpg">
+              <div class="caption">
+                  <br>
+                <h3>Intel ISEF Track</h3>
+                <h4>Open Period: <br>
+                    Apr 8 - May 12<br>
+                  <br>
+                    
+                  <!-- <span class="deadline">Extended to <br>
+                    Sunday, March 24<span></h4> -->
+                <p>
+                  <br>
+                  <a href={% if user.is_authenticated %} "/school-application/" {% else %} "/account/signup/" {% endif %}
+                    class="btn btn-primary" role="button">Apply</a>
+                  <a href="/general-track-info/" class="btn btn-info" role="button">Track Info</a>
                 </p>
               </div>
             </div>
