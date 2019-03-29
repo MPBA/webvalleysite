@@ -128,7 +128,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <h1>Applications are Open!</h1>
+        <h1>Applications are <span class="deadline">closed</span></h1>
         <div class="row text-center">
           <div class="col-sm-6">
             <div class="thumbnail">
@@ -139,8 +139,8 @@
                   <span class="deadline">Extended to Sunday, March 24<span></h4>
                 <p>
                   <br>
-                  <a href={% if user.is_authenticated %} "/school-application/" {% else %} "/account/signup/" {% endif %}
-                    class="btn btn-primary" role="button">Apply</a>
+                  <!-- <a href={% if user.is_authenticated %} "/school-application/" {% else %} "/account/signup/" {% endif %}
+                    class="btn btn-primary" role="button">Apply</a> -->
                   <a href="/general-track-info/" class="btn btn-info" role="button">Track Info</a>
                 </p>
               </div>
@@ -156,8 +156,8 @@
                   <small>Reserved for Istituto Pavoniano Artigianelli di Trento<small>
                 </h4>
                 <p>
-                  <a href={% if user.is_authenticated %} "/school-application/" {% else %} "/account/signup/" {% endif %}
-                    class="btn btn-primary" role="button">Apply</a>
+<!--                   <a href={% if user.is_authenticated %} "/school-application/" {% else %} "/account/signup/" {% endif %}
+                    class="btn btn-primary" role="button">Apply</a> -->
                   <a href="/communication-track-info/" class="btn btn-info" role="button">Track Info</a>
                 </p>
               </div>
